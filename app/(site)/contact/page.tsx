@@ -1,10 +1,13 @@
 import { Mail, Phone, MapPin, Clock, Calendar } from "lucide-react";
 import { PageHeader } from "@/components/sections/page-header";
 import { ContactForm } from "@/components/sections/contact-form";
+import { FaqAccordion } from "@/components/sections/faq-accordion";
+import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { Reveal } from "@/components/animations/reveal";
 import { TechBackground } from "@/components/patterns/tech-background";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 import { getPublishedServices } from "@/lib/db/queries/services";
+import { getPublishedFaqs } from "@/lib/db/queries/content";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
@@ -12,7 +15,11 @@ export async function generateMetadata() {
 }
 
 export default async function ContactPage() {
-  const [settings, services] = await Promise.all([getSiteSettings(), getPublishedServices()]);
+  const [settings, services, faqs] = await Promise.all([
+    getSiteSettings(),
+    getPublishedServices(),
+    getPublishedFaqs(),
+  ]);
 
   return (
     <>
@@ -54,6 +61,14 @@ export default async function ContactPage() {
           </Reveal>
         </div>
       </section>
+
+      {faqs.length > 0 && (
+        <SectionWrapper index="FAQ" label="Common Questions" title="Frequently Asked Questions" headerAlign="center">
+          <div className="mx-auto max-w-2xl">
+            <FaqAccordion faqs={faqs} />
+          </div>
+        </SectionWrapper>
+      )}
     </>
   );
 }

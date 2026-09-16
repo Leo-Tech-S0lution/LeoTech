@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Cursor } from "@/components/animations/cursor";
 import { PageLoader } from "@/components/animations/page-loader";
+import { PageTransition } from "@/components/animations/page-transition";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { getPublishedServices } from "@/lib/db/queries/services";
 import { getPublishedCourses } from "@/lib/db/queries/training";
@@ -29,7 +30,9 @@ export default async function SiteLayout({
       <ScrollProgress />
       <Cursor />
       <Navbar services={navServices} courses={navCourses} />
-      <main>{children}</main>
+      <main>
+        <PageTransition>{children}</PageTransition>
+      </main>
       <Footer />
     </>
   );
