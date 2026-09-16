@@ -85,7 +85,6 @@ export function Navbar({ services, courses }: NavbarProps) {
       <header
         ref={barRef}
         className="fixed inset-x-0 top-0 z-50 border-b border-transparent"
-        style={{ backgroundColor: "rgba(0,0,84,0)" }}
         onMouseLeave={() => setOpenMenu(null)}
       >
         <nav className="container-tech flex h-20 items-center justify-between">
