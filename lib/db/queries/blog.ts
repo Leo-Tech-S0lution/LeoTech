@@ -101,6 +101,18 @@ export async function getBlogTags() {
   return db.select().from(blogTags).orderBy(asc(blogTags.name));
 }
 
+// --- Admin (categories & tags) ---
+
+export async function getBlogCategoryByIdAdmin(id: string) {
+  const [row] = await db.select().from(blogCategories).where(eq(blogCategories.id, id)).limit(1);
+  return row ?? null;
+}
+
+export async function getBlogTagByIdAdmin(id: string) {
+  const [row] = await db.select().from(blogTags).where(eq(blogTags.id, id)).limit(1);
+  return row ?? null;
+}
+
 // --- Admin ---
 
 export async function getAllBlogPostsAdmin(): Promise<BlogPost[]> {

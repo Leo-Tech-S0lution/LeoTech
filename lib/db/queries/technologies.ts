@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
 import { technologyCategories, technologies } from "@/lib/db/schema";
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 export interface TechCategoryWithItems {
   id: string;
@@ -25,4 +25,32 @@ export async function getTechnologiesByCategory(): Promise<TechCategoryWithItems
       .filter((i) => i.categoryId === cat.id)
       .map((i) => ({ id: i.id, name: i.name, icon: i.icon })),
   }));
+}
+
+// --- Admin ---
+
+export async function getTechnologyCategoriesAdmin() {
+  return db.select().from(technologyCategories).orderBy(asc(technologyCategories.order));
+}
+
+export async function getTechnologyCategoryByIdAdmin(id: string) {
+  const [row] = await db
+    .select()
+    .from(technologyCategories)
+    .where(eq(technologyCategories.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
+export async function getTechnologyByIdAdmin(id: string) {
+  const [row] = await db.select().from(technologies).where(eq(technologies.id, id)).limit(1);
+  return row ?? null;
+}
+
+export async function getTechnologiesByCategoryIdAdmin(categoryId: string) {
+  return db
+    .select()
+    .from(technologies)
+    .where(eq(technologies.categoryId, categoryId))
+    .orderBy(asc(technologies.order));
 }

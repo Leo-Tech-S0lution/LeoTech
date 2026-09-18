@@ -14,3 +14,8 @@ export async function getPublishedTeamMembers(): Promise<TeamMember[]> {
 export async function getAllTeamMembersAdmin(): Promise<TeamMember[]> {
   return db.select().from(teamMembers).orderBy(asc(teamMembers.order));
 }
+
+export async function getTeamMemberByIdAdmin(id: string): Promise<TeamMember | null> {
+  const [row] = await db.select().from(teamMembers).where(eq(teamMembers.id, id)).limit(1);
+  return row ?? null;
+}

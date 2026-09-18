@@ -56,3 +56,8 @@ export async function getCourseByIdAdmin(id: string): Promise<TrainingCourse | n
 export async function getAllInternshipProgramsAdmin(): Promise<InternshipProgram[]> {
   return db.select().from(internshipPrograms).orderBy(asc(internshipPrograms.order));
 }
+
+export async function getInternshipProgramByIdAdmin(id: string): Promise<InternshipProgram | null> {
+  const [row] = await db.select().from(internshipPrograms).where(eq(internshipPrograms.id, id)).limit(1);
+  return row ?? null;
+}
