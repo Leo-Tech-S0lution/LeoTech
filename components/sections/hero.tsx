@@ -32,7 +32,7 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
   const cta1Href = current?.cta1Href ?? "/contact";
   const cta2Label = current?.cta2Label ?? "Explore Services";
   const cta2Href = current?.cta2Href ?? "/services";
-  const image = current?.image;
+  const hasAnyImage = slides.some((s) => s.image);
 
   function goToSlide(index: number) {
     const el = contentRef.current;
@@ -109,24 +109,12 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
       className="relative flex min-h-[92vh] flex-col overflow-hidden bg-navy-900 pt-20"
     >
       <div className="relative flex flex-1 items-center">
-        {image ? (
-          <>
-            <Image
-              src={image}
-              alt=""
-              fill
-              priority
-              className="object-cover object-[75%_center] opacity-90"
-            />
-            <TechBackground type="network" dark className="opacity-25" />
-          </>
-        ) : (
-          <TechBackground type="network" dark className="opacity-60" />
-        )}
+        <TechBackground type="network" dark className={hasAnyImage ? "opacity-25" : "opacity-60"} />
+        {hasAnyImage && <HeroBackgroundImages slides={slides} active={active} />}
         {/* Left-to-right fade so text stays legible over an image or the pattern */}
         <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/30" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy-900" />
-        {!image && <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />}
+        {!hasAnyImage && <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />}
 
         <div className="container-tech relative z-10">
           <div ref={contentRef} className="max-w-2xl">
@@ -184,6 +172,71 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
         <HeroTicker slides={slides} active={active} onSelect={goToSlide} />
       )}
     </section>
+  );
+}
+
+/**
+ * Stacks each slide's background image absolutely and slides the outgoing
+ * one out while the incoming one slides in (opposite horizontal direction,
+ * crossfading at the same time) — rather than the image just popping to a
+ * new src when the active slide changes.
+ */
+function HeroBackgroundImages({ slides, active }: { slides: HeroSlide[]; active: number }) {
+  const layerRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const prevActiveRef = useRef(active);
+
+  useEffect(() => {
+    const prev = prevActiveRef.current;
+    prevActiveRef.current = active;
+    if (prev === active) return;
+
+    const outEl = layerRefs.current[prev];
+    const inEl = layerRefs.current[active];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      if (outEl) gsap.set(outEl, { opacity: 0, xPercent: 0 });
+      if (inEl) gsap.set(inEl, { opacity: 1, xPercent: 0 });
+      return;
+    }
+
+    if (outEl) {
+      gsap.killTweensOf(outEl);
+      gsap.to(outEl, { opacity: 0, xPercent: -8, duration: 1.1, ease: "power2.inOut" });
+    }
+    if (inEl) {
+      gsap.killTweensOf(inEl);
+      gsap.fromTo(
+        inEl,
+        { opacity: 0, xPercent: 8 },
+        { opacity: 1, xPercent: 0, duration: 1.1, ease: "power2.inOut" },
+      );
+    }
+  }, [active]);
+
+  return (
+    <>
+      {slides.map((slide, i) =>
+        slide.image ? (
+          <div
+            key={slide.id}
+            ref={(el) => {
+              layerRefs.current[i] = el;
+            }}
+            className="absolute inset-0"
+            style={{ opacity: i === active ? 1 : 0 }}
+          >
+            <Image
+              src={slide.image}
+              alt=""
+              fill
+              priority={i === active}
+              className="object-cover object-[75%_center] opacity-90"
+            />
+          </div>
+        ) : null,
+      )}
+    </>
   );
 }
 
