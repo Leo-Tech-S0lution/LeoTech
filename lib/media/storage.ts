@@ -1,19 +1,18 @@
 import "server-only";
-import { writeFile, unlink, mkdir } from "fs/promises";
-import path from "path";
-import { randomBytes } from "crypto";
-import sharp from "sharp";
+import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
 
 /**
- * Local-disk media storage. Files land in /public/uploads and are served
- * directly by Next.js as static assets.
- *
- * This is the single integration point for storage: swap the body of
- * `saveUploadedFile` / `deleteStoredFile` for an S3 / Vercel Blob / Cloudinary
- * client to move to external storage without touching any calling code.
+ * Cloudinary-backed media storage. This is the single integration point for
+ * uploads — swap the body of `saveUploadedFile` / `deleteStoredFile` again
+ * (e.g. for S3) without touching any calling code.
  */
 
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 export interface StoredFile {
   url: string;
@@ -22,6 +21,8 @@ export interface StoredFile {
   size: number;
   width: number | null;
   height: number | null;
+  /** Cloudinary public_id — needed to delete the asset later. */
+  externalId: string;
 }
 
 const ALLOWED_MIME_TYPES = new Set([
@@ -32,67 +33,57 @@ const ALLOWED_MIME_TYPES = new Set([
   "image/gif",
 ]);
 
+const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
 export async function saveUploadedFile(file: File): Promise<StoredFile> {
   if (!ALLOWED_MIME_TYPES.has(file.type)) {
     throw new Error(`Unsupported file type: ${file.type}`);
   }
-  const MAX_SIZE = 10 * 1024 * 1024; // 10MB
   if (file.size > MAX_SIZE) {
     throw new Error("File exceeds the 10MB upload limit.");
   }
-
-  await mkdir(UPLOAD_DIR, { recursive: true });
-
-  const ext = path.extname(file.name).toLowerCase() || guessExt(file.type);
-  const safeName = `${Date.now()}-${randomBytes(6).toString("hex")}${ext}`;
-  const destination = path.join(UPLOAD_DIR, safeName);
-
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(destination, buffer);
-
-  let width: number | null = null;
-  let height: number | null = null;
-  if (file.type !== "image/svg+xml") {
-    try {
-      const meta = await sharp(buffer).metadata();
-      width = meta.width ?? null;
-      height = meta.height ?? null;
-    } catch {
-      // Non-fatal: dimension probing failed, still keep the file.
-    }
+  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+    throw new Error("Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET.");
   }
 
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "leotech-solution",
+        resource_type: "image",
+        // SVGs are uploaded as image assets too — Cloudinary accounts have
+        // SVG delivery disabled by default (XSS risk from embedded scripts);
+        // enable "Allow delivery of SVG" under Settings > Security if you
+        // need to serve uploaded SVGs.
+      },
+      (error, uploadResult) => {
+        if (error || !uploadResult) {
+          reject(error ?? new Error("Cloudinary upload failed."));
+        } else {
+          resolve(uploadResult);
+        }
+      },
+    );
+    stream.end(buffer);
+  });
+
   return {
-    url: `/uploads/${safeName}`,
-    filename: safeName,
+    url: result.secure_url,
+    filename: file.name || `${result.public_id}.${result.format}`,
     mimeType: file.type,
-    size: file.size,
-    width,
-    height,
+    size: result.bytes,
+    width: result.width ?? null,
+    height: result.height ?? null,
+    externalId: result.public_id,
   };
 }
 
-export async function deleteStoredFile(url: string): Promise<void> {
-  if (!url.startsWith("/uploads/")) return; // never touch files outside our managed dir
-  const filePath = path.join(process.cwd(), "public", url);
-  await unlink(filePath).catch(() => {
-    // Already gone — treat as success.
+export async function deleteStoredFile(externalId: string | null | undefined): Promise<void> {
+  if (!externalId) return; // nothing to do for pre-Cloudinary/local records
+  await cloudinary.uploader.destroy(externalId, { resource_type: "image" }).catch(() => {
+    // Already gone, or transient error — treat as success rather than
+    // blocking the admin from removing the database record.
   });
-}
-
-function guessExt(mimeType: string): string {
-  switch (mimeType) {
-    case "image/jpeg":
-      return ".jpg";
-    case "image/png":
-      return ".png";
-    case "image/webp":
-      return ".webp";
-    case "image/svg+xml":
-      return ".svg";
-    case "image/gif":
-      return ".gif";
-    default:
-      return "";
-  }
 }

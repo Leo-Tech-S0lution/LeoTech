@@ -29,6 +29,7 @@ export async function uploadMediaAction(formData: FormData): Promise<ActionResul
       .values({
         filename: stored.filename,
         url: stored.url,
+        externalId: stored.externalId,
         mimeType: stored.mimeType,
         size: stored.size,
         width: stored.width,
@@ -56,7 +57,7 @@ export async function deleteMediaAction(id: string): Promise<ActionResult> {
     const [row] = await db.select().from(media).where(eq(media.id, id)).limit(1);
     if (!row) return { success: false, error: "Media item not found." };
 
-    await deleteStoredFile(row.url);
+    await deleteStoredFile(row.externalId);
     await db.delete(media).where(eq(media.id, id));
 
     revalidatePath("/admin/media");

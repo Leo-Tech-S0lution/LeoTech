@@ -15,7 +15,7 @@ The public site is fully database-driven: hero slides, services, projects, train
 - **Database:** Neon PostgreSQL via Drizzle ORM (`pg` driver)
 - **Auth:** Self-contained cookie/session auth (bcrypt password hashing, hashed session tokens) — no third-party auth provider
 - **Rich text:** Tiptap (blog editor)
-- **Media:** Local-disk storage under `public/uploads`, abstracted behind `lib/media/storage.ts` for an easy swap to S3 / Vercel Blob / Cloudinary later
+- **Media:** Cloudinary, abstracted behind `lib/media/storage.ts` for an easy swap to S3 / Vercel Blob later if needed
 
 ---
 
@@ -40,6 +40,9 @@ cp .env.example .env.local
 | `DATABASE_URL` | Neon PostgreSQL connection string (see below) |
 | `AUTH_SECRET` | Any long random string — used to strengthen session handling. Generate with `openssl rand -base64 32` |
 | `NEXT_PUBLIC_SITE_URL` | The public URL of the site (used for SEO metadata, sitemap, OG tags) |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (see below) |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret — keep this private, it's server-only |
 
 **Never commit `.env.local`.** It's already git-ignored.
 
@@ -49,7 +52,15 @@ cp .env.example .env.local
 2. Copy the connection string from the dashboard (it looks like `postgresql://user:password@host/dbname?sslmode=require`).
 3. Paste it into `DATABASE_URL` in `.env.local`.
 
-### 4. Run database migrations
+### 4. Set up Cloudinary
+
+1. Create a free account at [console.cloudinary.com](https://console.cloudinary.com).
+2. On the dashboard home page, copy your **Cloud name**, **API Key**, and **API Secret**.
+3. Paste them into `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` in `.env.local`.
+
+Uploads made through the admin Media Library land in a `leotech-solution/` folder in your Cloudinary account. Cloudinary blocks delivery of uploaded SVGs by default (an XSS precaution, since an SVG can embed a script), so if you need to upload SVGs through the Media Library, look under your Cloudinary account's Settings → Security for the option to allow SVG delivery — skip this if you won't be uploading SVGs.
+
+### 5. Run database migrations
 
 Migrations are generated with Drizzle Kit and checked into `/drizzle`. To apply them to your database:
 
@@ -66,7 +77,7 @@ npm run db:migrate
 
 `npm run db:studio` opens Drizzle Studio, a GUI for browsing/editing the database directly — useful for debugging.
 
-### 5. Seed demo content
+### 6. Seed demo content
 
 ```bash
 npm run db:seed
@@ -76,13 +87,13 @@ This populates realistic starter content (services, projects, training courses, 
 
 Re-running the seed script is safe for the admin user (it skips creation if that email already exists) but will insert duplicate content rows for everything else — it's meant for first-time setup, not repeated resets.
 
-### 6. Run the dev server
+### 7. Run the dev server
 
 ```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the CMS.
+Visit `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the CMS. Use `npm run dev` (not `npm run build && npm run start`) for day-to-day content work — see the Troubleshooting note below on why.
 
 ---
 
@@ -111,7 +122,7 @@ lib/
     migrate.ts          Migration runner
     seed.ts              Seed script
   auth/                Session management, password hashing, requireAdmin() guard
-  media/               Upload storage abstraction
+  media/               Upload storage abstraction (Cloudinary)
   validation/          Zod schemas for admin forms
   seo/                 Metadata + JSON-LD helpers
   utils/               cn(), slugify, date/reading-time helpers
@@ -120,8 +131,9 @@ lib/
 drizzle/                Generated SQL migrations (checked into git)
 public/
   brand/                The real LeoTech Solution logo (dark + light variants), used verbatim across the site
-  uploads/               Admin-uploaded media (git-ignored — this is runtime data, not source)
 ```
+
+Admin-uploaded media lives in Cloudinary, not in this repo — nothing under `public/` is runtime-writable.
 
 ---
 
@@ -162,14 +174,15 @@ npm run start
 
 ## Deployment
 
-The app is a standard Next.js app and deploys cleanly to any Next.js-compatible host (Vercel, a Node server, etc.). Set the same environment variables from `.env.local` in your hosting provider's dashboard — never commit them.
+The app is a standard Next.js app and deploys cleanly to any Next.js-compatible host (Vercel, a Node server, etc.). Set the same environment variables from `.env.local` — including the three `CLOUDINARY_*` ones — in your hosting provider's dashboard. Never commit them. Because media lives in Cloudinary rather than on local disk, there's nothing extra to configure for serverless/read-only-filesystem hosts (this was the reason the storage layer was moved off local disk in the first place).
 
-If you deploy to a serverless/read-only-filesystem platform, swap `lib/media/storage.ts` for an external storage provider (S3, Vercel Blob, Cloudinary) — it's the single integration point for uploads, so nothing else needs to change.
+If you ever need a different provider (S3, Vercel Blob, etc.), `lib/media/storage.ts` is the single integration point for uploads — swap its two functions without touching any calling code.
 
 ## Troubleshooting
 
 - **`DATABASE_URL is not set`** — make sure `.env.local` exists and is filled in (not just `.env.example`).
 - **Migration fails with a permissions/SSL error** — confirm your Neon connection string includes `?sslmode=require`.
-- **Images not showing after upload** — confirm `public/uploads` exists and is writable; on serverless hosts, switch to external storage (see above), since their filesystems are typically read-only or ephemeral.
+- **"Cloudinary is not configured" on upload** — fill in `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` in `.env.local` and restart the server.
+- **Uploaded images don't show up** — if you're running `npm run start` (a production build) rather than `npm run dev`, restart the server: Next's production server only discovers new files under `public/` at startup, and there's no `public/` involvement in the Cloudinary path anyway once it's configured — this specific issue only applied when media briefly lived on local disk. If it recurs, check the browser console/network tab for the actual failing request (a 4xx from `res.cloudinary.com` usually means the account's SVG-delivery or security settings are blocking that file type).
 - **Locked out of `/admin`** — connect to the database (`npm run db:studio` or the Neon SQL editor) and inspect the `admin_users` table, or re-run `npm run db:seed` after deleting your row to get a fresh temporary password.
 - **Stale content after an admin edit** — content is revalidated automatically; a hard refresh (Ctrl/Cmd+Shift+R) rules out browser caching if something still looks old.

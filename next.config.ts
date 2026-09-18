@@ -1,12 +1,22 @@
 import type { NextConfig } from "next";
 
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+
 const nextConfig: NextConfig = {
-  // All media is uploaded through the admin Media Library and served locally
-  // from /uploads, so next/image never needs to fetch a remote host. Leaving
-  // remotePatterns empty (rather than wildcarding "**") keeps the built-in
-  // image optimizer from doubling as an open proxy for arbitrary URLs.
+  // Media is uploaded through the admin Media Library to Cloudinary. Scope
+  // next/image's remote fetching to exactly that one account's upload path
+  // (never a bare "**") so the built-in image optimizer can't double as an
+  // open proxy for arbitrary URLs.
   images: {
-    remotePatterns: [],
+    remotePatterns: cloudName
+      ? [
+          {
+            protocol: "https",
+            hostname: "res.cloudinary.com",
+            pathname: `/${cloudName}/image/upload/**`,
+          },
+        ]
+      : [],
   },
   eslint: {
     ignoreDuringBuilds: false,
