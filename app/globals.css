@@ -104,3 +104,9 @@ body {
   border-radius: 9999px;
   will-change: transform;
 }
+
+/* Applied to <html> only once Cursor confirms a fine pointer + no reduced-motion preference */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
