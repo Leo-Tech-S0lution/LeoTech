@@ -25,12 +25,16 @@ export function MediaLibrary({ initialItems }: { initialItems: Media[] }) {
       const formData = new FormData();
       formData.append("file", file);
       startUpload(async () => {
-        const result = await uploadMediaAction(formData);
-        if (result.success) {
-          setItems((prev) => [result.data, ...prev]);
-          toast.success(`${file.name} uploaded.`);
-        } else {
-          toast.error(result.error);
+        try {
+          const result = await uploadMediaAction(formData);
+          if (result.success) {
+            setItems((prev) => [result.data, ...prev]);
+            toast.success(`${file.name} uploaded.`);
+          } else {
+            toast.error(result.error);
+          }
+        } catch {
+          toast.error(`${file.name}: upload failed. The file may be too large (max 10MB).`);
         }
       });
     });

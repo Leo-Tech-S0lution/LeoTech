@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         ]
       : [],
   },
+  // Server actions default to a 1MB request body, which rejects most photos
+  // before uploadMediaAction runs. Match storage.ts's 10MB MAX_SIZE (+ headroom
+  // for multipart overhead).
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "11mb",
+    },
+  },
   eslint: {
     ignoreDuringBuilds: false,
   },

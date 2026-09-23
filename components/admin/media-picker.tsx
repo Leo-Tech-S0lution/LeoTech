@@ -98,13 +98,17 @@ function MediaPickerModal({
     formData.append("file", file);
 
     startUpload(async () => {
-      const result = await uploadMediaAction(formData);
-      if (result.success) {
-        setItems((prev) => (prev ? [result.data, ...prev] : [result.data]));
-        onSelect(result.data.url);
-        toast.success("Image uploaded.");
-      } else {
-        toast.error(result.error);
+      try {
+        const result = await uploadMediaAction(formData);
+        if (result.success) {
+          setItems((prev) => (prev ? [result.data, ...prev] : [result.data]));
+          onSelect(result.data.url);
+          toast.success("Image uploaded.");
+        } else {
+          toast.error(result.error);
+        }
+      } catch {
+        toast.error("Upload failed. The file may be too large (max 10MB).");
       }
     });
   }

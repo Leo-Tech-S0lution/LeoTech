@@ -1,8 +1,10 @@
 "use server";
 
+import { after } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { contactSubmissions } from "@/lib/db/schema";
+import { notifyAdminOfInquiry } from "@/lib/mail/mailer";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name.").max(160),
@@ -43,15 +45,25 @@ export async function submitContactForm(
   }
 
   try {
-    await db.insert(contactSubmissions).values({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone || null,
-      company: parsed.data.company || null,
-      service: parsed.data.service || null,
-      budget: parsed.data.budget || null,
-      message: parsed.data.message,
-    });
+    const [inquiry] = await db
+      .insert(contactSubmissions)
+      .values({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone || null,
+        company: parsed.data.company || null,
+        service: parsed.data.service || null,
+        budget: parsed.data.budget || null,
+        message: parsed.data.message,
+      })
+      .returning();
+
+    // Send after the response so a slow/failed SMTP call never delays or fails the form.
+    if (inquiry) {
+      after(() =>
+        notifyAdminOfInquiry(inquiry).catch((err) => console.error("[mailer] Admin notification failed:", err)),
+      );
+    }
     return { status: "success" };
   } catch {
     return { status: "error", message: "Something went wrong sending your message. Please try again or email us directly." };
