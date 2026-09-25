@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeRichText } from "@/lib/utils/sanitize";
 import { requireAdmin } from "@/lib/auth/guard";
 import { db } from "@/lib/db";
 import { blogPosts, blogPostTags, type BlogPost } from "@/lib/db/schema";
@@ -32,7 +32,7 @@ export async function createBlogPostAction(input: unknown): Promise<ActionResult
     return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const { tagIds, publishedAt, ...rest } = parsed.data;
-  const safeContent = DOMPurify.sanitize(rest.content);
+  const safeContent = sanitizeRichText(rest.content);
 
   try {
     const [row] = await db
@@ -69,7 +69,7 @@ export async function updateBlogPostAction(id: string, input: unknown): Promise<
     return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const { tagIds, publishedAt, ...rest } = parsed.data;
-  const safeContent = DOMPurify.sanitize(rest.content);
+  const safeContent = sanitizeRichText(rest.content);
 
   try {
     const [existing] = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);

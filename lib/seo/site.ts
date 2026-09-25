@@ -6,7 +6,11 @@ export const SITE_URL = "https://leotechsolution.com.np";
 
 /** Official brand name, and the legitimate spellings people search for (used as schema alternateName). */
 export const BRAND_NAME = "Leo Tech Solution";
-export const BRAND_ALTERNATE_NAMES = ["LeoTech Solution", "leotechsolution"];
+export const BRAND_ALTERNATE_NAMES = [
+  "LeoTech Solution",
+  "LeoTech Solutions",
+  "Leo Tech Solutions",
+];
 
 /** Default 1200×630 social share image (PNG — social networks don't render SVG). */
 export const DEFAULT_SHARE_IMAGE = "/og-image.png";

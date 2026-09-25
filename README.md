@@ -8,7 +8,7 @@ The public site is fully database-driven: hero slides, services, projects, train
 
 ## Stack
 
-- **Runtime:** Node.js 22.22.2+ or 24.15.0+ (LTS) — see `engines` in `package.json`
+- **Runtime:** Node.js 22.12+ (LTS 22 or 24) — see `engines` in `package.json`
 - **Framework:** Next.js 16 (App Router, Server Components, Server Actions, Turbopack) on React 19
 - **Language:** TypeScript 6
 - **Styling:** Tailwind CSS 4 (CSS-first config in `app/globals.css` via `@theme`; no `tailwind.config.ts`)
@@ -214,7 +214,7 @@ Before submitting, sanity-check production:
 - Sessions are opaque random tokens stored in an httpOnly, secure (in production), `SameSite=Lax` cookie. The database only stores a SHA-256 hash of the token, not the token itself.
 - Every admin page and every mutating server action independently calls `requireAdmin()` — authorization isn't only enforced at the layout level.
 - All admin inputs are validated server-side with Zod, even though forms also validate client-side.
-- Rich text from the blog editor is sanitized with DOMPurify both before it's stored and again before it's rendered.
+- Rich text from the blog editor is sanitized with `sanitize-html` (`lib/utils/sanitize.ts`, an allow-list matching the Tiptap editor) both before it's stored and again before it's rendered. It is pure JavaScript (no jsdom), so it runs reliably in serverless functions.
 - `DATABASE_URL` and all secrets stay server-side only — verify this yourself with `grep -r "DATABASE_URL" components/` if you're auditing.
 
 ---

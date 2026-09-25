@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeRichText } from "@/lib/utils/sanitize";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { Linkedin, Twitter, Facebook } from "@/components/ui/brand-icons";
 import { PageHeader } from "@/components/sections/page-header";
@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const [related, siteUrl] = [await getRelatedPosts(post), getSiteUrl()];
   const postUrl = `${siteUrl}/blog/${post.slug}`;
-  const safeContent = DOMPurify.sanitize(post.content);
+  const safeContent = sanitizeRichText(post.content);
 
   const jsonLd = {
     "@context": "https://schema.org",
