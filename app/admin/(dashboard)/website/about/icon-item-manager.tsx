@@ -15,7 +15,7 @@ import { AdminButton } from "@/components/admin/ui/button";
 import { SubmitButton } from "@/components/admin/submit-button";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { toast } from "@/components/admin/toast";
-import { getIcon } from "@/lib/icons";
+import { DynamicIcon } from "@/components/ui/dynamic-icon";
 import type { ActionResult } from "@/lib/validation/common";
 
 interface IconItem {
@@ -107,10 +107,9 @@ export function IconItemManager<T extends IconItem>({
 }
 
 function IconPreview({ icon }: { icon: string | null }) {
-  const Icon = getIcon(icon);
   return (
     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-blue-500">
-      <Icon className="h-4 w-4" />
+      <DynamicIcon icon={icon} className="h-4 w-4" />
     </div>
   );
 }
@@ -132,7 +131,7 @@ function ItemRow<T extends IconItem>({
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<WhyLeotechItemInput>({
+  } = useForm({
     resolver: zodResolver(whyLeotechItemSchema),
     defaultValues: {
       title: item?.title ?? "",
@@ -168,7 +167,7 @@ function ItemRow<T extends IconItem>({
         <Textarea rows={2} {...register("description")} />
       </FormField>
       <FormField label="Icon" error={errors.icon?.message}>
-        <Controller name="icon" control={control} render={({ field }) => <IconPicker value={field.value} onChange={field.onChange} />} />
+        <Controller name="icon" control={control} render={({ field }) => <IconPicker value={field.value ?? ""} onChange={field.onChange} />} />
       </FormField>
       <div className="flex items-center gap-2">
         <SubmitButton pending={isPending} pendingLabel="Saving…">

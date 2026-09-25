@@ -21,7 +21,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<SiteSettingsInput>({
+  } = useForm({
     resolver: zodResolver(siteSettingsSchema),
     defaultValues: {
       companyName: settings.companyName,

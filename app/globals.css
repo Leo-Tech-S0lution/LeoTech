@@ -1,95 +1,187 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --primary: #000054;
-  --primary-blue: #1373e9;
-  --accent-blue: #0451ae;
-  --background: #ffffff;
-  --dark-background: #000054;
-  --text: #0a0e27;
-  --muted: #57628a;
-  --border: #e2e7f2;
-}
+/* ==========================================================================
+   Theme (Tailwind CSS v4, CSS-first configuration — replaces tailwind.config.ts)
+   ========================================================================== */
+@theme {
+  /* Core brand system, derived directly from the Leo Tech Solution logo. */
+  --color-navy-950: #00001f;
+  --color-navy-900: #000054; /* logo primary (deep navy) */
+  --color-navy-800: #050a3d;
+  --color-navy-700: #0c1552;
+  --color-navy-600: #141f66;
+  --color-navy-500: #1d2c80;
 
-* {
-  border-color: var(--border);
-}
+  --color-blue-50: #eef5ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #b3d4ff;
+  --color-blue-300: #7fb4ff;
+  --color-blue-400: #2e8cff; /* light-logo accent */
+  --color-blue-500: #1373e9; /* logo primary blue */
+  --color-blue-600: #0451ae; /* logo secondary blue */
+  --color-blue-700: #053e88;
+  --color-blue-800: #0a2f66;
+  --color-blue-900: #0a1f42;
 
-html {
-  scroll-behavior: smooth;
-}
+  --color-ink: #0a0e27;
 
-body {
-  background: var(--background);
-  color: var(--text);
-  font-feature-settings: "ss01" 1, "cv01" 1;
-}
+  --color-slate-50: #f5f7fb;
+  --color-slate-100: #e8ecf5;
+  --color-slate-200: #cfd7e8;
+  --color-slate-300: #a9b5d1;
+  --color-slate-400: #7887ac;
+  --color-slate-500: #57628a;
+  --color-slate-600: #414a6e;
+  --color-slate-700: #2f3656;
+  --color-slate-800: #1d2340;
+  --color-slate-900: #12162b;
 
-::selection {
-  background: var(--primary-blue);
-  color: white;
-}
+  --color-border: #e2e7f2;
+  --color-border-dark: rgba(120, 150, 220, 0.16);
 
-/* Thin technical scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(19, 115, 233, 0.35);
-  border-radius: 0;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(19, 115, 233, 0.6);
-  background-clip: content-box;
-}
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  --shadow-glow-sm: 0 0 24px rgba(19, 115, 233, 0.25);
+  --shadow-glow-md: 0 0 48px rgba(19, 115, 233, 0.3);
+  --shadow-card: 0 1px 2px rgba(10, 14, 39, 0.04), 0 8px 24px rgba(10, 14, 39, 0.06);
+
+  --ease-technical: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }
 
-/* Utility layer: shared technical design primitives */
-@layer components {
-  .container-tech {
-    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12;
+/* Technical background textures (v4 has no backgroundImage/backgroundSize theme keys). */
+@utility bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(20, 31, 102, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 31, 102, 0.05) 1px, transparent 1px);
+}
+@utility bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(120, 150, 220, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 150, 220, 0.08) 1px, transparent 1px);
+}
+@utility bg-glow-blue {
+  background-image: radial-gradient(circle at 50% 0%, rgba(19, 115, 233, 0.25), transparent 60%);
+}
+@utility bg-grid {
+  background-size: 40px 40px;
+}
+@utility bg-grid-sm {
+  background-size: 20px 20px;
+}
+
+/* Tailwind v3 defaults that v4 changed — kept so the site looks and behaves the same. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+  }
+}
+
+@utility container-tech {
+  @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12;
+}
+
+@utility clip-corner {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%
+  );
+}
+
+@utility clip-corner-sm {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+}
+
+@layer base {
+  :root {
+    --primary: #000054;
+    --primary-blue: #1373e9;
+    --accent-blue: #0451ae;
+    --background: #ffffff;
+    --dark-background: #000054;
+    --text: #0a0e27;
+    --muted: #57628a;
+    --border: #e2e7f2;
   }
 
-  .clip-corner {
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - 20px),
-      calc(100% - 20px) 100%,
-      0 100%
-    );
+  * {
+    border-color: var(--border);
   }
 
-  .clip-corner-sm {
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - 10px),
-      calc(100% - 10px) 100%,
-      0 100%
-    );
+  html {
+    scroll-behavior: smooth;
   }
 
-  .text-balance {
-    text-wrap: balance;
+  body {
+    background: var(--background);
+    color: var(--text);
+    font-feature-settings:
+      'ss01' 1,
+      'cv01' 1;
+  }
+
+  ::selection {
+    background: var(--primary-blue);
+    color: white;
+  }
+
+  /* Thin technical scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(19, 115, 233, 0.35);
+    border-radius: 0;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(19, 115, 233, 0.6);
+    background-clip: content-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

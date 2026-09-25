@@ -43,9 +43,9 @@ export function AboutPreview({ title, description, statistics }: AboutPreviewPro
           </Link>
         </Reveal>
 
-        <Reveal className="relative aspect-[4/3] overflow-hidden border border-border bg-navy-900">
+        <Reveal className="relative aspect-4/3 overflow-hidden border border-border bg-navy-900">
           <TechBackground type="ai" dark className="opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-transparent to-transparent" />
         </Reveal>
       </div>
 

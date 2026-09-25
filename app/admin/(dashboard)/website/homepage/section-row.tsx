@@ -14,7 +14,7 @@ import type { HomepageSection } from "@/lib/db/schema";
 export function SectionRow({ section }: { section: HomepageSection }) {
   const [isPending, startTransition] = useTransition();
 
-  const { register, handleSubmit, control } = useForm<HomepageSectionInput>({
+  const { register, handleSubmit, control } = useForm({
     resolver: zodResolver(homepageSectionSchema),
     defaultValues: {
       title: section.title ?? "",
@@ -41,7 +41,7 @@ export function SectionRow({ section }: { section: HomepageSection }) {
         <Controller
           name="enabled"
           control={control}
-          render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+          render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
         />
       </div>
       <div className="mt-4 grid grid-cols-1 gap-4">

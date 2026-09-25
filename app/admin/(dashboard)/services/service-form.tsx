@@ -31,7 +31,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
     control,
     setValue,
     formState: { errors },
-  } = useForm<ServiceInput>({
+  } = useForm({
     resolver: zodResolver(serviceSchema),
     defaultValues: {
       title: service?.title ?? "",
@@ -101,7 +101,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
             <Controller
               name="icon"
               control={control}
-              render={({ field }) => <IconPicker value={field.value} onChange={field.onChange} />}
+              render={({ field }) => <IconPicker value={field.value ?? ""} onChange={field.onChange} />}
             />
           </FormField>
           <FormField label="Order" error={errors.order?.message}>
@@ -160,7 +160,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
             <Controller
               name="featured"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
         </div>

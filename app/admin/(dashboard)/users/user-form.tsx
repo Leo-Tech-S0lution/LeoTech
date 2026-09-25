@@ -36,9 +36,9 @@ function CreateUserForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateAdminUserInput>({
+  } = useForm({
     resolver: zodResolver(createAdminUserSchema),
-    defaultValues: { name: "", email: "", role: "editor", password: "" },
+    defaultValues: { name: "", email: "", role: "editor" as const, password: "" },
   });
 
   function onSubmit(data: CreateAdminUserInput) {
@@ -93,7 +93,7 @@ function EditUserForm({ user }: { user: AdminUser }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UpdateAdminUserInput>({
+  } = useForm({
     resolver: zodResolver(updateAdminUserSchema),
     defaultValues: { id: user.id, name: user.name, email: user.email, role: user.role },
   });
@@ -148,7 +148,7 @@ function ResetPasswordForm({ userId }: { userId: string }) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ResetPasswordInput>({
+  } = useForm({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: { id: userId, password: "" },
   });

@@ -31,7 +31,7 @@ export function CourseForm({ course }: CourseFormProps) {
     control,
     setValue,
     formState: { errors },
-  } = useForm<TrainingCourseInput>({
+  } = useForm({
     resolver: zodResolver(trainingCourseSchema),
     defaultValues: {
       title: course?.title ?? "",
@@ -192,7 +192,7 @@ export function CourseForm({ course }: CourseFormProps) {
             <Controller
               name="featured"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
         </div>

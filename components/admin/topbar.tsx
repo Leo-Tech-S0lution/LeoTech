@@ -11,7 +11,7 @@ interface TopbarProps {
 
 export function Topbar({ userName, userRole, onOpenMobile }: TopbarProps) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur sm:px-6">
+    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur-sm sm:px-6">
       <button
         onClick={onOpenMobile}
         className="text-slate-500 hover:text-navy-900 lg:hidden"

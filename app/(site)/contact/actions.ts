@@ -8,7 +8,7 @@ import { notifyAdminOfInquiry } from "@/lib/mail/mailer";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name.").max(160),
-  email: z.string().trim().email("Please enter a valid email address.").max(255),
+  email: z.string().trim().max(255).pipe(z.email({ error: "Please enter a valid email address." })),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   company: z.string().trim().max(160).optional().or(z.literal("")),
   service: z.string().trim().max(160).optional().or(z.literal("")),

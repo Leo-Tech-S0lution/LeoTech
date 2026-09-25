@@ -31,7 +31,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
     control,
     setValue,
     formState: { errors },
-  } = useForm<ProjectInput>({
+  } = useForm({
     resolver: zodResolver(projectSchema),
     defaultValues: {
       title: project?.title ?? "",
@@ -178,7 +178,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             <Controller
               name="featured"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
         </div>

@@ -27,7 +27,7 @@ export function HeroSlideForm({ slide }: HeroSlideFormProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<HeroSlideInput>({
+  } = useForm({
     resolver: zodResolver(heroSlideSchema),
     defaultValues: {
       title: slide?.title ?? "",
@@ -116,7 +116,7 @@ export function HeroSlideForm({ slide }: HeroSlideFormProps) {
             <Controller
               name="active"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
         </div>

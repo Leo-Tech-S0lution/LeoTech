@@ -37,7 +37,7 @@ const dateStringSchema = z
 
 const curriculumModuleSchema = z.object({
   title: z.string().trim().min(1, "Module title is required."),
-  items: z.array(z.string().trim().min(1)).default([]),
+  items: z.array(z.string().trim().min(1)),
 });
 
 export const curriculumSchema = z.array(curriculumModuleSchema).default([]);
@@ -57,7 +57,7 @@ export const trainingCourseSchema = z.object({
   instructor: optionalTrimmed(160),
   startDate: dateStringSchema,
   image: optionalTrimmed(500),
-  featured: z.coerce.boolean().default(false),
+  featured: z.coerce.boolean<boolean>().default(false),
   status: contentStatusSchema,
   order: orderSchema,
   seoTitle: optionalTrimmed(160),

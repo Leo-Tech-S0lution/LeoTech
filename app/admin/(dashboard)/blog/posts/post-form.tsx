@@ -41,7 +41,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
     setValue,
     watch,
     formState: { errors },
-  } = useForm<BlogPostInput>({
+  } = useForm({
     resolver: zodResolver(blogPostSchema),
     defaultValues: {
       title: post?.title ?? "",
@@ -128,7 +128,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
             <Controller
               name="content"
               control={control}
-              render={({ field }) => <RichTextEditor value={field.value} onChange={field.onChange} />}
+              render={({ field }) => <RichTextEditor value={field.value ?? ""} onChange={field.onChange} />}
             />
           </FormField>
           <FormField label="Featured image">
@@ -222,7 +222,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
             <Controller
               name="featured"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
         </div>

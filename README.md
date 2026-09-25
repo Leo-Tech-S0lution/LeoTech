@@ -8,13 +8,18 @@ The public site is fully database-driven: hero slides, services, projects, train
 
 ## Stack
 
-- **Framework:** Next.js 15 (App Router, Server Components, Server Actions)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Runtime:** Node.js 22.22.2+ or 24.15.0+ (LTS) — see `engines` in `package.json`
+- **Framework:** Next.js 16 (App Router, Server Components, Server Actions, Turbopack) on React 19
+- **Language:** TypeScript 6
+- **Styling:** Tailwind CSS 4 (CSS-first config in `app/globals.css` via `@theme`; no `tailwind.config.ts`)
 - **Animation:** GSAP + ScrollTrigger
+- **Validation / forms:** Zod 4 + React Hook Form (`@hookform/resolvers` 5)
 - **Database:** Neon PostgreSQL via Drizzle ORM (`pg` driver)
 - **Auth:** Self-contained cookie/session auth (bcrypt password hashing, hashed session tokens) — no third-party auth provider
-- **Rich text:** Tiptap (blog editor)
+- **Rich text:** Tiptap 3 (blog editor)
+- **Icons:** lucide-react 1.x; brand/social logos live in `components/ui/brand-icons.ts` (lucide 1.x removed them)
+- **Linting:** ESLint 9 flat config (`eslint.config.mjs`, `npm run lint`) — Next.js 16 removed `next lint`
+- **Request proxy:** `proxy.ts` (Next.js 16's rename of `middleware.ts`)
 - **Media:** Cloudinary, abstracted behind `lib/media/storage.ts` for an easy swap to S3 / Vercel Blob later if needed
 
 ---

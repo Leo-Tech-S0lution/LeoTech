@@ -1,38 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "./gsap-setup";
 
 const SESSION_KEY = "leotech_loaded";
 
+/** Decided once per full page load; later reads return the same answer. */
+let initialDecision: boolean | null = null;
+
+function shouldShowLoader(pathname: string): boolean {
+  if (initialDecision !== null) return initialDecision;
+  // Team profiles are usually opened by scanning an ID-card QR — show the person immediately.
+  if (pathname.startsWith("/team/")) return (initialDecision = false);
+  let alreadyShown = false;
+  try {
+    alreadyShown = sessionStorage.getItem(SESSION_KEY) === "1";
+    sessionStorage.setItem(SESSION_KEY, "1");
+  } catch {
+    // storage unavailable (private mode etc.) — just show it once, harmlessly
+  }
+  return (initialDecision = !alreadyShown);
+}
+
+const noSubscription = () => () => {};
+
 /** One-time premium loading screen shown on the first page load of a session — never on client-side navigation. */
 export function PageLoader() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(false);
+  const shouldShow = useSyncExternalStore(noSubscription, () => shouldShowLoader(pathname), () => false);
+  const [finished, setFinished] = useState(false);
+  const visible = shouldShow && !finished;
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Team profiles are usually opened by scanning an ID-card QR — show the person immediately.
-    if (pathname.startsWith("/team/")) return;
-    let alreadyShown = false;
-    try {
-      alreadyShown = sessionStorage.getItem(SESSION_KEY) === "1";
-    } catch {
-      // storage unavailable (private mode etc.) — just show it once, harmlessly
-    }
-    if (!alreadyShown) {
-      setVisible(true);
-      try {
-        sessionStorage.setItem(SESSION_KEY, "1");
-      } catch {
-        // ignore
-      }
-    }
-    // Only evaluated for the initial page of the session.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (!visible) return;
@@ -43,7 +43,7 @@ export function PageLoader() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const tl = gsap.timeline({
-      onComplete: () => setVisible(false),
+      onComplete: () => setFinished(true),
     });
 
     if (reducedMotion) {
@@ -71,7 +71,7 @@ export function PageLoader() {
   return (
     <div
       ref={rootRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-navy-900"
+      className="fixed inset-0 z-100 flex flex-col items-center justify-center gap-6 bg-navy-900"
       aria-hidden
     >
       <img src="/brand/leotech-logo-light.svg" alt="" className="loader-logo h-16 w-16" />

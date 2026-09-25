@@ -39,7 +39,7 @@ export default async function ProjectsPage() {
                 <Link
                   key={project.id}
                   href={`/projects/${project.slug}`}
-                  className="group relative block aspect-[4/3] overflow-hidden border border-border bg-navy-900"
+                  className="group relative block aspect-4/3 overflow-hidden border border-border bg-navy-900"
                 >
                   {project.coverImage ? (
                     <Image
@@ -51,7 +51,7 @@ export default async function ProjectsPage() {
                   ) : (
                     <TechBackground type="blueprint" dark className="opacity-70" />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/40 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/40 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
                     {project.category && (
                       <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-blue-400">

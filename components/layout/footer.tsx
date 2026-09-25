@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Linkedin, Twitter, Github, Facebook, Instagram, Youtube, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { Linkedin, Twitter, Github, Facebook, Instagram, Youtube } from "@/components/ui/brand-icons";
 import { Logo } from "@/components/ui/logo";
 import { TechBackground } from "@/components/patterns/tech-background";
 import { getSiteSettings } from "@/lib/db/queries/settings";

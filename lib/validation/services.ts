@@ -12,7 +12,7 @@ export const serviceSchema = z.object({
   ctaLabel: z.string().trim().max(60).optional().or(z.literal("")).transform((v) => v || undefined),
   ctaHref: z.string().trim().max(255).optional().or(z.literal("")).transform((v) => v || undefined),
   order: orderSchema,
-  featured: z.coerce.boolean().default(false),
+  featured: z.coerce.boolean<boolean>().default(false),
   status: contentStatusSchema,
   seoTitle: z.string().trim().max(160).optional().or(z.literal("")).transform((v) => v || undefined),
   seoDescription: z.string().trim().max(255).optional().or(z.literal("")).transform((v) => v || undefined),

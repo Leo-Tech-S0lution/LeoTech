@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin, Twitter, Github, ArrowUpRight, BadgeCheck } from "lucide-react";
+import { ArrowUpRight, BadgeCheck } from "lucide-react";
+import { Linkedin, Twitter, Github } from "@/components/ui/brand-icons";
 import { Reveal } from "@/components/animations/reveal";
 import { profilePath } from "@/lib/team/profile";
 import type { TeamMember } from "@/lib/db/schema";
@@ -17,7 +18,7 @@ export function TeamGrid({ members, showDepartment = false }: { members: TeamMem
     <Reveal stagger className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
       {members.map((member) => (
         <article key={member.id} className="group relative flex flex-col overflow-hidden border border-border">
-          <div className="relative aspect-[3/4] overflow-hidden bg-slate-100">
+          <div className="relative aspect-3/4 overflow-hidden bg-slate-100">
             {member.image ? (
               <Image
                 src={member.image}
@@ -31,7 +32,7 @@ export function TeamGrid({ members, showDepartment = false }: { members: TeamMem
                 {member.name.charAt(0)}
               </div>
             )}
-            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy-900/90 via-navy-900/0 to-navy-900/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="absolute inset-0 flex items-end bg-linear-to-t from-navy-900/90 via-navy-900/0 to-navy-900/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {member.socialLinks && member.socialLinks.length > 0 && (
                 <div className="flex gap-2 p-4">
                   {member.socialLinks.map((s) => {

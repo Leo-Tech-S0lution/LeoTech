@@ -71,7 +71,7 @@ export function TechBackground({ type, className, dark = false }: TechBackground
               dark ? "bg-grid-dark" : "bg-grid-light",
             )}
           />
-          <div className="absolute inset-x-0 top-0 h-24 animate-pulse-slow bg-gradient-to-b from-blue-500/10 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-24 animate-pulse-slow bg-linear-to-b from-blue-500/10 to-transparent" />
         </div>
       );
 

@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { CtaSection } from "@/components/sections/cta-section";
 import { Reveal } from "@/components/animations/reveal";
 import { Button } from "@/components/ui/button";
-import { getIcon } from "@/lib/icons";
+import { DynamicIcon } from "@/components/ui/dynamic-icon";
 import { getServiceBySlug, getPublishedServices } from "@/lib/db/queries/services";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 import type { Metadata } from "next";
@@ -43,7 +43,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   if (!service) notFound();
 
-  const Icon = getIcon(service.icon);
   const siteUrl = getSiteUrl();
 
   const jsonLd = {
@@ -68,7 +67,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <section className="py-20 lg:py-28">
         <div className="container-tech grid grid-cols-1 gap-16 lg:grid-cols-[1fr_320px]">
           <Reveal className="space-y-6">
-            <Icon className="h-10 w-10 text-blue-500" strokeWidth={1.5} />
+            <DynamicIcon icon={service.icon} className="h-10 w-10 text-blue-500" strokeWidth={1.5} />
             {service.description && (
               <p className="max-w-2xl whitespace-pre-line text-base leading-relaxed text-slate-600">
                 {service.description}

@@ -24,7 +24,7 @@ export type HeroSlideInput = z.infer<typeof heroSlideSchema>;
 
 export const statisticSchema = z.object({
   label: requiredString(120),
-  value: z.coerce.number().int(),
+  value: z.coerce.number<number>().int(),
   suffix: optionalString(20),
   order: orderSchema,
 });

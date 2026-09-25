@@ -26,7 +26,7 @@ export function FaqForm({ faq }: FaqFormProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FaqInput>({
+  } = useForm({
     resolver: zodResolver(faqSchema),
     defaultValues: {
       question: faq?.question ?? "",
@@ -71,7 +71,7 @@ export function FaqForm({ faq }: FaqFormProps) {
               <Controller
                 name="published"
                 control={control}
-                render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+                render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
               />
             </FormField>
           </div>

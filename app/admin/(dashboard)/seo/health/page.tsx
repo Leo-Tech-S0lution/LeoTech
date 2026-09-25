@@ -137,7 +137,7 @@ export default async function SeoHealthPage() {
               <Icon className={`mt-0.5 h-5 w-5 shrink-0 ${COLORS[c.level]}`} aria-label={c.level} />
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-navy-900">{c.label}</p>
-                <p className="mt-0.5 break-words text-xs text-slate-500">{c.detail}</p>
+                <p className="mt-0.5 wrap-break-word text-xs text-slate-500">{c.detail}</p>
               </div>
               {c.fix && c.level !== "pass" ? (
                 <Link href={c.fix.href} className="shrink-0 text-xs font-medium text-blue-600 hover:underline">

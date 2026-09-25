@@ -9,7 +9,7 @@ export const technologyCategorySchema = z.object({
 export type TechnologyCategoryInput = z.infer<typeof technologyCategorySchema>;
 
 export const technologySchema = z.object({
-  categoryId: z.string().uuid("Select a category."),
+  categoryId: z.uuid({ error: "Select a category." }),
   name: requiredString(100),
   icon: z.string().trim().max(255).optional().or(z.literal("")).transform((v) => v || undefined),
   order: orderSchema,

@@ -27,7 +27,7 @@ export function SeoPageForm({ seoPage }: SeoPageFormProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<SeoPageInput>({
+  } = useForm({
     resolver: zodResolver(seoPageSchema),
     defaultValues: {
       path: seoPage?.path ?? "",

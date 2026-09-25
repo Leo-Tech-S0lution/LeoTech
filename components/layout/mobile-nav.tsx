@@ -66,8 +66,8 @@ export function MobileNav({ open, onClose, navLinks }: MobileNavProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] lg:hidden">
-      <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-sm" onClick={handleClose} aria-hidden />
+    <div className="fixed inset-0 z-60 lg:hidden">
+      <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-xs" onClick={handleClose} aria-hidden />
       <div
         ref={panelRef}
         role="dialog"

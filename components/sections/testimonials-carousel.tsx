@@ -17,10 +17,6 @@ export function TestimonialsCarousel({ title, description, testimonials }: Testi
   const [index, setIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  if (testimonials.length === 0) return null;
-
-  const current = testimonials[index]!;
-
   function go(next: number) {
     const dir = next > index || (index === testimonials.length - 1 && next === 0) ? 1 : -1;
     const el = cardRef.current;
@@ -46,6 +42,10 @@ export function TestimonialsCarousel({ title, description, testimonials }: Testi
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, testimonials.length]);
+
+  // Early return only after all hooks have run (rules of hooks).
+  if (testimonials.length === 0) return null;
+  const current = testimonials[index]!;
 
   return (
     <SectionWrapper

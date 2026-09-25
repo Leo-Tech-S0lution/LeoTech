@@ -20,7 +20,7 @@ export function BlogPreview({ title, description, posts }: BlogPreviewProps) {
       <Reveal stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
-            <div className="relative aspect-[16/10] overflow-hidden border border-border bg-slate-100">
+            <div className="relative aspect-16/10 overflow-hidden border border-border bg-slate-100">
               {post.featuredImage && (
                 <Image
                   src={post.featuredImage}

@@ -96,7 +96,7 @@ function CategoryRow({ category, onDone }: { category?: TechnologyCategory; onDo
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<TechnologyCategoryInput>({
+  } = useForm({
     resolver: zodResolver(technologyCategorySchema),
     defaultValues: {
       name: category?.name ?? "",

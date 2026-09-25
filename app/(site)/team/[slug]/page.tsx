@@ -12,16 +12,11 @@ import {
   UserPlus,
   MapPin,
   Building2,
-  Linkedin,
-  Github,
-  Facebook,
-  Instagram,
-  Youtube,
-  Twitter,
   Globe,
   ArrowUpRight,
   ChevronRight,
 } from "lucide-react";
+import { Linkedin, Github, Facebook, Instagram, Youtube, Twitter } from "@/components/ui/brand-icons";
 import { TechBackground } from "@/components/patterns/tech-background";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/team/share-profile-button";
@@ -164,7 +159,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
   ]);
 
   const actionClass =
-    "flex min-h-[48px] flex-col items-center justify-center gap-1 border border-white/15 bg-white/5 px-2 py-2.5 text-[11px] font-medium uppercase tracking-wide text-white transition-colors hover:border-blue-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:flex-row sm:gap-2 sm:px-4 sm:text-xs";
+    "flex min-h-[48px] flex-col items-center justify-center gap-1 border border-white/15 bg-white/5 px-2 py-2.5 text-[11px] font-medium uppercase tracking-wide text-white transition-colors hover:border-blue-400/60 hover:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:flex-row sm:gap-2 sm:px-4 sm:text-xs";
 
   return (
     <>
@@ -185,7 +180,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
           <Image src={m.coverImage} alt="" fill priority className="object-cover opacity-25" sizes="100vw" />
         ) : null}
         <TechBackground type="network" dark className="opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-900/40 to-navy-900" />
+        <div className="absolute inset-0 bg-linear-to-b from-navy-900/40 to-navy-900" />
 
         <div className="container-tech relative">
           <nav aria-label="Breadcrumb" className="mb-6 hidden sm:block">

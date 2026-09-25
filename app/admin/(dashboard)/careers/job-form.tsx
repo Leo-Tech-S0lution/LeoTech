@@ -29,7 +29,7 @@ export function JobForm({ job }: JobFormProps) {
     control,
     setValue,
     formState: { errors },
-  } = useForm<JobOpeningInput>({
+  } = useForm({
     resolver: zodResolver(jobOpeningSchema),
     defaultValues: {
       title: job?.title ?? "",

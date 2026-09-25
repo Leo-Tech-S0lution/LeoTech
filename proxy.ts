@@ -2,7 +2,12 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const SESSION_COOKIE = "leotech_admin_session";
 
-export function middleware(request: NextRequest) {
+/**
+ * Next.js 16 Proxy (formerly Middleware). Fast redirect for obviously
+ * unauthenticated admin requests; the real authorization check (session
+ * lookup in the database) still happens server-side via requireAdmin().
+ */
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {

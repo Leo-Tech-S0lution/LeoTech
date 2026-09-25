@@ -112,8 +112,8 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
         <TechBackground type="network" dark className={hasAnyImage ? "opacity-25" : "opacity-60"} />
         {hasAnyImage && <HeroBackgroundImages slides={slides} active={active} />}
         {/* Left-to-right fade so text stays legible over an image or the pattern */}
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy-900" />
+        <div className="absolute inset-0 bg-linear-to-r from-navy-900 via-navy-900/85 to-navy-900/30" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy-900" />
         {!hasAnyImage && <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />}
 
         <div className="container-tech relative z-10">
@@ -250,7 +250,7 @@ function HeroTicker({
   onSelect: (index: number) => void;
 }) {
   return (
-    <div className="hero-ticker relative z-10 hidden border-t border-white/10 bg-navy-900/60 backdrop-blur-sm lg:block">
+    <div className="hero-ticker relative z-10 hidden border-t border-white/10 bg-navy-900/60 backdrop-blur-xs lg:block">
       <div className="container-tech grid" style={{ gridTemplateColumns: `repeat(${slides.length}, minmax(0, 1fr))` }}>
         {slides.map((slide, i) => (
           <button

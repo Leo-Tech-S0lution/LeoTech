@@ -58,7 +58,7 @@ export default async function MemberAnalyticsPage({ params }: { params: Promise<
                 className="w-full rounded-t-sm bg-blue-500 transition-colors group-hover:bg-blue-600"
                 style={{ height: d.views ? `${Math.max(4, (d.views / peak) * 100)}%` : "2px", opacity: d.views ? 1 : 0.25 }}
               />
-              <span className="pointer-events-none absolute -top-7 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-navy-900 px-1.5 py-0.5 text-[10px] text-white group-hover:block">
+              <span className="pointer-events-none absolute -top-7 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-sm bg-navy-900 px-1.5 py-0.5 text-[10px] text-white group-hover:block">
                 {d.day.slice(5)}: {d.views}
               </span>
             </div>

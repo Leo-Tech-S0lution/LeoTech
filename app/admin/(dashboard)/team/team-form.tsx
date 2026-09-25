@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { useForm, Controller, type FieldErrors } from "react-hook-form";
+import { useForm, Controller, type Control, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
-import { teamMemberSchema, type TeamMemberInput } from "@/lib/validation/team";
+import { isBlankRow, teamMemberSchema, type TeamMemberFormValues, type TeamMemberInput } from "@/lib/validation/team";
 import { checkSlugAvailabilityAction, createTeamMemberAction, updateTeamMemberAction } from "./actions";
 import { FormField } from "@/components/admin/form-field";
 import { Input, Textarea, Switch, Select } from "@/components/admin/ui/input";
@@ -46,7 +46,7 @@ function Step({ n, title, description, children }: { n: number; title: string; d
   );
 }
 
-function firstErrorMessage(errors: FieldErrors<TeamMemberInput>): string {
+function firstErrorMessage(errors: FieldErrors<TeamMemberFormValues>): string {
   for (const [key, err] of Object.entries(errors)) {
     if (!err) continue;
     if ("message" in err && typeof err.message === "string" && err.message) return `${key}: ${err.message}`;
@@ -72,8 +72,9 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
     control,
     watch,
     setValue,
+    getValues,
     formState: { errors },
-  } = useForm<TeamMemberInput>({
+  } = useForm({
     resolver: zodResolver(teamMemberSchema),
     defaultValues: {
       firstName: member?.firstName ?? "",
@@ -159,7 +160,18 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, (errs) => toast.error(firstErrorMessage(errs)))} className="space-y-6">
+    <form
+      onSubmit={(e) => {
+        // Drop repeatable rows the admin added but never filled in, then validate.
+        for (const key of ["experience", "education", "projects", "certifications"] as const) {
+          const rows = (getValues(key) ?? []) as Record<string, unknown>[];
+          const kept = rows.filter((row) => !isBlankRow(row));
+          if (kept.length !== rows.length) setValue(key, kept as never);
+        }
+        return handleSubmit(onSubmit, (errs) => toast.error(firstErrorMessage(errs)))(e);
+      }}
+      className="space-y-6"
+    >
       <Step n={1} title="Basic information">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <FormField label="First name" error={errors.firstName?.message}>
@@ -376,7 +388,7 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
                   },
                 })}
                 disabled={lockSettings}
-                className="min-w-0 flex-1 bg-white px-3 py-2 font-mono text-sm text-navy-900 outline-none disabled:bg-slate-50 disabled:text-slate-400"
+                className="min-w-0 flex-1 bg-white px-3 py-2 font-mono text-sm text-navy-900 outline-hidden disabled:bg-slate-50 disabled:text-slate-400"
                 aria-describedby="slug-status"
               />
             </div>
@@ -465,7 +477,7 @@ function ToggleRow({
   hint,
   disabled,
 }: {
-  control: ReturnType<typeof useForm<TeamMemberInput>>["control"];
+  control: Control<TeamMemberFormValues, unknown, TeamMemberInput>;
   name: "published" | "isActive" | "isVerified" | "qrEnabled";
   label: string;
   hint: string;

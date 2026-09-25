@@ -21,7 +21,7 @@ export const projectSchema = z.object({
   coverImage: optionalString(500),
   gallery: z.array(z.string().trim().min(1)).default([]),
   projectUrl: hrefSchema,
-  featured: z.coerce.boolean().default(false),
+  featured: z.coerce.boolean<boolean>().default(false),
   status: contentStatusSchema,
   order: orderSchema,
   seoTitle: optionalString(160),

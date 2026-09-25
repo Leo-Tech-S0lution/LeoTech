@@ -57,7 +57,7 @@ function ProjectCard({ project, large = false }: { project: Project; large?: boo
     <Link
       href={`/projects/${project.slug}`}
       className={`group relative block overflow-hidden border border-border bg-navy-900 ${
-        large ? "aspect-[16/8]" : "aspect-[4/3]"
+        large ? "aspect-16/8" : "aspect-4/3"
       }`}
     >
       {project.coverImage ? (
@@ -70,7 +70,7 @@ function ProjectCard({ project, large = false }: { project: Project; large?: boo
       ) : (
         <TechBackground type="blueprint" dark className="opacity-70" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/40 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-6">
         {project.category && (
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-blue-400">

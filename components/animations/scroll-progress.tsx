@@ -23,7 +23,7 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed left-0 right-0 top-0 z-[70] h-[2px] bg-transparent">
+    <div className="pointer-events-none fixed left-0 right-0 top-0 z-70 h-[2px] bg-transparent">
       <div ref={barRef} className="h-full w-full origin-left scale-x-0 bg-blue-500" />
     </div>
   );

@@ -51,7 +51,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
       {project.coverImage && (
         <div className="container-tech -mt-10 relative z-10">
-          <Reveal className="relative aspect-[16/8] overflow-hidden border border-border">
+          <Reveal className="relative aspect-16/8 overflow-hidden border border-border">
             <Image src={project.coverImage} alt={project.title} fill className="object-cover" priority />
           </Reveal>
         </div>
@@ -132,7 +132,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         <div className="container-tech mt-16 border-t border-border pt-8">
           <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-navy-900">
-            <ArrowUpRight className="h-4 w-4 rotate-[225deg]" /> Back to all projects
+            <ArrowUpRight className="h-4 w-4 rotate-225" /> Back to all projects
           </Link>
         </div>
       </section>

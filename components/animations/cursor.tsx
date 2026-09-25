@@ -1,19 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { gsap } from "./gsap-setup";
+
+const FINE_POINTER = "(pointer: fine)";
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+
+function getCursorEnabled(): boolean {
+  return window.matchMedia(FINE_POINTER).matches && !window.matchMedia(REDUCED_MOTION).matches;
+}
+
+function subscribeCursorMedia(onChange: () => void): () => void {
+  const queries = [window.matchMedia(FINE_POINTER), window.matchMedia(REDUCED_MOTION)];
+  queries.forEach((q) => q.addEventListener("change", onChange));
+  return () => queries.forEach((q) => q.removeEventListener("change", onChange));
+}
 
 /** Premium custom cursor: small dot + trailing ring, expands over interactive elements. Desktop only. */
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setEnabled(isFinePointer && !reducedMotion);
-  }, []);
+  const enabled = useSyncExternalStore(subscribeCursorMedia, getCursorEnabled, () => false);
 
   useEffect(() => {
     if (!enabled) return;

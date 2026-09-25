@@ -98,7 +98,7 @@ function Row<T extends NameSlugItem>({
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<SchemaInput>({
+  } = useForm({
     resolver: zodResolver(schema),
     defaultValues: { name: item?.name ?? "", slug: item?.slug ?? "" },
   });

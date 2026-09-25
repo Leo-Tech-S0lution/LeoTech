@@ -27,7 +27,7 @@ export function InternshipForm({ program }: InternshipFormProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<InternshipProgramInput>({
+  } = useForm({
     resolver: zodResolver(internshipProgramSchema),
     defaultValues: {
       title: program?.title ?? "",

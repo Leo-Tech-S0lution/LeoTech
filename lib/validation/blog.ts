@@ -17,7 +17,7 @@ export const blogPostSchema = z.object({
   categoryId: uuidOrEmpty,
   authorId: uuidOrEmpty,
   tagIds: z.array(z.string()).default([]),
-  featured: z.coerce.boolean().default(false),
+  featured: z.coerce.boolean<boolean>().default(false),
   status: contentStatusSchema,
   seoTitle: optionalString(160),
   seoDescription: optionalString(255),

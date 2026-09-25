@@ -16,7 +16,7 @@ export default function AdminLoginPage() {
         </div>
       </div>
 
-      <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-xl backdrop-blur">
+      <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/3 p-6 shadow-xl backdrop-blur-sm">
         <LoginForm />
       </div>
     </div>

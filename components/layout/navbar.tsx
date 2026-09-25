@@ -43,10 +43,13 @@ export function Navbar({ services, courses }: NavbarProps) {
   const barRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  useEffect(() => {
+  // Close menus when the route changes ("adjust state on prop change" during render).
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
     setOpenMenu(null);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     function onScroll() {

@@ -73,7 +73,7 @@ function StatRow({ stat, onDone }: { stat?: Statistic; onDone: () => void }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<StatisticInput>({
+  } = useForm({
     resolver: zodResolver(statisticSchema),
     defaultValues: {
       label: stat?.label ?? "",

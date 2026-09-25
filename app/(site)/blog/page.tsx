@@ -66,7 +66,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 name="q"
                 defaultValue={q}
                 placeholder="Search articles..."
-                className="border border-border bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-none"
+                className="border border-border bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-hidden"
               />
             </form>
           </div>
@@ -79,7 +79,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <Reveal stagger className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden border border-border bg-slate-100">
+                  <div className="relative aspect-16/10 overflow-hidden border border-border bg-slate-100">
                     {post.featuredImage && (
                       <Image
                         src={post.featuredImage}

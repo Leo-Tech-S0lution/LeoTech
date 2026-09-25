@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import DOMPurify from "isomorphic-dompurify";
-import { Linkedin, Twitter, Facebook, Clock, ArrowUpRight } from "lucide-react";
+import { Clock, ArrowUpRight } from "lucide-react";
+import { Linkedin, Twitter, Facebook } from "@/components/ui/brand-icons";
 import { PageHeader } from "@/components/sections/page-header";
 import { Reveal } from "@/components/animations/reveal";
 import { formatDate } from "@/lib/utils/text";
@@ -81,7 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             {post.featuredImage && (
-              <div className="relative mt-8 aspect-[16/9] overflow-hidden border border-border">
+              <div className="relative mt-8 aspect-video overflow-hidden border border-border">
                 <Image src={post.featuredImage} alt={post.title} fill className="object-cover" priority />
               </div>
             )}

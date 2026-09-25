@@ -13,7 +13,7 @@ export function PageHeader({ eyebrow, title, description, pattern = "grid" }: Pa
   return (
     <section className="relative overflow-hidden bg-navy-900 pb-16 pt-36 lg:pb-20 lg:pt-44">
       <TechBackground type={pattern} dark className="opacity-50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-navy-900" />
+      <div className="absolute inset-0 bg-linear-to-b from-transparent to-navy-900" />
       <div className="container-tech relative">
         <Reveal>
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-blue-400">

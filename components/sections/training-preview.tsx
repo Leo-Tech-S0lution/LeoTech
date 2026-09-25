@@ -25,7 +25,7 @@ export function TrainingPreview({ title, description, courses }: TrainingPreview
             <Link
               key={course.id}
               href={`/training/${course.slug}`}
-              className="group flex flex-col border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-blue-400/30 hover:bg-white/[0.04]"
+              className="group flex flex-col border border-white/10 bg-white/2 p-6 transition-colors hover:border-blue-400/30 hover:bg-white/4"
             >
               {course.category && (
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-blue-400">

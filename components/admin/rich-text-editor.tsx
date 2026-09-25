@@ -3,8 +3,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
+import { Placeholder } from "@tiptap/extensions";
 import {
   Bold,
   Italic,
@@ -35,15 +34,15 @@ export function RichTextEditor({ value, onChange, placeholder = "Write your post
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit,
+      // Tiptap 3: StarterKit bundles Link (and Underline) — configure it here rather than adding it twice.
+      StarterKit.configure({ link: { openOnClick: false, autolink: true } }),
       Image,
-      Link.configure({ openOnClick: false, autolink: true }),
       Placeholder.configure({ placeholder }),
     ],
     content: value,
     editorProps: {
       attributes: {
-        class: "prose prose-sm max-w-none min-h-[280px] px-4 py-3 focus:outline-none",
+        class: "prose prose-sm max-w-none min-h-[280px] px-4 py-3 focus:outline-hidden",
       },
     },
     onUpdate: ({ editor }) => onChange(editor.getHTML()),

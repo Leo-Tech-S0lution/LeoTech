@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+/** Trimmed, required email address (Zod 4 `z.email()` format). */
+export const emailSchema = (max = 255) =>
+  z
+    .string()
+    .trim()
+    .min(1, "Email is required.")
+    .max(max)
+    .pipe(z.email({ error: "Enter a valid email address." }));
+
 /** Non-empty trimmed string, required. */
 export const requiredString = (max = 255) =>
   z.string().trim().min(1, "This field is required.").max(max);
@@ -40,25 +49,16 @@ export const hrefSchema = z
   .transform((v) => (v ? v : undefined));
 
 /** Coerces a checkbox/select-driven boolean field. */
-export const booleanSchema = z.coerce.boolean();
+export const booleanSchema = z.coerce.boolean<boolean>();
 
 /** Coerces an order/number input, defaulting to 0. */
-export const orderSchema = z.coerce.number().int().default(0);
+export const orderSchema = z.coerce.number<number>().int().default(0);
 
-/** String array field (features, technologies, skills, etc.) - filters blank entries. */
+/** String array field (features, technologies, skills, etc.) - trims and filters blank entries. */
 export const stringArraySchema = z
-  .array(z.string().trim().min(1))
+  .array(z.string())
   .default([])
-  .or(
-    z
-      .string()
-      .transform((s) =>
-        s
-          .split("\n")
-          .map((line) => line.trim())
-          .filter(Boolean),
-      ),
-  );
+  .transform((items) => items.map((item) => item.trim()).filter(Boolean));
 
 /** {label, url} repeatable pair schema, used for social links and similar. */
 export const labelUrlPairSchema = z.object({

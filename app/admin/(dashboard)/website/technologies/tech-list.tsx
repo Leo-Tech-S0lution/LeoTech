@@ -53,7 +53,7 @@ function TechRow({ categoryId, tech, onDone }: { categoryId: string; tech?: Tech
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TechnologyInput>({
+  } = useForm({
     resolver: zodResolver(technologySchema),
     defaultValues: {
       categoryId,

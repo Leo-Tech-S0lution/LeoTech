@@ -11,7 +11,7 @@ import {
 } from "./common";
 
 const optionalUrl = optionalString(500).refine((v) => !v || /^https?:\/\//i.test(v), {
-  message: "Links must start with http:// or https://",
+  error: "Links must start with http:// or https://",
 });
 
 const experienceSchema = z.object({
@@ -41,15 +41,14 @@ const certificationSchema = z.object({
   url: optionalUrl,
 });
 
-/** Array of records, ignoring rows the admin added but left completely blank. */
-function listOf<T extends z.ZodTypeAny>(item: T) {
-  return z.preprocess(
-    (v) =>
-      Array.isArray(v)
-        ? v.filter((o) => o && Object.values(o).some((x) => typeof x === "string" && x.trim() !== ""))
-        : v,
-    z.array(item).default([]),
-  );
+/** Array of structured rows (experience, education, …). */
+function listOf<T extends z.ZodType>(item: T) {
+  return z.array(item).default([]);
+}
+
+/** True if every string field in a repeatable row is blank (an "Add" click the admin never filled in). */
+export function isBlankRow(row: Record<string, unknown>): boolean {
+  return !Object.values(row).some((v) => typeof v === "string" && v.trim() !== "");
 }
 
 export const teamMemberSchema = z.object({
@@ -65,12 +64,12 @@ export const teamMemberSchema = z.object({
   position: optionalString(160),
   department: optionalString(120),
   joiningDate: optionalString(10).refine((v) => !v || /^\d{4}-\d{2}-\d{2}$/.test(v), {
-    message: "Joining date must be a valid date.",
+    error: "Joining date must be a valid date.",
   }),
   employmentType: employmentTypeSchema.optional().or(z.literal("")).transform((v) => (v ? v : undefined)),
   // Step 3 — contact
-  email: optionalString(255).refine((v) => !v || z.string().email().safeParse(v).success, {
-    message: "Enter a valid email address.",
+  email: optionalString(255).refine((v) => !v || z.email().safeParse(v).success, {
+    error: "Enter a valid email address.",
   }),
   phone: optionalString(40),
   whatsapp: optionalString(40),
@@ -94,4 +93,7 @@ export const teamMemberSchema = z.object({
   // Step 7 — QR
   qrEnabled: booleanSchema.default(true),
 });
-export type TeamMemberInput = z.infer<typeof teamMemberSchema>;
+/** Parsed (output) values — what server actions receive. */
+export type TeamMemberInput = z.output<typeof teamMemberSchema>;
+/** Raw form (input) values — what react-hook-form holds. */
+export type TeamMemberFormValues = z.input<typeof teamMemberSchema>;

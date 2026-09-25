@@ -33,9 +33,9 @@ export async function generateMetadata(): Promise<Metadata> {
     // can't drift to www, http, localhost or a preview domain.
     metadataBase: new URL(SITE_URL),
     applicationName: settings.companyName,
-    title: {
+     title: {
       default: defaultTitle,
-      template: `%s | ${settings.companyName}`,
+      template: `%s | Leo Tech Solution`,
     },
     description: settings.defaultSeoDescription ?? undefined,
     robots: { index: true, follow: true, "max-image-preview": "large" },

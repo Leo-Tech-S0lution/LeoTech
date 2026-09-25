@@ -27,7 +27,7 @@ export function TestimonialForm({ testimonial }: TestimonialFormProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<TestimonialInput>({
+  } = useForm({
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
       name: testimonial?.name ?? "",
@@ -84,7 +84,7 @@ export function TestimonialForm({ testimonial }: TestimonialFormProps) {
             <Controller
               name="published"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+              render={({ field }) => <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />}
             />
           </FormField>
           <FormField label="Photo" className="sm:col-span-2">
