@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { getSiteSettings } from "@/lib/db/queries/settings";
-import { getSiteUrl } from "@/lib/seo/site";
+import { SITE_URL } from "@/lib/seo/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,13 +24,14 @@ const jetbrainsMono = JetBrains_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
-  const siteUrl = getSiteUrl();
   const defaultTitle =
     settings.defaultSeoTitle ?? `${settings.companyName} | Software, AI, IoT, Robotics & Technology Training`;
   const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
 
   return {
-    metadataBase: new URL(siteUrl),
+    // Always the canonical apex domain — never derived from env, so canonicals/OG URLs
+    // can't drift to www, http, localhost or a preview domain.
+    metadataBase: new URL(SITE_URL),
     applicationName: settings.companyName,
     title: {
       default: defaultTitle,
