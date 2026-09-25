@@ -196,7 +196,7 @@ After deploying with `NEXT_PUBLIC_SITE_URL=https://leotechsolution.com.np`:
 Before submitting, sanity-check production:
 
 - `https://leotechsolution.com.np/robots.txt` allows `/` and lists the sitemap.
-- `https://www.leotechsolution.com.np` and `http://leotechsolution.com.np` both 301 to `https://leotechsolution.com.np`. The middleware handles this when requests reach the app; if your host terminates them first (e.g. Vercel domain settings), set the apex as primary there too.
+- `https://www.leotechsolution.com.np/*` and `http://leotechsolution.com.np/*` both permanently redirect to `https://leotechsolution.com.np/*` in one hop. `next.config.ts` redirects the www host; on Vercel also set **Settings → Domains**: `leotechsolution.com.np` as the primary domain and `www.leotechsolution.com.np` → *Redirect to* `leotechsolution.com.np` (308). Never configure the reverse (apex → www) or the two rules will loop. Vercel redirects HTTP → HTTPS automatically.
 - Site Settings contain the real company email, phone, address and official social profile URLs (these feed the Organization schema), and the default OG image is a 1200×630 PNG/JPG.
 - Admin → SEO → SEO Health shows no failures.
 - Validate structured data with the [Rich Results Test](https://search.google.com/test/rich-results) for the homepage and a team profile.

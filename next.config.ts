@@ -33,6 +33,19 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [{ source: "/favicon.ico", destination: "/brand/icon-48.png" }];
   },
+  // Canonical domain: www.* permanently redirects to the apex in a single hop
+  // (path and query string preserved). Only matches the www host, so localhost
+  // and preview deployments are unaffected. HTTP→HTTPS is handled by the host.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.leotechsolution.com.np" }],
+        destination: "https://leotechsolution.com.np/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
