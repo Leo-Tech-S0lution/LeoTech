@@ -15,17 +15,17 @@ async function main() {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const db = drizzle(pool, { schema });
 
-  console.log("Seeding LeoTech Solution database...\n");
+  console.log("Seeding Leo Tech Solution database...\n");
 
   // ---------- Site settings ----------
   await db
     .insert(schema.siteSettings)
     .values({
       id: 1,
-      companyName: "LeoTech Solution",
+      companyName: "Leo Tech Solution",
       tagline: "Engineering software, systems, and skills for what's next.",
       footerDescription:
-        "LeoTech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and runs a hands-on technology training academy for the engineers who will run them.",
+        "Leo Tech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and runs a hands-on technology training academy for the engineers who will run them.",
       email: "hello@leotechsolution.com",
       phone: "+1 (415) 555-0148",
       address: "148 Harbor Point Drive, Suite 400, San Francisco, CA 94105",
@@ -37,9 +37,9 @@ async function main() {
         { label: "GitHub", url: "https://github.com/leotechsolution" },
         { label: "Instagram", url: "https://instagram.com/leotechsolution" },
       ],
-      defaultSeoTitle: "LeoTech Solution — Software, AI/ML, IoT & Technology Training",
+      defaultSeoTitle: "Leo Tech Solution — Software, AI/ML, IoT & Technology Training",
       defaultSeoDescription:
-        "LeoTech Solution designs and builds custom software, AI/ML, IoT, cloud, and cybersecurity solutions, and runs a hands-on technology training academy.",
+        "Leo Tech Solution designs and builds custom software, AI/ML, IoT, cloud, and cybersecurity solutions, and runs a hands-on technology training academy.",
       defaultOgImage: "/brand/leotech-logo.svg",
     })
     .onConflictDoNothing();
@@ -72,7 +72,7 @@ async function main() {
       title: "Engineering Software,\nSystems & Skills for What's Next",
       subtitle: "TECHNOLOGY • INNOVATION • TRAINING",
       description:
-        "LeoTech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them.",
+        "Leo Tech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them.",
       cta1Label: "Start a Project",
       cta1Href: "/contact",
       cta2Label: "Explore Services",
@@ -171,12 +171,12 @@ async function main() {
 
   // ---------- FAQs ----------
   await db.insert(schema.faqs).values([
-    { question: "What industries does LeoTech Solution work with?", answer: "We work primarily with technology, healthcare, logistics, and education companies, though our engineering process applies to most software-driven businesses.", category: "General", order: 0 },
+    { question: "What industries does Leo Tech Solution work with?", answer: "We work primarily with technology, healthcare, logistics, and education companies, though our engineering process applies to most software-driven businesses.", category: "General", order: 0 },
     { question: "How long does a typical software project take?", answer: "Most custom software engagements run 8–20 weeks depending on scope. We provide a detailed timeline after the discovery phase.", category: "General", order: 1 },
     { question: "Do you offer ongoing maintenance after launch?", answer: "Yes. Every project includes an optional support plan covering monitoring, bug fixes, and incremental improvements.", category: "General", order: 2 },
     { question: "Are your training courses available online?", answer: "Yes, courses run both online and in a hybrid format, with live instruction and recorded sessions for review.", category: "Training", order: 3 },
     { question: "Do I need prior experience to join an internship?", answer: "Most internships require completion of a related foundational course or equivalent self-taught experience, verified during the application review.", category: "Training", order: 4 },
-    { question: "Do students receive a certificate?", answer: "Yes, students who complete a course's curriculum and final project receive a LeoTech Solution certificate of completion.", category: "Training", order: 5 },
+    { question: "Do students receive a certificate?", answer: "Yes, students who complete a course's curriculum and final project receive a Leo Tech Solution certificate of completion.", category: "Training", order: 5 },
     { question: "What is your pricing model for client projects?", answer: "We scope most projects as fixed-price milestones after discovery. Ongoing support is billed monthly or hourly depending on the engagement.", category: "Pricing", order: 6 },
     { question: "Can you work with our existing engineering team?", answer: "Yes — we regularly integrate with in-house teams, either augmenting capacity or owning a specific subsystem end-to-end.", category: "Pricing", order: 7 },
   ]);
@@ -452,7 +452,7 @@ async function main() {
         { title: "Capstone Project", items: ["Full-stack application build", "Deployment", "Code review & presentation"] },
       ],
       projects: ["Personal portfolio site", "Full-stack marketplace app", "Capstone team project"],
-      certification: "LeoTech Solution Certificate in Full-Stack Web Development",
+      certification: "Leo Tech Solution Certificate in Full-Stack Web Development",
       price: "1200.00",
       instructor: "Daniela Reyes",
       featured: true,
@@ -472,7 +472,7 @@ async function main() {
         { title: "Production ML", items: ["Deployment pipelines", "Monitoring & retraining", "MLOps basics"] },
       ],
       projects: ["Classification model project", "Computer vision project", "Deployed inference API"],
-      certification: "LeoTech Solution Certificate in AI/ML Engineering",
+      certification: "Leo Tech Solution Certificate in AI/ML Engineering",
       price: "1450.00",
       instructor: "Marcus Chen",
       featured: true,
@@ -492,7 +492,7 @@ async function main() {
         { title: "Visualization", items: ["Matplotlib & Seaborn", "Dashboard basics"] },
       ],
       projects: ["Exploratory data analysis report", "Interactive dashboard"],
-      certification: "LeoTech Solution Certificate in Python for Data Science",
+      certification: "Leo Tech Solution Certificate in Python for Data Science",
       price: "800.00",
       instructor: "Priya Nair",
       featured: false,
@@ -512,7 +512,7 @@ async function main() {
         { title: "Testing", items: ["Usability testing", "Iteration & handoff"] },
       ],
       projects: ["Mobile app redesign", "Design system starter kit"],
-      certification: "LeoTech Solution Certificate in UI/UX Design",
+      certification: "Leo Tech Solution Certificate in UI/UX Design",
       price: "700.00",
       instructor: "Sofia Alvarez",
       featured: true,
@@ -532,7 +532,7 @@ async function main() {
         { title: "Defense & Monitoring", items: ["Incident response basics", "Monitoring & alerting"] },
       ],
       projects: ["Vulnerability assessment report", "Hardened sample application"],
-      certification: "LeoTech Solution Certificate in Cybersecurity Fundamentals",
+      certification: "Leo Tech Solution Certificate in Cybersecurity Fundamentals",
       price: "900.00",
       instructor: "James Okafor",
       featured: false,
@@ -552,7 +552,7 @@ async function main() {
         { title: "CI/CD", items: ["Pipeline design", "Monitoring & rollback strategies"] },
       ],
       projects: ["Containerized application deployment", "CI/CD pipeline build"],
-      certification: "LeoTech Solution Certificate in Cloud & DevOps Engineering",
+      certification: "Leo Tech Solution Certificate in Cloud & DevOps Engineering",
       price: "1100.00",
       instructor: "Daniela Reyes",
       featured: false,
@@ -574,7 +574,7 @@ async function main() {
       technologies: ["TypeScript", "React", "Node.js", "PostgreSQL"],
       projects: "Interns contribute directly to active client or internal product codebases under code review.",
       mentorship: "Paired with a senior engineer for weekly 1:1s and daily standups.",
-      certificate: "LeoTech Solution Certificate of Internship Completion",
+      certificate: "Leo Tech Solution Certificate of Internship Completion",
       eligibility: "Completion of the Full-Stack Web Development course or equivalent experience.",
       status: "published",
       order: 0,
@@ -586,7 +586,7 @@ async function main() {
       technologies: ["Python", "PyTorch", "AWS SageMaker"],
       projects: "Interns work on a scoped model-development project with a defined evaluation benchmark.",
       mentorship: "Paired with an ML engineer for weekly reviews and pairing sessions.",
-      certificate: "LeoTech Solution Certificate of Internship Completion",
+      certificate: "Leo Tech Solution Certificate of Internship Completion",
       eligibility: "Completion of the AI/ML Engineering course or equivalent portfolio.",
       status: "published",
       order: 1,

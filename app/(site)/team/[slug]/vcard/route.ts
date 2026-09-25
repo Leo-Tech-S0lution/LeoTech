@@ -18,7 +18,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
 
   const m = lookup.member;
   const settings = await getSiteSettings();
-  const org = settings.companyName || "LeoTech Solution";
+  const org = settings.companyName || "Leo Tech Solution";
   const last = m.lastName ?? "";
   const first = m.firstName ? [m.firstName, m.middleName].filter(Boolean).join(" ") : m.name;
 

@@ -17,7 +17,7 @@ export const siteSettings = pgTable("site_settings", {
   id: integer("id").primaryKey().default(1),
   companyName: varchar("company_name", { length: 160 })
     .notNull()
-    .default("LeoTech Solution"),
+    .default("Leo Tech Solution"),
   tagline: varchar("tagline", { length: 255 }),
   footerDescription: text("footer_description"),
   email: varchar("email", { length: 255 }),

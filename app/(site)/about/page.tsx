@@ -15,7 +15,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/about", {
     title: "About Us",
     description:
-      "LeoTech Solution is a technology company that designs and builds custom software, AI/ML, IoT and cloud systems — and trains the engineers who run them.",
+      "Leo Tech Solution is a technology company that designs and builds custom software, AI/ML, IoT and cloud systems — and trains the engineers who run them.",
   });
 }
 
@@ -31,7 +31,7 @@ export default async function AboutPage() {
       <PageHeader
         eyebrow="01 / ABOUT"
         title="A technology company built on engineering rigor"
-        description="LeoTech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them."
+        description="Leo Tech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them."
         pattern="network"
       />
 
@@ -39,7 +39,7 @@ export default async function AboutPage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal className="space-y-6 text-base leading-relaxed text-slate-600">
             <p>
-              LeoTech Solution was founded on a simple premise: technology companies too often
+              Leo Tech Solution was founded on a simple premise: technology companies too often
               separate the people who design systems from the people who teach others to build
               them. We don&apos;t. Our engineers work on client systems and teach in our training
               academy, which keeps both sides honest — curriculum stays grounded in real

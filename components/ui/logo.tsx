@@ -11,7 +11,7 @@ interface LogoProps {
 }
 
 /**
- * Renders the LeoTech Solution brand mark exactly as supplied — no cropping,
+ * Renders the Leo Tech Solution brand mark exactly as supplied — no cropping,
  * recoloring beyond the dedicated light variant, or proportion changes.
  */
 export function Logo({
@@ -29,7 +29,7 @@ export function Logo({
   const image = (
     <Image
       src={src}
-      alt="LeoTech Solution"
+      alt="Leo Tech Solution"
       width={size}
       height={size}
       priority={priority}
@@ -40,7 +40,7 @@ export function Logo({
   if (!href) return image;
 
   return (
-    <Link href={href} aria-label="LeoTech Solution — home" className="inline-flex shrink-0">
+    <Link href={href} aria-label="Leo Tech Solution — home" className="inline-flex shrink-0">
       {image}
     </Link>
   );

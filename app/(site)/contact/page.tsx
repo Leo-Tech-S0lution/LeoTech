@@ -14,7 +14,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/contact", {
     title: "Contact",
     description:
-      "Contact LeoTech Solution about software development, AI/ML, IoT, robotics or technology training — we reply within one business day.",
+      "Contact Leo Tech Solution about software development, AI/ML, IoT, robotics or technology training — we reply within one business day.",
   });
 }
 

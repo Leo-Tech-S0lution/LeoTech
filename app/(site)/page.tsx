@@ -84,7 +84,7 @@ export default async function HomePage() {
           fallbackTitle={"Engineering Software,\nSystems & Skills for What's Next"}
           fallbackDescription={
             settings.tagline ??
-            "LeoTech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them."
+            "Leo Tech Solution designs and builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who run them."
           }
         />
       )}

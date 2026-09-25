@@ -11,7 +11,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/careers", {
     title: "Careers",
     description:
-      "Open positions at LeoTech Solution — join our engineering, AI/ML and training teams.",
+      "Open positions at Leo Tech Solution — join our engineering, AI/ML and training teams.",
   });
 }
 

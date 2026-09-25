@@ -4,7 +4,7 @@ export default function GlobalNotFound() {
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col items-center justify-center bg-[#000054] px-6 text-center font-sans text-white">
-        <img src="/brand/leotech-logo-light.svg" alt="LeoTech Solution" width={56} height={56} />
+        <img src="/brand/leotech-logo-light.svg" alt="Leo Tech Solution" width={56} height={56} />
         <h1 className="mt-8 text-2xl font-bold">Page not found</h1>
         <p className="mt-3 max-w-sm text-sm text-slate-400">
           The page you&apos;re looking for doesn&apos;t exist or has moved.

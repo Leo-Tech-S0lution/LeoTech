@@ -12,7 +12,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/solutions", {
     title: "Solutions",
     description:
-      "AI & machine learning, IoT & robotics, cloud, cybersecurity, networking and UI/UX solutions delivered by LeoTech Solution.",
+      "AI & machine learning, IoT & robotics, cloud, cybersecurity, networking and UI/UX solutions delivered by Leo Tech Solution.",
   });
 }
 

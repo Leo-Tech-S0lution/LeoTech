@@ -12,7 +12,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/team", {
     title: "Our Team",
     description:
-      "Meet the LeoTech Solution team — the engineers, instructors and leaders behind our software, AI, IoT, robotics and technology training work.",
+      "Meet the Leo Tech Solution team — the engineers, instructors and leaders behind our software, AI, IoT, robotics and technology training work.",
   });
 }
 
@@ -37,8 +37,8 @@ export default async function TeamPage() {
 
       <PageHeader
         eyebrow="TEAM"
-        title="The people behind LeoTech Solution"
-        description="Every LeoTech Solution team member has a verified digital profile — the same one linked from the QR code on their company ID card."
+        title="The people behind Leo Tech Solution"
+        description="Every Leo Tech Solution team member has a verified digital profile — the same one linked from the QR code on their company ID card."
         pattern="network"
       />
 

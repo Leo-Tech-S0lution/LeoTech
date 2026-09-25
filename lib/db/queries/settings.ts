@@ -6,19 +6,19 @@ import { eq } from "drizzle-orm";
 
 const FALLBACK: SiteSettings = {
   id: 1,
-  companyName: "LeoTech Solution",
+  companyName: "Leo Tech Solution",
   tagline: "Engineering software, systems, and skills for what's next.",
   footerDescription:
-    "LeoTech Solution builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who will run them.",
+    "Leo Tech Solution builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who will run them.",
   email: "infoleotechsolution@gmail.com",
   phone: null,
   address: "",
   businessHours: "Mon – Fri, 9:00 AM – 6:00 PM",
   schedulingUrl: null,
   socialLinks: [],
-  defaultSeoTitle: "LeoTech Solution | Software, AI, IoT, Robotics & Technology Training",
+  defaultSeoTitle: "Leo Tech Solution | Software, AI, IoT, Robotics & Technology Training",
   defaultSeoDescription:
-    "LeoTech Solution designs and builds custom software, AI/ML, IoT, cloud, and cybersecurity solutions, and runs a hands-on technology training academy.",
+    "Leo Tech Solution designs and builds custom software, AI/ML, IoT, cloud, and cybersecurity solutions, and runs a hands-on technology training academy.",
   defaultOgImage: "/brand/leotech-logo.svg",
   updatedAt: new Date(),
 };

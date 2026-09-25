@@ -6,7 +6,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/privacy-policy", {
     title: "Privacy Policy",
     description:
-      "How LeoTech Solution collects, uses and protects your information.",
+      "How Leo Tech Solution collects, uses and protects your information.",
   });
 }
 

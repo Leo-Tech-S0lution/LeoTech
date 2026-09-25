@@ -7,7 +7,7 @@ export default function ProfileNotFound() {
       <PageHeader
         eyebrow="404 / TEAM"
         title="Profile Not Found"
-        description="The requested LeoTech Solution team profile could not be found."
+        description="The requested Leo Tech Solution team profile could not be found."
         pattern="grid"
       />
       <section className="py-20 text-center lg:py-28">

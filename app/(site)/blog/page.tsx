@@ -12,7 +12,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/blog", {
     title: "Blog",
     description:
-      "Engineering insights, tutorials and news from the LeoTech Solution team.",
+      "Engineering insights, tutorials and news from the Leo Tech Solution team.",
   });
 }
 

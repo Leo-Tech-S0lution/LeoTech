@@ -52,7 +52,7 @@ export default async function QrManagementPage() {
     <div>
       <PageHeader
         title="QR Management"
-        description="Manage digital ID QR codes for LeoTech Solution team members. Each QR encodes only the member's public profile URL."
+        description="Manage digital ID QR codes for Leo Tech Solution team members. Each QR encodes only the member's public profile URL."
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">

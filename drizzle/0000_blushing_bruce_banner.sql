@@ -90,7 +90,7 @@ CREATE TABLE "seo_pages" (
 --> statement-breakpoint
 CREATE TABLE "site_settings" (
 	"id" integer PRIMARY KEY DEFAULT 1 NOT NULL,
-	"company_name" varchar(160) DEFAULT 'LeoTech Solution' NOT NULL,
+	"company_name" varchar(160) DEFAULT 'Leo Tech Solution' NOT NULL,
 	"tagline" varchar(255),
 	"footer_description" text,
 	"email" varchar(255),

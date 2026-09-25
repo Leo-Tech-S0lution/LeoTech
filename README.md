@@ -1,6 +1,6 @@
-# LeoTech Solution
+# Leo Tech Solution
 
-The official website and CMS for **LeoTech Solution** — a technology company and training academy. Built with Next.js (App Router), TypeScript, Tailwind CSS, GSAP, Drizzle ORM, and Neon PostgreSQL.
+The official website and CMS for **Leo Tech Solution** — a technology company and training academy. Built with Next.js (App Router), TypeScript, Tailwind CSS, GSAP, Drizzle ORM, and Neon PostgreSQL.
 
 The public site is fully database-driven: hero slides, services, projects, training courses, internships, team, testimonials, blog, careers, FAQs, SEO metadata, and site settings are all managed through a custom admin dashboard at `/admin` — nothing important is hardcoded.
 
@@ -77,7 +77,7 @@ npm run db:migrate
 
 Migration `0002_team_digital_profiles` (Team Digital ID + QR) is additive: it adds columns and two new tables, backfills a profile slug for every existing team member from their name, and marks their QR as generated. No existing rows are deleted or overwritten. Run it against production with `npm run db:migrate` — never `db:push` against production.
 
-To load the current LeoTech Solution roster without touching anything already entered in the admin:
+To load the current Leo Tech Solution roster without touching anything already entered in the admin:
 
 ```bash
 npm run db:seed-team
@@ -140,7 +140,7 @@ lib/
 
 drizzle/                Generated SQL migrations (checked into git)
 public/
-  brand/                The real LeoTech Solution logo (dark + light variants), used verbatim across the site
+  brand/                The real Leo Tech Solution logo (dark + light variants), used verbatim across the site
 ```
 
 Admin-uploaded media lives in Cloudinary, not in this repo — nothing under `public/` is runtime-writable.
@@ -191,7 +191,7 @@ After deploying with `NEXT_PUBLIC_SITE_URL=https://leotechsolution.com.np`:
 4. Go to **Sitemaps** and submit `https://leotechsolution.com.np/sitemap.xml`.
 5. Inspect a few important pages the same way: `/about`, `/services`, `/team`, `/contact` and a couple of team profiles. Don't re-submit the same URL repeatedly.
 6. Check **Pages** (indexing) over the following days and fix anything reported as excluded, blocked or erroring.
-7. Watch **Performance** for the query “LeoTech Solution”.
+7. Watch **Performance** for the query “Leo Tech Solution”.
 
 Before submitting, sanity-check production:
 

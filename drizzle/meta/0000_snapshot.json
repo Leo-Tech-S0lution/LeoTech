@@ -540,7 +540,7 @@
           "type": "varchar(160)",
           "primaryKey": false,
           "notNull": true,
-          "default": "'LeoTech Solution'"
+          "default": "'Leo Tech Solution'"
         },
         "tagline": {
           "name": "tagline",

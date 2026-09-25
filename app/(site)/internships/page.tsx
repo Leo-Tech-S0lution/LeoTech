@@ -10,7 +10,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/internships", {
     title: "Internships",
     description:
-      "Mentored internship programs at LeoTech Solution where participants join real project teams building production software.",
+      "Mentored internship programs at Leo Tech Solution where participants join real project teams building production software.",
   });
 }
 
@@ -20,7 +20,7 @@ const TIMELINE = [
   { icon: GraduationCap, label: "Training", description: "Onboarding into our tools, codebase, and process." },
   { icon: Rocket, label: "Project", description: "Work on a real project alongside a senior mentor." },
   { icon: ClipboardCheck, label: "Evaluation", description: "Structured feedback on your work and growth." },
-  { icon: Award, label: "Certificate", description: "Receive a LeoTech Solution certificate of completion." },
+  { icon: Award, label: "Certificate", description: "Receive a Leo Tech Solution certificate of completion." },
 ];
 
 export default async function InternshipsPage() {

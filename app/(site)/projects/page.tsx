@@ -13,7 +13,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/projects", {
     title: "Projects",
     description:
-      "Selected software, AI, IoT and cloud projects designed, built and shipped by LeoTech Solution.",
+      "Selected software, AI, IoT and cloud projects designed, built and shipped by Leo Tech Solution.",
   });
 }
 

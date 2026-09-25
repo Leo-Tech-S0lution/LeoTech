@@ -12,7 +12,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/services", {
     title: "Services",
     description:
-      "Software development, AI/ML, IoT, cloud, cybersecurity and networking services from LeoTech Solution — from first architecture sketch to long-term support.",
+      "Software development, AI/ML, IoT, cloud, cybersecurity and networking services from Leo Tech Solution — from first architecture sketch to long-term support.",
   });
 }
 

@@ -425,7 +425,7 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
             control={control}
             name="isVerified"
             label="Verified team member"
-            hint="Shows the ✓ Verified LeoTech Solution Team Member badge."
+            hint="Shows the ✓ Verified Leo Tech Solution Team Member badge."
             disabled={!canManage}
           />
         </div>

@@ -1,7 +1,7 @@
 /**
  * Idempotent, production-safe team seed: `npm run db:seed-team`.
  *
- * For each member of the current LeoTech Solution roster:
+ * For each member of the current Leo Tech Solution roster:
  * - if a member with the same slug or the same name (case-insensitive) exists,
  *   only EMPTY fields are filled in (name parts, designation, department) —
  *   nothing that an admin has already entered is overwritten;

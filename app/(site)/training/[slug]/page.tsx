@@ -47,7 +47,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
     "@type": "Course",
     name: course.title,
     description: course.description ?? undefined,
-    provider: { "@type": "Organization", name: "LeoTech Solution" },
+    provider: { "@type": "Organization", name: "Leo Tech Solution" },
   };
 
   return (

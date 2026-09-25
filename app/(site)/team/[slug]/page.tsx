@@ -493,11 +493,11 @@ function ProfileUnavailable() {
         <span className="font-mono text-xs uppercase tracking-[0.25em] text-blue-400">Team Profile</span>
         <h1 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl">Profile Unavailable</h1>
         <p className="mx-auto mt-4 max-w-md text-slate-400">
-          This LeoTech Solution digital profile is currently unavailable.
+          This Leo Tech Solution digital profile is currently unavailable.
         </p>
         <div className="mt-8">
           <Button href="/" variant="primary" size="md">
-            Visit LeoTech Solution
+            Visit Leo Tech Solution
           </Button>
         </div>
       </div>

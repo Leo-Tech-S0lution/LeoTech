@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 
 interface PageSeoFallback {
-  /** Page name, e.g. "About Us" — rendered as "About Us | LeoTech Solution" by the root title template. */
+  /** Page name, e.g. "About Us" — rendered as "About Us | Leo Tech Solution" by the root title template. */
   title?: string;
   description?: string;
 }
@@ -23,7 +23,7 @@ export async function buildPageMetadata(path: string, fallback: PageSeoFallback 
   const isHome = path === "/";
   const rawTitle =
     override?.title ?? (isHome ? null : fallback.title) ?? settings.defaultSeoTitle ?? settings.companyName;
-  // Titles that already carry the brand (or the homepage default) skip the "| LeoTech Solution" template.
+  // Titles that already carry the brand (or the homepage default) skip the "| Leo Tech Solution" template.
   const absolute = isHome || rawTitle.includes(settings.companyName);
   const fullTitle = absolute ? rawTitle : `${rawTitle} | ${settings.companyName}`;
   const description =

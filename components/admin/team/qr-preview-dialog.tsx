@@ -51,7 +51,7 @@ export function QrPreviewDialog({ member, onClose }: QrPreviewDialogProps) {
         </button>
 
         <div className="text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-blue-600">LeoTech Solution</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-blue-600">Leo Tech Solution</p>
           <h2 id="qr-preview-title" className="mt-3 font-display text-lg font-semibold text-navy-900">
             {member.name}
           </h2>

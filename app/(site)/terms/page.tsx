@@ -6,7 +6,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/terms", {
     title: "Terms of Service",
     description:
-      "Terms governing the use of the LeoTech Solution website and services.",
+      "Terms governing the use of the Leo Tech Solution website and services.",
   });
 }
 

@@ -11,7 +11,7 @@ export async function generateMetadata() {
   return buildPageMetadata("/training", {
     title: "Technology Training",
     description:
-      "Hands-on technology training from LeoTech Solution — coding, AI/ML, IoT, robotics, cloud and more, taught by working engineers.",
+      "Hands-on technology training from Leo Tech Solution — coding, AI/ML, IoT, robotics, cloud and more, taught by working engineers.",
   });
 }
 

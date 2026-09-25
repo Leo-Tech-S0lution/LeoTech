@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core brand system, derived directly from the LeoTech Solution logo.
+        // Core brand system, derived directly from the Leo Tech Solution logo.
         navy: {
           950: "#00001f",
           900: "#000054", // logo primary (deep navy)

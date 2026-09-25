@@ -23,7 +23,7 @@ export function AboutPreview({ title, description, statistics }: AboutPreviewPro
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal className="space-y-6 text-base leading-relaxed text-slate-600">
           <p>
-            LeoTech Solution is a technology company built around a simple idea: software,
+            Leo Tech Solution is a technology company built around a simple idea: software,
             infrastructure, and the people who run them should be engineered with the same
             rigor. We design and build custom applications, AI/ML systems, IoT platforms, and
             cloud infrastructure — and we run a hands-on training academy that prepares the next
