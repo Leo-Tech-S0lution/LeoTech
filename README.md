@@ -75,6 +75,16 @@ npm run db:generate
 npm run db:migrate
 ```
 
+Migration `0002_team_digital_profiles` (Team Digital ID + QR) is additive: it adds columns and two new tables, backfills a profile slug for every existing team member from their name, and marks their QR as generated. No existing rows are deleted or overwritten. Run it against production with `npm run db:migrate` — never `db:push` against production.
+
+To load the current LeoTech Solution roster without touching anything already entered in the admin:
+
+```bash
+npm run db:seed-team
+```
+
+It matches existing members by slug or name and only fills in empty fields; missing members are created.
+
 `npm run db:studio` opens Drizzle Studio, a GUI for browsing/editing the database directly — useful for debugging.
 
 ### 6. Seed demo content
@@ -149,8 +159,47 @@ Log in at `/admin/login`. The sidebar covers every content type described in the
 - **SEO** → Per-page title/description/OG image overrides for static routes
 - **Site Settings** → Company info, contact details, social links, default SEO
 - **Users** → Manage other admin accounts (owner/editor roles)
+- **QR Management** → Digital ID QR codes for every team member (see below)
+- **SEO → SEO Health** → Configuration checklist (titles, canonical, sitemap, schema, OG image, verification)
 
 Content changes are reflected on the public site via `revalidatePath()` — no redeploy needed.
+
+### Team Digital ID + QR
+
+Every team member has a permanent public profile at `/team/{slug}` (e.g. `/team/suraj-kumar-sah`). The QR printed on the back of their ID card encodes **only that URL** — no name, phone or other personal data — so profile details can change in the admin at any time without reprinting cards.
+
+- **Creating a member** (Team → New Team Member) generates the slug from the name (editable, checked for uniqueness) and the QR automatically.
+- **Changing a slug** keeps the old one in `team_member_slug_history`; the old URL permanently redirects to the new one, so printed cards keep working.
+- **Regenerate QR** only issues a new file/version number — the encoded URL never changes.
+- **Public / Private**: private profiles still open from the QR but are hidden from the team directory, sitemap and search engines (`noindex`).
+- **Active / Inactive**: inactive profiles show “Profile Unavailable” instead of any details.
+- **QR Management** (`/admin/qr-management`): search/filter, preview, PNG (1024px) / SVG download, single ID-card print (CR80, 54 × 85.6 mm) and bulk A4 print sheets. Print at 100% scale.
+- **Analytics**: anonymous profile views (device class, browser family, OS, referrer host — no IP or raw user agent); bots and signed-in admins are excluded.
+- **Roles**: owners can do everything; editors can edit profile content and view/download/print QR codes, but can't change slugs, visibility, verification, activation, regenerate QR codes or delete members.
+
+---
+
+## Google Search Console
+
+Code can make the site crawlable and understandable; it can't force Google to index or rank it. Indexing takes days to weeks after these steps, and search placement is up to Google.
+
+After deploying with `NEXT_PUBLIC_SITE_URL=https://leotechsolution.com.np`:
+
+1. Open [Google Search Console](https://search.google.com/search-console) and **Add property → Domain**, entering `leotechsolution.com.np`.
+2. Verify ownership by adding the TXT record Google shows to the domain's DNS. (Alternatively use a URL-prefix property with the HTML tag method: put the token in `GOOGLE_SITE_VERIFICATION` and redeploy.)
+3. Open **URL Inspection**, inspect `https://leotechsolution.com.np/`, and click **Request indexing** if it isn't indexed yet.
+4. Go to **Sitemaps** and submit `https://leotechsolution.com.np/sitemap.xml`.
+5. Inspect a few important pages the same way: `/about`, `/services`, `/team`, `/contact` and a couple of team profiles. Don't re-submit the same URL repeatedly.
+6. Check **Pages** (indexing) over the following days and fix anything reported as excluded, blocked or erroring.
+7. Watch **Performance** for the query “LeoTech Solution”.
+
+Before submitting, sanity-check production:
+
+- `https://leotechsolution.com.np/robots.txt` allows `/` and lists the sitemap.
+- `https://www.leotechsolution.com.np` and `http://leotechsolution.com.np` both 301 to `https://leotechsolution.com.np`. The middleware handles this when requests reach the app; if your host terminates them first (e.g. Vercel domain settings), set the apex as primary there too.
+- Site Settings contain the real company email, phone, address and official social profile URLs (these feed the Organization schema), and the default OG image is a 1200×630 PNG/JPG.
+- Admin → SEO → SEO Health shows no failures.
+- Validate structured data with the [Rich Results Test](https://search.google.com/test/rich-results) for the homepage and a team profile.
 
 ---
 

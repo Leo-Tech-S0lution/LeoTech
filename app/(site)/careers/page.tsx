@@ -8,7 +8,11 @@ import { getOpenJobs } from "@/lib/db/queries/careers";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/careers");
+  return buildPageMetadata("/careers", {
+    title: "Careers",
+    description:
+      "Open positions at LeoTech Solution — join our engineering, AI/ML and training teams.",
+  });
 }
 
 export default async function CareersPage() {

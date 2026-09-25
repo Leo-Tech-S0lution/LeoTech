@@ -8,6 +8,7 @@ import { getIcon } from "@/lib/icons";
 import { getServiceBySlug, getPublishedServices } from "@/lib/db/queries/services";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 import type { Metadata } from "next";
+import { getSiteUrl } from "@/lib/seo/site";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
   return {
     title,
+    alternates: { canonical: `/services/${slug}` },
     description,
     openGraph: { title, description, images: image ? [image] : undefined },
     twitter: { title, description },
@@ -42,7 +44,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   if (!service) notFound();
 
   const Icon = getIcon(service.icon);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   const jsonLd = {
     "@context": "https://schema.org",

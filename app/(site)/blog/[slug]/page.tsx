@@ -8,6 +8,7 @@ import { Reveal } from "@/components/animations/reveal";
 import { formatDate } from "@/lib/utils/text";
 import { getBlogPostBySlug, getPublishedBlogPosts, getRelatedPosts } from "@/lib/db/queries/blog";
 import type { Metadata } from "next";
+import { getSiteUrl } from "@/lib/seo/site";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   return {
     title,
+    alternates: { canonical: `/blog/${slug}` },
     description,
     openGraph: { title, description, images: image ? [image] : undefined, type: "article" },
     twitter: { title, description, card: "summary_large_image" },
@@ -40,7 +42,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const [related, siteUrl] = [await getRelatedPosts(post), process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"];
+  const [related, siteUrl] = [await getRelatedPosts(post), getSiteUrl()];
   const postUrl = `${siteUrl}/blog/${post.slug}`;
   const safeContent = DOMPurify.sanitize(post.content);
 

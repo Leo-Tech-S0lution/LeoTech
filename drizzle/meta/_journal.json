@@ -15,6 +15,13 @@
       "when": 1789715928135,
       "tag": "0001_salty_the_liberteens",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790328235134,
+      "tag": "0002_team_digital_profiles",
+      "breakpoints": true
     }
   ]
 }

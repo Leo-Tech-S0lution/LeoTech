@@ -17,6 +17,7 @@ import {
   Search,
   Settings,
   ShieldCheck,
+  QrCode,
   ChevronDown,
   X,
   LogOut,
@@ -81,11 +82,19 @@ const NAV: NavItem[] = [
     ],
   },
   { label: "Team", href: "/admin/team", icon: Users },
+  { label: "QR Management", href: "/admin/qr-management", icon: QrCode },
   { label: "Testimonials", href: "/admin/testimonials", icon: Star },
   { label: "Careers", href: "/admin/careers", icon: UserPlus },
   { label: "Messages / Inquiries", href: "/admin/messages", icon: Mail },
   { label: "Media Library", href: "/admin/media", icon: ImageIcon },
-  { label: "SEO", href: "/admin/seo", icon: Search },
+  {
+    label: "SEO",
+    icon: Search,
+    children: [
+      { label: "Page SEO", href: "/admin/seo" },
+      { label: "SEO Health", href: "/admin/seo/health" },
+    ],
+  },
   { label: "Site Settings", href: "/admin/settings", icon: Settings },
   { label: "Users / Admin", href: "/admin/users", icon: ShieldCheck },
 ];

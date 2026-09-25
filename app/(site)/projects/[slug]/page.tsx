@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   return {
     title,
+    alternates: { canonical: `/projects/${slug}` },
     description,
     openGraph: { title, description, images: image ? [image] : undefined },
     twitter: { title, description },

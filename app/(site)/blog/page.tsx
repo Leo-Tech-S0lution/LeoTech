@@ -9,7 +9,11 @@ import { getPublishedBlogPosts, getBlogCategories } from "@/lib/db/queries/blog"
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/blog");
+  return buildPageMetadata("/blog", {
+    title: "Blog",
+    description:
+      "Engineering insights, tutorials and news from the LeoTech Solution team.",
+  });
 }
 
 interface BlogPageProps {

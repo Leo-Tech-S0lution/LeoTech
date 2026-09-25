@@ -10,13 +10,13 @@ const FALLBACK: SiteSettings = {
   tagline: "Engineering software, systems, and skills for what's next.",
   footerDescription:
     "LeoTech Solution builds custom software, AI/ML, IoT, and cloud systems — and trains the engineers who will run them.",
-  email: "hello@leotechsolution.com",
-  phone: "+1 (000) 000-0000",
+  email: "infoleotechsolution@gmail.com",
+  phone: null,
   address: "",
   businessHours: "Mon – Fri, 9:00 AM – 6:00 PM",
   schedulingUrl: null,
   socialLinks: [],
-  defaultSeoTitle: "LeoTech Solution — Software, AI/ML, IoT & Technology Training",
+  defaultSeoTitle: "LeoTech Solution | Software, AI, IoT, Robotics & Technology Training",
   defaultSeoDescription:
     "LeoTech Solution designs and builds custom software, AI/ML, IoT, cloud, and cybersecurity solutions, and runs a hands-on technology training academy.",
   defaultOgImage: "/brand/leotech-logo.svg",

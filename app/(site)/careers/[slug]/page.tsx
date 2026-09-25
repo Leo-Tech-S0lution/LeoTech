@@ -19,7 +19,11 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
   const { slug } = await params;
   const job = await getJobBySlug(slug);
   if (!job) return {};
-  return { title: job.title, description: job.description ?? undefined };
+  return {
+    title: job.title,
+    description: job.description ?? undefined,
+    alternates: { canonical: `/careers/${slug}` },
+  };
 }
 
 export default async function JobDetailPage({ params }: JobPageProps) {

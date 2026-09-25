@@ -21,6 +21,7 @@ import { getPublishedTeamMembers } from "@/lib/db/queries/team";
 import { getFeaturedBlogPosts } from "@/lib/db/queries/blog";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { getSiteUrl } from "@/lib/seo/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
 
 export async function generateMetadata() {
@@ -58,7 +59,7 @@ export default async function HomePage() {
     getSiteSettings(),
   ]);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
   const isEnabled = (key: string) => sections[key]?.enabled !== false;
   const sectionTitle = (key: string, fallback: string) => sections[key]?.title || fallback;
   const sectionDesc = (key: string, fallback: string | null) =>

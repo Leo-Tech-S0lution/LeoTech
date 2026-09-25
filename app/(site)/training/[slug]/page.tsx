@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
 
   return {
     title,
+    alternates: { canonical: `/training/${slug}` },
     description,
     openGraph: { title, description, images: image ? [image] : undefined },
     twitter: { title, description },

@@ -3,7 +3,11 @@ import { getSiteSettings } from "@/lib/db/queries/settings";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/privacy-policy");
+  return buildPageMetadata("/privacy-policy", {
+    title: "Privacy Policy",
+    description:
+      "How LeoTech Solution collects, uses and protects your information.",
+  });
 }
 
 export default async function PrivacyPolicyPage() {

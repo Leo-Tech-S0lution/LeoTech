@@ -15,10 +15,13 @@ function getTransporter(): Transporter | null {
 
   if (!transporter) {
     const port = Number(SMTP_PORT) || 587;
+    // SMTP_SECURE overrides the port heuristic when set explicitly.
+    const secureEnv = process.env.SMTP_SECURE?.trim().toLowerCase();
+    const secure = secureEnv ? secureEnv === "true" : port === 465; // 465 = implicit TLS; 587 upgrades via STARTTLS
     transporter = nodemailer.createTransport({
       host: SMTP_HOST,
       port,
-      secure: port === 465, // 465 = implicit TLS; 587 upgrades via STARTTLS
+      secure,
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
   }
@@ -79,4 +82,32 @@ export async function notifyAdminOfInquiry(inquiry: ContactSubmission): Promise<
     text,
     html,
   });
+}
+
+/**
+ * Short admin notification for team/QR events (member created, deactivated,
+ * QR generated). Fire-and-forget: failures are logged, never thrown.
+ */
+export async function notifyAdmin(subject: string, lines: string[], adminPath?: string): Promise<void> {
+  const mailer = getTransporter();
+  const to = process.env.ADMIN_NOTIFY_EMAIL || process.env.SMTP_USER;
+  if (!mailer || !to) return;
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+  const link = adminPath ? `${siteUrl}${adminPath}` : null;
+
+  try {
+    await mailer.sendMail({
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to,
+      subject: subject.replace(/[\r\n]+/g, " "),
+      text: [...lines, ...(link ? ["", `Open in admin: ${link}`] : [])].join("\n"),
+      html: `
+    <h2 style="margin:0 0 12px">${escapeHtml(subject)}</h2>
+    ${lines.map((l) => `<p style="margin:4px 0">${escapeHtml(l)}</p>`).join("")}
+    ${link ? `<p><a href="${escapeHtml(link)}">Open in admin</a></p>` : ""}`,
+    });
+  } catch (err) {
+    console.error("[mailer] admin notification failed:", err);
+  }
 }

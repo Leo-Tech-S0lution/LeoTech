@@ -12,7 +12,11 @@ import { getPublishedTeamMembers } from "@/lib/db/queries/team";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/about");
+  return buildPageMetadata("/about", {
+    title: "About Us",
+    description:
+      "LeoTech Solution is a technology company that designs and builds custom software, AI/ML, IoT and cloud systems — and trains the engineers who run them.",
+  });
 }
 
 export default async function AboutPage() {

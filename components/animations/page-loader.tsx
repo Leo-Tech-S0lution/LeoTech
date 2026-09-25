@@ -1,17 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "./gsap-setup";
 
 const SESSION_KEY = "leotech_loaded";
 
 /** One-time premium loading screen shown on the first page load of a session — never on client-side navigation. */
 export function PageLoader() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Team profiles are usually opened by scanning an ID-card QR — show the person immediately.
+    if (pathname.startsWith("/team/")) return;
     let alreadyShown = false;
     try {
       alreadyShown = sessionStorage.getItem(SESSION_KEY) === "1";
@@ -26,6 +30,8 @@ export function PageLoader() {
         // ignore
       }
     }
+    // Only evaluated for the initial page of the session.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

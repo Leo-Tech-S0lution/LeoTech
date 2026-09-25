@@ -10,7 +10,11 @@ import { getPublishedProjects } from "@/lib/db/queries/projects";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/projects");
+  return buildPageMetadata("/projects", {
+    title: "Projects",
+    description:
+      "Selected software, AI, IoT and cloud projects designed, built and shipped by LeoTech Solution.",
+  });
 }
 
 export default async function ProjectsPage() {

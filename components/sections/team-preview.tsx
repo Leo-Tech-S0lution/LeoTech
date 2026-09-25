@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Linkedin, Twitter, Github, ArrowUpRight } from "lucide-react";
 import { SectionWrapper } from "./section-wrapper";
 import { Reveal } from "@/components/animations/reveal";
+import { profilePath } from "@/lib/team/profile";
 import type { TeamMember } from "@/lib/db/schema";
 
 const SOCIAL_ICONS: Record<string, typeof Linkedin> = {
@@ -30,8 +31,9 @@ export function TeamPreview({ title, description, members }: TeamPreviewProps) {
               {member.image ? (
                 <Image
                   src={member.image}
-                  alt={member.name}
+                  alt={`${member.name}${member.position ? `, ${member.position}` : ""} at LeoTech Solution`}
                   fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   className="object-cover transition-transform duration-500 ease-technical group-hover:scale-105"
                 />
               ) : (
@@ -62,7 +64,11 @@ export function TeamPreview({ title, description, members }: TeamPreviewProps) {
               </div>
             </div>
             <div className="p-3">
-              <p className="font-medium text-navy-900">{member.name}</p>
+              <p className="font-medium text-navy-900">
+                <Link href={profilePath(member.slug)} className="hover:text-blue-600">
+                  {member.name}
+                </Link>
+              </p>
               <p className="text-xs text-slate-500">{member.position}</p>
             </div>
           </div>
@@ -71,7 +77,7 @@ export function TeamPreview({ title, description, members }: TeamPreviewProps) {
 
       <div className="mt-10 text-center">
         <Link
-          href="/about#team"
+          href="/team"
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-blue-600 hover:text-blue-700"
         >
           Meet the Full Team

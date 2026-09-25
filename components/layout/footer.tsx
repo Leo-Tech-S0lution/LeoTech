@@ -25,6 +25,7 @@ const COLUMNS = [
     heading: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Our Team", href: "/team" },
       { label: "Projects", href: "/projects" },
       { label: "Blog", href: "/blog" },
       { label: "Careers", href: "/careers" },

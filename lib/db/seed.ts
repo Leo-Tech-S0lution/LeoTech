@@ -595,18 +595,26 @@ async function main() {
   console.log("✓ Internship programs");
 
   // ---------- Team members ----------
+  // Real team roster; slugs are the permanent /team/{slug} profile URLs used by ID-card QR codes.
   const team = [
-    { name: "Leonardo Ortiz", position: "Founder & CEO", bio: "Leonardo founded LeoTech Solution after a decade building infrastructure at scale for logistics and fintech companies.", skills: ["Systems Architecture", "Cloud Infrastructure", "Leadership"], order: 0 },
-    { name: "Daniela Reyes", position: "Lead Engineer & Instructor", bio: "Daniela leads full-stack engagements and teaches the Full-Stack Web Development and Cloud & DevOps courses.", skills: ["React", "Node.js", "AWS"], order: 1 },
-    { name: "Marcus Chen", position: "Head of AI/ML", bio: "Marcus leads LeoTech's machine learning practice, from model design through production deployment.", skills: ["PyTorch", "MLOps", "Computer Vision"], order: 2 },
-    { name: "Priya Nair", position: "Data Engineer & Instructor", bio: "Priya builds data pipelines for client projects and teaches Python for Data Science.", skills: ["Python", "Data Engineering", "Analytics"], order: 3 },
-    { name: "Sofia Alvarez", position: "Lead Product Designer", bio: "Sofia leads UI/UX engagements and design-system work, and teaches the UI/UX Design Fundamentals course.", skills: ["Figma", "User Research", "Design Systems"], order: 4 },
-    { name: "James Okafor", position: "Security Engineer & Instructor", bio: "James leads security reviews for client infrastructure and teaches Cybersecurity Fundamentals.", skills: ["Application Security", "Network Security", "Auditing"], order: 5 },
-  ];
-  await db.insert(schema.teamMembers).values(
-    team.map((t) => ({ ...t, socialLinks: [{ label: "LinkedIn", url: "https://linkedin.com" }], published: true })),
-  );
-  console.log(`✓ Team members (${team.length})`);
+    { firstName: "Deepa", lastName: "Paswan", position: "CEO", department: "Management", order: 0 },
+    { firstName: "Suraj", middleName: "Kumar", lastName: "Sah", position: "Managing Director", department: "Management", order: 1 },
+    { firstName: "Dipesh", middleName: "Kumar", lastName: "Mahato", position: "CTO", order: 2 },
+    { firstName: "Ramabtar", lastName: "Yadav", position: "HR", order: 3 },
+    { firstName: "Raja", middleName: "Kumar", lastName: "Sah", position: "Full-Stack Software Engineer", order: 4 },
+    { firstName: "Rahul", lastName: "Paswan", position: "Robotics Instructor", order: 5 },
+  ].map((t) => {
+    const name = [t.firstName, t.middleName, t.lastName].filter(Boolean).join(" ");
+    return { ...t, name, slug: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"), published: true, qrGeneratedAt: new Date() };
+  });
+  const insertedTeam = await db.insert(schema.teamMembers).values(team).onConflictDoNothing().returning();
+  if (insertedTeam.length > 0) {
+    await db
+      .insert(schema.teamMemberSlugHistory)
+      .values(insertedTeam.map((m) => ({ teamMemberId: m.id, slug: m.slug, isCurrent: true })))
+      .onConflictDoNothing();
+  }
+  console.log(`✓ Team members (${insertedTeam.length})`);
 
   // ---------- Testimonials ----------
   await db.insert(schema.testimonials).values([

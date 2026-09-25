@@ -29,6 +29,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  // Browsers and crawlers request /favicon.ico by convention; serve the brand PNG.
+  async rewrites() {
+    return [{ source: "/favicon.ico", destination: "/brand/icon-48.png" }];
+  },
 };
 
 export default nextConfig;

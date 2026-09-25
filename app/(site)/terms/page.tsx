@@ -3,7 +3,11 @@ import { getSiteSettings } from "@/lib/db/queries/settings";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/terms");
+  return buildPageMetadata("/terms", {
+    title: "Terms of Service",
+    description:
+      "Terms governing the use of the LeoTech Solution website and services.",
+  });
 }
 
 export default async function TermsPage() {

@@ -7,7 +7,11 @@ import { getPublishedInternshipPrograms } from "@/lib/db/queries/training";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/internships");
+  return buildPageMetadata("/internships", {
+    title: "Internships",
+    description:
+      "Mentored internship programs at LeoTech Solution where participants join real project teams building production software.",
+  });
 }
 
 const TIMELINE = [

@@ -8,7 +8,11 @@ import { getPublishedCourses } from "@/lib/db/queries/training";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/training");
+  return buildPageMetadata("/training", {
+    title: "Technology Training",
+    description:
+      "Hands-on technology training from LeoTech Solution — coding, AI/ML, IoT, robotics, cloud and more, taught by working engineers.",
+  });
 }
 
 export default async function TrainingPage() {

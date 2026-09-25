@@ -11,7 +11,11 @@ import { getPublishedFaqs } from "@/lib/db/queries/content";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export async function generateMetadata() {
-  return buildPageMetadata("/contact");
+  return buildPageMetadata("/contact", {
+    title: "Contact",
+    description:
+      "Contact LeoTech Solution about software development, AI/ML, IoT, robotics or technology training — we reply within one business day.",
+  });
 }
 
 export default async function ContactPage() {
