@@ -29,7 +29,7 @@ import { recordProfileView, resolveProfileSlug } from "@/lib/db/queries/team";
 import { getSiteSettings } from "@/lib/db/queries/settings";
 import { profilePath, profileUrl, telHref, whatsappHref } from "@/lib/team/profile";
 import { isBot, parseUserAgent, referrerHost } from "@/lib/team/user-agent";
-import { absoluteUrl, getSiteUrl } from "@/lib/seo/site";
+import { absoluteUrl, getSiteUrl, shareImage } from "@/lib/seo/site";
 import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 import type { TeamMember } from "@/lib/db/schema";
 
@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
 
   const title = [m.name, m.position, org].filter(Boolean).join(" | ");
   const description = metaDescription(m, org);
-  const image = m.image ?? settings.defaultOgImage ?? "/brand/leotech-logo.svg";
+  const image = m.image ?? shareImage(settings.defaultOgImage);
   const canonical = profilePath(m.slug);
 
   return {

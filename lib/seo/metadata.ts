@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { seoPages } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getSiteSettings } from "@/lib/db/queries/settings";
+import { shareImage } from "@/lib/seo/site";
 
 interface PageSeoFallback {
   /** Page name, e.g. "About Us" — rendered as "About Us | Leo Tech Solution" by the root title template. */
@@ -28,7 +29,7 @@ export async function buildPageMetadata(path: string, fallback: PageSeoFallback 
   const fullTitle = absolute ? rawTitle : `${rawTitle} | ${settings.companyName}`;
   const description =
     override?.description ?? fallback.description ?? settings.defaultSeoDescription ?? undefined;
-  const ogImage = override?.ogImage ?? settings.defaultOgImage ?? undefined;
+  const ogImage = shareImage(override?.ogImage ?? settings.defaultOgImage);
 
   return {
     title: absolute ? { absolute: rawTitle } : rawTitle,
@@ -40,8 +41,8 @@ export async function buildPageMetadata(path: string, fallback: PageSeoFallback 
       description,
       url: path,
       siteName: settings.companyName,
-      images: ogImage ? [ogImage] : undefined,
+      images: [ogImage],
     },
-    twitter: { card: "summary_large_image", title: fullTitle, description, images: ogImage ? [ogImage] : undefined },
+    twitter: { card: "summary_large_image", title: fullTitle, description, images: [ogImage] },
   };
 }

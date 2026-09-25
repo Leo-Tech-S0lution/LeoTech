@@ -52,6 +52,12 @@ export default async function AboutPage() {
               touch more than one of these domains, and we&apos;d rather own that complexity than
               hand clients off between disconnected vendors.
             </p>
+            <p>
+              Leo Tech Solution (also written LeoTech Solution, online at leotechsolution.com.np)
+              is based in Biratnagar, Nepal. Alongside software, web development, AI/ML, IoT,
+              robotics and cloud solutions, we run technology training — coding education and
+              STEM and robotics programs for students and working engineers.
+            </p>
           </Reveal>
 
           <Reveal className="space-y-6">

@@ -29,10 +29,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  // Browsers and crawlers request /favicon.ico by convention; serve the brand PNG.
-  async rewrites() {
-    return [{ source: "/favicon.ico", destination: "/brand/icon-48.png" }];
-  },
   // Canonical domain: www.* permanently redirects to the apex in a single hop
   // (path and query string preserved). Only matches the www host, so localhost
   // and preview deployments are unaffected. HTTP→HTTPS is handled by the host.

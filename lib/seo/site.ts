@@ -4,6 +4,18 @@
  */
 export const SITE_URL = "https://leotechsolution.com.np";
 
+/** Official brand name, and the legitimate spellings people search for (used as schema alternateName). */
+export const BRAND_NAME = "Leo Tech Solution";
+export const BRAND_ALTERNATE_NAMES = ["LeoTech Solution", "leotechsolution"];
+
+/** Default 1200×630 social share image (PNG — social networks don't render SVG). */
+export const DEFAULT_SHARE_IMAGE = "/og-image.png";
+
+/** Returns a share image social platforms can render, falling back to the default for SVGs/blank values. */
+export function shareImage(url: string | null | undefined): string {
+  return url && !/\.svg(\?|#|$)/i.test(url) ? url : DEFAULT_SHARE_IMAGE;
+}
+
 /** @deprecated alias kept for existing imports; use SITE_URL. */
 export const PRODUCTION_SITE_URL = SITE_URL;
 

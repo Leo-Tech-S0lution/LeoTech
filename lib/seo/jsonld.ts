@@ -1,8 +1,14 @@
 import type { SiteSettings } from "@/lib/db/schema";
+import { BRAND_ALTERNATE_NAMES } from "@/lib/seo/site";
 
 /** Only real, absolute http(s) profile URLs belong in sameAs. */
 function officialProfiles(settings: SiteSettings): string[] {
   return (settings.socialLinks ?? []).map((s) => s.url.trim()).filter((u) => /^https?:\/\/[^\s]+\.[^\s]+/i.test(u));
+}
+
+/** Brand spellings other than the configured company name. */
+function alternateNames(settings: SiteSettings): string[] {
+  return BRAND_ALTERNATE_NAMES.filter((n) => n.toLowerCase() !== settings.companyName.toLowerCase());
 }
 
 export function organizationJsonLd(settings: SiteSettings, siteUrl: string) {
@@ -12,6 +18,7 @@ export function organizationJsonLd(settings: SiteSettings, siteUrl: string) {
     "@type": "Organization",
     "@id": `${siteUrl}/#organization`,
     name: settings.companyName,
+    alternateName: alternateNames(settings),
     url: `${siteUrl}/`,
     logo: {
       "@type": "ImageObject",
@@ -33,6 +40,7 @@ export function websiteJsonLd(settings: SiteSettings, siteUrl: string) {
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     name: settings.companyName,
+    alternateName: alternateNames(settings),
     url: `${siteUrl}/`,
     inLanguage: "en",
     publisher: { "@id": `${siteUrl}/#organization` },

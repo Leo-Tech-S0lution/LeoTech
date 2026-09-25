@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { getSiteSettings } from "@/lib/db/queries/settings";
-import { SITE_URL } from "@/lib/seo/site";
+import { SITE_URL, shareImage } from "@/lib/seo/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -42,12 +42,10 @@ export async function generateMetadata(): Promise<Metadata> {
     verification: googleVerification ? { google: googleVerification } : undefined,
     icons: {
       icon: [
-        { url: "/brand/icon-48.png", sizes: "48x48", type: "image/png" },
-        { url: "/brand/icon-192.png", sizes: "192x192", type: "image/png" },
-        { url: "/brand/leotech-logo.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.png", type: "image/png", sizes: "192x192" },
       ],
-      shortcut: "/brand/icon-48.png",
-      apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     },
     openGraph: {
       type: "website",
@@ -55,14 +53,14 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_US",
       title: defaultTitle,
       description: settings.defaultSeoDescription ?? undefined,
-      images: settings.defaultOgImage ? [settings.defaultOgImage] : undefined,
+      images: [shareImage(settings.defaultOgImage)],
       url: "/",
     },
     twitter: {
       card: "summary_large_image",
       title: defaultTitle,
       description: settings.defaultSeoDescription ?? undefined,
-      images: settings.defaultOgImage ? [settings.defaultOgImage] : undefined,
+      images: [shareImage(settings.defaultOgImage)],
     },
   };
 }
