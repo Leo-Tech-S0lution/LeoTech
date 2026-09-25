@@ -12,7 +12,8 @@
     "db:migrate": "tsx lib/db/migrate.ts",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx lib/db/seed.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "admin:reset": "tsx lib/db/reset-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

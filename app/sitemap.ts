@@ -21,7 +21,9 @@ const STATIC_ROUTES = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://leotechsolution.com.np";
 
   const [services, projects, courses, posts, jobs] = await Promise.all([
     getPublishedServices(),
