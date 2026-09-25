@@ -28,7 +28,11 @@ export default async function QrPrintPage({ searchParams }: PrintPageProps) {
   const [members, settings] = await Promise.all([getTeamMembersByIdsAdmin(idList), getSiteSettings()]);
   const printable = members.filter((m) => m.qrEnabled);
   const blocks = await Promise.all(
-    printable.map(async (m) => ({ member: m, url: profileUrl(m.slug), svg: await qrSvg(profileUrl(m.slug)) })),
+    printable.map(async (m) => ({
+      member: m,
+      url: profileUrl(m.slug),
+      svg: await qrSvg(profileUrl(m.slug), { idSuffix: m.id.slice(0, 8) }),
+    })),
   );
   const isSheet = layout === "sheet";
 
@@ -36,7 +40,7 @@ export default async function QrPrintPage({ searchParams }: PrintPageProps) {
     <div className="min-h-screen bg-slate-100 print:bg-white">
       <style>{`
         @page { size: A4; margin: ${isSheet ? "10mm" : "12mm"}; }
-        .qr-svg svg { width: 100%; height: auto; display: block; }
+        .qr-svg > svg { width: 100%; height: auto; display: block; }
         @media print {
           .qr-block { break-inside: avoid; }
           .qr-card-page { break-after: page; }
