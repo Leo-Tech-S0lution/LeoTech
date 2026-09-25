@@ -8,8 +8,8 @@ export const SITE_URL = "https://leotechsolution.com.np";
 export const BRAND_NAME = "Leo Tech Solution";
 export const BRAND_ALTERNATE_NAMES = [
   "LeoTech Solution",
-  "LeoTech Solutions",
-  "Leo Tech Solutions",
+  "LeoTech Solution",
+  "Leo Tech Solution",
 ];
 
 /** Default 1200×630 social share image (PNG — social networks don't render SVG). */
