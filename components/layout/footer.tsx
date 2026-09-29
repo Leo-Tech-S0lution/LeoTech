@@ -69,11 +69,12 @@ export async function Footer() {
             </p>
             {settings.socialLinks && settings.socialLinks.length > 0 && (
               <div className="mt-6 flex items-center gap-3">
-                {settings.socialLinks.map((s) => {
+                {settings.socialLinks.map((s, i) => {
                   const Icon = socialIcon(s.label);
                   return (
                     <a
-                      key={s.url}
+                      // URL alone isn't unique — settings can list the same link twice.
+                      key={`${s.url}-${i}`}
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"

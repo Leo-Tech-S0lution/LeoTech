@@ -64,9 +64,10 @@ export function Navbar({ services, courses }: NavbarProps) {
     const el = barRef.current;
     if (!el) return;
     gsap.to(el, {
-      backgroundColor: scrolled ? "rgba(0,0,84,0.82)" : "rgba(0,0,84,0)",
+      // navy-900 (#050A24) / navy-700 (#1E2A5E) from the theme palette.
+      backgroundColor: scrolled ? "rgba(5,10,36,0.9)" : "rgba(5,10,36,0)",
       backdropFilter: scrolled ? "blur(16px)" : "blur(0px)",
-      borderColor: scrolled ? "rgba(120,150,220,0.16)" : "rgba(120,150,220,0)",
+      borderColor: scrolled ? "rgba(30,42,94,1)" : "rgba(30,42,94,0)",
       duration: 0.5,
       ease: "power2.out",
     });

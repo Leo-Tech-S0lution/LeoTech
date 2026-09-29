@@ -102,20 +102,26 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
       ref={rootRef}
       className="relative flex min-h-svh flex-col overflow-hidden bg-navy-900 pt-20"
     >
-      <div className="relative flex flex-1 items-center py-12 lg:py-16">
+      {/* Mobile: image on top, text below (stacked). Desktop: text left, image bleeding off the right edge. */}
+      <div className="relative flex flex-1 flex-col lg:flex-row lg:items-center">
         <TechBackground type="network" dark className="opacity-40" />
         <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />
         {hasAnyImage && <HeroImages slides={slides} active={active} />}
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy-900" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy-900" />
 
-        <div className="container-tech relative z-10">
+        <div
+          className={cn(
+            "container-tech relative z-10 flex flex-1 flex-col justify-center pb-10 lg:py-16",
+            hasAnyImage ? "-mt-6 sm:-mt-10 lg:mt-0" : "pt-12",
+          )}
+        >
           <div ref={contentRef} className="max-w-2xl lg:max-w-[46%]">
-            <div className="hero-badge mb-5 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-blue-400">
+            <div className="hero-badge mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-blue-400 sm:mb-5 sm:text-xs sm:tracking-[0.25em]">
               <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-blue-400" />
-              {subtitle}
+              <span className="min-w-0">{subtitle}</span>
             </div>
 
-            <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight text-white wrap-break-word min-[400px]:text-4xl sm:text-5xl sm:leading-[1.08] lg:text-6xl">
               {title.split("\n").map((line, i) => (
                 <span key={i} className="hero-line block overflow-hidden">
                   {line}
@@ -123,18 +129,18 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
               ))}
             </h1>
 
-            <p className="hero-description mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            <p className="hero-description mt-4 max-w-xl text-[15px] leading-relaxed text-slate-300 sm:mt-6 sm:text-lg">
               {description}
             </p>
 
-            <div className="mt-10 flex flex-col items-start gap-4">
-              <Button href={cta1Href} variant="primary" size="lg" className="hero-cta group">
+            <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:items-start">
+              <Button href={cta1Href} variant="primary" size="lg" className="hero-cta group justify-center">
                 {cta1Label}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <a
                 href={cta2Href}
-                className="hero-cta group inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 underline decoration-slate-500 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+                className="hero-cta group inline-flex items-center justify-center gap-1.5 py-1 text-sm font-medium text-slate-300 underline decoration-slate-500 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
               >
                 {cta2Label}
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -158,8 +164,8 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
 
 /**
  * Right-hand image that bleeds to the viewport edge and fades into the
- * background on its left and bottom (NVIDIA-style). On mobile it sits faintly
- * behind the text instead. Each slide's image is stacked absolutely; the
+ * background on its left and bottom (NVIDIA-style). On mobile it sits above the
+ * text as a full-width banner fading into it. Each slide's image is stacked absolutely; the
  * outgoing one drifts out while the incoming one drifts in, crossfading.
  */
 function HeroImages({ slides, active }: { slides: HeroSlide[]; active: number }) {
@@ -197,7 +203,7 @@ function HeroImages({ slides, active }: { slides: HeroSlide[]; active: number })
 
   return (
     <div
-      className="hero-image-mask pointer-events-none absolute inset-0 overflow-hidden opacity-25 lg:left-auto lg:w-[58%] lg:opacity-70"
+      className="hero-image-mask pointer-events-none relative aspect-16/10 max-h-[42svh] w-full shrink-0 overflow-hidden opacity-85 lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:max-h-none lg:w-[58%] lg:opacity-70"
       aria-hidden
     >
       {slides.map((slide, i) =>
@@ -257,7 +263,7 @@ function HeroTicker({
     <div className="hero-ticker relative z-10 pb-6 lg:pb-8">
       <div
         ref={railRef}
-        className="container-tech flex snap-x snap-mandatory gap-5 overflow-x-auto scrollbar-none lg:grid lg:gap-8 lg:overflow-visible [&::-webkit-scrollbar]:hidden"
+        className="container-tech flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto sm:scroll-px-8 scrollbar-none lg:grid lg:gap-8 lg:overflow-visible [&::-webkit-scrollbar]:hidden"
         style={{ gridTemplateColumns: `repeat(${slides.length}, minmax(0, 1fr))` }}
       >
         {slides.map((slide, i) => {
@@ -272,7 +278,9 @@ function HeroTicker({
               onClick={() => onSelect(i)}
               aria-label={`Show slide ${i + 1}: ${fullTitle}`}
               aria-current={isActive ? "true" : undefined}
-              className="group w-[70%] shrink-0 snap-start text-left sm:w-[40%] lg:w-auto"
+              // flex-col + justify-start: a <button> centres its content vertically by
+              // default, which drops one-line titles below their neighbours.
+              className="group flex w-[70%] shrink-0 snap-start flex-col justify-start text-left sm:w-[40%] lg:w-auto"
             >
               <span className="block h-0.75 overflow-hidden bg-white/15">
                 <TickerProgress active={isActive} onComplete={onComplete} />

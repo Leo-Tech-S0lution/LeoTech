@@ -8,6 +8,7 @@ import { technologySchema, type TechnologyInput } from "@/lib/validation/technol
 import { createTechnologyAction, updateTechnologyAction, deleteTechnologyAction } from "./actions";
 import { FormField } from "@/components/admin/form-field";
 import { MediaPicker } from "@/components/admin/media-picker";
+import { resolveTechLogo } from "@/lib/tech-logos";
 import { Input } from "@/components/admin/ui/input";
 import { AdminButton } from "@/components/admin/ui/button";
 import { SubmitButton } from "@/components/admin/submit-button";
@@ -27,15 +28,11 @@ export function TechList({ categoryId, items }: { categoryId: string; items: Tec
         ) : (
           <div key={tech.id} className="flex items-center justify-between gap-3 rounded-md bg-slate-50/60 px-3 py-1.5">
             <span className="flex items-center gap-2.5 text-sm text-slate-700">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white">
-                {tech.icon ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={tech.icon} alt="" className="h-full w-full object-contain p-1" />
-                ) : (
-                  <span className="text-[10px] font-semibold text-slate-400">{tech.name.slice(0, 2)}</span>
-                )}
-              </span>
+              <TechThumb name={tech.name} icon={tech.icon} />
               {tech.name}
+              {!tech.icon && resolveTechLogo(tech.name, null) && (
+                <span className="text-[10px] uppercase tracking-wide text-slate-400">built-in logo</span>
+              )}
             </span>
             <div className="flex items-center gap-1">
               <AdminButton variant="ghost" size="icon" onClick={() => setEditingId(tech.id)} aria-label="Edit">
@@ -55,6 +52,21 @@ export function TechList({ categoryId, items }: { categoryId: string; items: Tec
         </AdminButton>
       )}
     </div>
+  );
+}
+
+/** Same logo the homepage shows: uploaded logo, else built-in, else initials. */
+function TechThumb({ name, icon }: { name: string; icon: string | null }) {
+  const src = resolveTechLogo(name, icon);
+  return (
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white">
+      {src ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt="" className="h-full w-full object-contain p-1" />
+      ) : (
+        <span className="text-[10px] font-semibold text-slate-400">{name.slice(0, 2)}</span>
+      )}
+    </span>
   );
 }
 

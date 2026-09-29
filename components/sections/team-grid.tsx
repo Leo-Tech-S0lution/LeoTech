@@ -35,11 +35,11 @@ export function TeamGrid({ members, showDepartment = false }: { members: TeamMem
             <div className="absolute inset-0 flex items-end bg-linear-to-t from-navy-900/90 via-navy-900/0 to-navy-900/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {member.socialLinks && member.socialLinks.length > 0 && (
                 <div className="flex gap-2 p-4">
-                  {member.socialLinks.map((s) => {
+                  {member.socialLinks.map((s, i) => {
                     const Icon = SOCIAL_ICONS[s.label.toLowerCase()] ?? ArrowUpRight;
                     return (
                       <a
-                        key={s.url}
+                        key={`${s.url}-${i}`}
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
