@@ -13,7 +13,7 @@ export default function GlobalNotFound() {
           href="/"
           className="mt-8 inline-flex items-center justify-center bg-[#1373e9] px-6 py-3 text-sm font-medium uppercase tracking-wide text-white hover:bg-[#0451ae]"
         >
-          Back to Home
+          Back To Home Page
         </Link>
       </body>
     </html>
