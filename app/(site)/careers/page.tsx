@@ -23,7 +23,7 @@ export default async function CareersPage() {
       <PageHeader
         eyebrow="CAREERS"
         title="Build and teach with us"
-        description="We hire engineers who can both ship production work and explain how they did it."
+        description="We hire engineers who could both ship production work and explain how they did it."
         pattern="grid"
       />
 
