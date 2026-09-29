@@ -37,10 +37,10 @@ export function ServicesGrid({ title, description, services }: ServicesGridProps
                   <Icon className="h-7 w-7 text-blue-500" strokeWidth={1.5} />
                   <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-500" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-navy-900">
+                <h3 className="mt-5 font-display text-lg font-semibold text-heading">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {service.shortDescription}
                 </p>
               </div>

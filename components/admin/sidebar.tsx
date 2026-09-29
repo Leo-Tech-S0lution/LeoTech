@@ -136,7 +136,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
           <Logo variant="dark" size={32} href="/admin" />
           <button
             onClick={onCloseMobile}
-            className="text-slate-400 hover:text-navy-900 lg:hidden"
+            className="text-slate-400 hover:text-heading lg:hidden"
             aria-label="Close menu"
           >
             <X className="h-5 w-5" />
@@ -189,7 +189,7 @@ function NavLink({
       className={cn(
         "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
         nested ? "pl-9 text-[13px]" : "",
-        active ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-navy-900",
+        active ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-heading",
       )}
     >
       {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
@@ -210,7 +210,7 @@ function NavGroupItem({ item, pathname }: { item: NavGroup; icon?: never; pathna
         onClick={() => setOpen((o) => !o)}
         className={cn(
           "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-          groupActive ? "text-navy-900" : "text-slate-600 hover:bg-slate-50 hover:text-navy-900",
+          groupActive ? "text-heading" : "text-slate-600 hover:bg-slate-50 hover:text-heading",
         )}
       >
         <Icon className="h-4 w-4 shrink-0" />

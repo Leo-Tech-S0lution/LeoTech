@@ -44,7 +44,7 @@ export default async function TrainingPage() {
                       {course.category}
                     </span>
                   )}
-                  <h2 className="mt-3 font-display text-lg font-semibold text-navy-900">{course.title}</h2>
+                  <h2 className="mt-3 font-display text-lg font-semibold text-heading">{course.title}</h2>
                   <p className="mt-2 line-clamp-2 text-sm text-slate-500">{course.description}</p>
                   <div className="mt-5 flex items-center gap-4 border-t border-border pt-4 text-xs text-slate-500">
                     {course.duration && (

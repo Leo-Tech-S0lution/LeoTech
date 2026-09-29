@@ -88,7 +88,7 @@ export function MediaLibrary({ initialItems }: { initialItems: Media[] }) {
                 <img src={item.url} alt={item.altText ?? item.filename} className="h-full w-full object-cover" />
               </div>
               <div className="p-3">
-                <p className="truncate text-xs font-medium text-navy-900" title={item.filename}>
+                <p className="truncate text-xs font-medium text-heading" title={item.filename}>
                   {item.filename}
                 </p>
                 <p className="mt-0.5 text-[11px] text-slate-400">

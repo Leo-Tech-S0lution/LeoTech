@@ -51,7 +51,7 @@ export function IconItemManager<T extends IconItem>({
     <div className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="font-display text-sm font-semibold text-navy-900">{title}</h2>
+          <h2 className="font-display text-sm font-semibold text-heading">{title}</h2>
           <p className="text-xs text-slate-400">{hint}</p>
         </div>
         {!adding ? (
@@ -80,7 +80,7 @@ export function IconItemManager<T extends IconItem>({
               <div className="flex items-center gap-2.5 text-sm">
                 <IconPreview icon={item.icon} />
                 <div>
-                  <p className="font-medium text-navy-900">{item.title}</p>
+                  <p className="font-medium text-heading">{item.title}</p>
                   {item.description ? (
                     <p className="line-clamp-1 text-xs text-slate-400">{item.description}</p>
                   ) : null}

@@ -70,7 +70,7 @@ export default async function QrManagementPage() {
 
       {topViewed.length > 0 && (
         <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5">
-          <h2 className="font-display text-sm font-semibold text-navy-900">Views by team member</h2>
+          <h2 className="font-display text-sm font-semibold text-heading">Views by team member</h2>
           <ul className="mt-3 space-y-2.5">
             {topViewed.map((r) => (
               <li key={r.id} className="grid grid-cols-[140px_1fr_48px] items-center gap-3 text-sm sm:grid-cols-[200px_1fr_56px]">

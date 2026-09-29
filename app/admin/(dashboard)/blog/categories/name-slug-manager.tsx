@@ -44,7 +44,7 @@ export function NameSlugManager<T extends NameSlugItem>({
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-display text-sm font-semibold text-navy-900">{title}</h2>
+        <h2 className="font-display text-sm font-semibold text-heading">{title}</h2>
         {!adding ? (
           <AdminButton size="sm" variant="outline" onClick={() => setAdding(true)}>
             <Plus className="h-3.5 w-3.5" />
@@ -63,7 +63,7 @@ export function NameSlugManager<T extends NameSlugItem>({
           ) : (
             <div key={item.id} className="flex items-center justify-between gap-3 rounded-lg border border-slate-100 bg-slate-50/60 px-3 py-2">
               <div className="text-sm">
-                <span className="font-medium text-navy-900">{item.name}</span>{" "}
+                <span className="font-medium text-heading">{item.name}</span>{" "}
                 <span className="text-slate-400">/{item.slug}</span>
               </div>
               <div className="flex items-center gap-1">

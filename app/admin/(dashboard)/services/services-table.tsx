@@ -27,7 +27,7 @@ export function ServicesTable({ services }: { services: Service[] }) {
       header: "Service",
       cell: (row) => (
         <div>
-          <p className="font-medium text-navy-900">
+          <p className="font-medium text-heading">
             {row.title}
             {row.featured ? <Star className="ml-1.5 inline h-3.5 w-3.5 fill-amber-400 text-amber-400" /> : null}
           </p>

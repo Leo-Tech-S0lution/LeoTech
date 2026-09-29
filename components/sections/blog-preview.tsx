@@ -31,7 +31,7 @@ export function BlogPreview({ title, description, posts }: BlogPreviewProps) {
               )}
             </div>
             <div className="mt-4">
-              <div className="flex items-center gap-3 text-xs text-slate-400">
+              <div className="flex items-center gap-3 text-xs text-slate-500">
                 {post.category && (
                   <span className="font-mono uppercase tracking-wide text-blue-600">
                     {post.category.name}
@@ -39,10 +39,10 @@ export function BlogPreview({ title, description, posts }: BlogPreviewProps) {
                 )}
                 {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
               </div>
-              <h3 className="mt-2 font-display text-lg font-semibold text-navy-900 group-hover:text-blue-600">
+              <h3 className="mt-2 font-display text-lg font-semibold text-heading group-hover:text-blue-600">
                 {post.title}
               </h3>
-              <p className="mt-2 line-clamp-2 text-sm text-slate-500">{post.excerpt}</p>
+              <p className="mt-2 line-clamp-2 text-sm text-slate-600">{post.excerpt}</p>
             </div>
           </Link>
         ))}

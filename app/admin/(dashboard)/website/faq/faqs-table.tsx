@@ -22,7 +22,7 @@ export function FaqsTable({ faqs }: { faqs: Faq[] }) {
       header: "Question",
       cell: (row) => (
         <div>
-          <p className="max-w-md font-medium text-navy-900">{row.question}</p>
+          <p className="max-w-md font-medium text-heading">{row.question}</p>
           {row.category ? <p className="text-xs text-slate-400">{row.category}</p> : null}
         </div>
       ),

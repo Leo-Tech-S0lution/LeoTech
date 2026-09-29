@@ -110,7 +110,7 @@ export default async function SolutionsPage() {
                 <span className={`font-mono text-xs uppercase tracking-[0.25em] ${dark ? "text-blue-400" : "text-blue-600"}`}>
                   {domain.label}
                 </span>
-                <h2 className={`mt-3 font-display text-3xl font-bold sm:text-4xl ${dark ? "text-white" : "text-navy-900"}`}>
+                <h2 className={`mt-3 font-display text-3xl font-bold sm:text-4xl ${dark ? "text-white" : "text-heading"}`}>
                   {domain.title}
                 </h2>
                 <p className={`mt-4 max-w-lg text-base leading-relaxed ${dark ? "text-slate-400" : "text-slate-500"}`}>
@@ -129,7 +129,7 @@ export default async function SolutionsPage() {
               </Reveal>
               <Reveal
                 className={`relative flex aspect-square max-w-sm items-center justify-center justify-self-center border ${
-                  dark ? "border-white/10" : "border-border"
+                  dark ? "border-navy-700" : "border-border"
                 } ${i % 2 === 1 ? "lg:order-1" : ""}`}
               >
                 <Icon className={`h-16 w-16 ${dark ? "text-blue-400" : "text-blue-500"}`} strokeWidth={1} />

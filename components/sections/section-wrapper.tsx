@@ -36,13 +36,13 @@ export function SectionWrapper({
           <h2
             className={cn(
               "mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]",
-              dark ? "text-white" : "text-navy-900",
+              dark ? "text-white" : "text-heading",
             )}
           >
             {title}
           </h2>
           {description && (
-            <p className={cn("mt-4 max-w-2xl text-base leading-relaxed", dark ? "text-slate-400" : "text-slate-500")}>
+            <p className={cn("mt-4 max-w-2xl text-base leading-relaxed", dark ? "text-slate-400" : "text-slate-600")}>
               {description}
             </p>
           )}

@@ -20,8 +20,8 @@ export function WhyLeotech({ title, description, items }: WhyLeotechProps) {
           return (
             <div key={item.id} className="border-l-2 border-blue-500/30 pl-5">
               <Icon className="h-6 w-6 text-blue-500" strokeWidth={1.5} />
-              <h3 className="mt-4 font-display text-lg font-semibold text-navy-900">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.description}</p>
+              <h3 className="mt-4 font-display text-lg font-semibold text-heading">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
             </div>
           );
         })}

@@ -50,9 +50,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       />
 
       {project.coverImage && (
-        <div className="container-tech -mt-10 relative z-10">
+        <div className="container-tech mt-12 lg:mt-16">
           <Reveal className="relative aspect-16/8 overflow-hidden border border-border">
-            <Image src={project.coverImage} alt={project.title} fill className="object-cover" priority />
+            <Image src={project.coverImage} alt={project.title} fill className="object-cover object-top" priority />
           </Reveal>
         </div>
       )}
@@ -100,7 +100,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {project.client && (
               <div>
                 <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Client</h3>
-                <p className="mt-1 text-sm text-navy-900">{project.client}</p>
+                <p className="mt-1 text-sm text-heading">{project.client}</p>
               </div>
             )}
             {project.technologies && project.technologies.length > 0 && (
@@ -131,7 +131,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
 
         <div className="container-tech mt-16 border-t border-border pt-8">
-          <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-navy-900">
+          <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-heading">
             <ArrowUpRight className="h-4 w-4 rotate-225" /> Back to all projects
           </Link>
         </div>

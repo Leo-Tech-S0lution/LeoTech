@@ -71,7 +71,7 @@ export function Process({ title, description, steps }: ProcessProps) {
                   className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center border transition-colors duration-300 ${
                     isActive
                       ? "border-blue-500 bg-blue-500 text-white"
-                      : "border-border bg-white text-slate-400"
+                      : "border-border bg-white text-slate-500"
                   }`}
                 >
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -82,12 +82,12 @@ export function Process({ title, description, steps }: ProcessProps) {
                   </span>
                   <h3
                     className={`mt-1 font-display text-lg font-semibold transition-colors duration-300 ${
-                      isActive ? "text-navy-900" : "text-slate-400"
+                      isActive ? "text-heading" : "text-slate-500"
                     }`}
                   >
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 max-w-md text-sm leading-relaxed text-slate-500">
+                  <p className="mt-1.5 max-w-md text-sm leading-relaxed text-slate-600">
                     {step.description}
                   </p>
                 </div>

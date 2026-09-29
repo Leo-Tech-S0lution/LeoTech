@@ -12,7 +12,7 @@ export function SeoPagesTable({ pages }: { pages: SeoPage[] }) {
   const router = useRouter();
 
   const columns: Column<SeoPage>[] = [
-    { header: "Path", cell: (row) => <span className="font-mono text-xs text-navy-900">{row.path}</span> },
+    { header: "Path", cell: (row) => <span className="font-mono text-xs text-heading">{row.path}</span> },
     { header: "Title", cell: (row) => row.title ?? "—" },
     { header: "Description", cell: (row) => <span className="line-clamp-1 max-w-xs text-slate-500">{row.description ?? "—"}</span> },
     {

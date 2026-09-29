@@ -47,7 +47,7 @@ export function ConfirmDialog({
         aria-labelledby="confirm-dialog-title"
         className="relative w-full max-w-sm rounded-xl border border-slate-200 bg-white p-5 shadow-xl"
       >
-        <h2 id="confirm-dialog-title" className="font-display text-base font-semibold text-navy-900">
+        <h2 id="confirm-dialog-title" className="font-display text-base font-semibold text-heading">
           {title}
         </h2>
         {description ? <p className="mt-2 text-sm text-slate-500">{description}</p> : null}

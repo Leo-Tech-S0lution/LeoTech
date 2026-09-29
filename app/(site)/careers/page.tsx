@@ -40,7 +40,7 @@ export default async function CareersPage() {
                   className="group flex flex-col items-start justify-between gap-3 py-6 sm:flex-row sm:items-center"
                 >
                   <div>
-                    <h2 className="font-display text-lg font-semibold text-navy-900 group-hover:text-blue-600">
+                    <h2 className="font-display text-lg font-semibold text-heading group-hover:text-blue-600">
                       {job.title}
                     </h2>
                     <div className="mt-1.5 flex flex-wrap items-center gap-4 text-sm text-slate-500">

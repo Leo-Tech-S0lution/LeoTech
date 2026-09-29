@@ -62,14 +62,14 @@ export default async function AboutPage() {
 
           <Reveal className="space-y-6">
             <div className="border-l-2 border-blue-500/30 pl-5">
-              <h3 className="font-display text-lg font-semibold text-navy-900">Mission</h3>
+              <h3 className="font-display text-lg font-semibold text-heading">Mission</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-500">
                 Build software and systems that are maintainable and secure by default, and train
                 the next generation of engineers to do the same.
               </p>
             </div>
             <div className="border-l-2 border-blue-500/30 pl-5">
-              <h3 className="font-display text-lg font-semibold text-navy-900">Vision</h3>
+              <h3 className="font-display text-lg font-semibold text-heading">Vision</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-500">
                 A technology industry where the line between &ldquo;built it&rdquo; and
                 &ldquo;can teach it&rdquo; keeps getting thinner.
@@ -82,7 +82,7 @@ export default async function AboutPage() {
           <Reveal stagger className="mt-16 grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-4">
             {statistics.map((stat) => (
               <div key={stat.id}>
-                <div className="font-display text-3xl font-bold text-navy-900 sm:text-4xl">
+                <div className="font-display text-3xl font-bold text-heading sm:text-4xl">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix ?? ""} />
                 </div>
                 <p className="mt-1 text-sm text-slate-500">{stat.label}</p>

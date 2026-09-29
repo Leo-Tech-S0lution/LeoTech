@@ -31,7 +31,7 @@ export function ContactForm({ serviceOptions }: ContactFormProps) {
     return (
       <div ref={successRef} className="flex flex-col items-center justify-center border border-blue-500/20 bg-blue-50 px-8 py-16 text-center">
         <CheckCircle2 className="h-10 w-10 text-blue-500" strokeWidth={1.5} />
-        <h3 className="mt-4 font-display text-xl font-semibold text-navy-900">Message sent</h3>
+        <h3 className="mt-4 font-display text-xl font-semibold text-heading">Message sent</h3>
         <p className="mt-2 max-w-sm text-sm text-slate-500">
           Thanks for reaching out. We typically respond within one business day.
         </p>
@@ -64,7 +64,7 @@ export function ContactForm({ serviceOptions }: ContactFormProps) {
           <select
             id="service"
             name="service"
-            className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-blue-400 focus:outline-hidden"
+            className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-heading focus:border-blue-400 focus:outline-hidden"
             defaultValue=""
           >
             <option value="">Select a service</option>
@@ -83,7 +83,7 @@ export function ContactForm({ serviceOptions }: ContactFormProps) {
           <select
             id="budget"
             name="budget"
-            className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-blue-400 focus:outline-hidden"
+            className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-heading focus:border-blue-400 focus:outline-hidden"
             defaultValue=""
           >
             <option value="">Select a range</option>
@@ -104,7 +104,7 @@ export function ContactForm({ serviceOptions }: ContactFormProps) {
           name="message"
           required
           rows={5}
-          className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-blue-400 focus:outline-hidden"
+          className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-heading focus:border-blue-400 focus:outline-hidden"
         />
         {fieldError("message") && <p className="mt-1.5 text-xs text-red-600">{fieldError("message")}</p>}
       </div>
@@ -148,7 +148,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-blue-400 focus:outline-hidden"
+        className="mt-2 w-full border border-border bg-white px-3 py-2.5 text-sm text-heading focus:border-blue-400 focus:outline-hidden"
       />
       {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
     </div>

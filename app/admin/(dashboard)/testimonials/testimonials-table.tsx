@@ -26,7 +26,7 @@ export function TestimonialsTable({ testimonials }: { testimonials: Testimonial[
       header: "Testimonial",
       cell: (row) => (
         <div>
-          <p className="font-medium text-navy-900">{row.name}</p>
+          <p className="font-medium text-heading">{row.name}</p>
           <p className="text-xs text-slate-400">{[row.position, row.company].filter(Boolean).join(" · ")}</p>
         </div>
       ),

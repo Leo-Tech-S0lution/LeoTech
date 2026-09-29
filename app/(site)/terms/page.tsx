@@ -19,7 +19,7 @@ export default async function TermsPage() {
       <PageHeader eyebrow="LEGAL" title="Terms of Service" description={`Last updated: ${updated}`} pattern="grid" />
 
       <section className="py-20 lg:py-24">
-        <div className="container-tech prose prose-slate max-w-3xl prose-headings:font-display prose-headings:text-navy-900 prose-a:text-blue-600">
+        <div className="container-tech prose prose-slate max-w-3xl prose-headings:font-display prose-headings:text-heading prose-a:text-blue-600">
           <p>
             These Terms of Service govern your use of the {settings.companyName} website and the
             services we describe on it. By using this site, you agree to these terms.

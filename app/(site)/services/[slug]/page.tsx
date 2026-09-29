@@ -76,7 +76,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
             {service.features && service.features.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-display text-xl font-semibold text-navy-900">What&apos;s Included</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">What&apos;s Included</h2>
                 <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5 text-sm text-slate-600">

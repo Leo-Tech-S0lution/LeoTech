@@ -200,7 +200,7 @@ function MegaPanel({ open, children }: { open: boolean; children: React.ReactNod
   return (
     <div
       className={cn(
-        "absolute inset-x-0 top-full hidden overflow-hidden border-b border-white/10 bg-navy-900/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-technical lg:block",
+        "absolute inset-x-0 top-full hidden overflow-hidden border-b border-navy-700 bg-navy-900/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-technical lg:block",
         open ? "max-h-96 opacity-100" : "pointer-events-none max-h-0 opacity-0",
       )}
     >
@@ -213,7 +213,7 @@ function MegaFooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="mt-4 inline-flex items-center gap-1.5 border-t border-white/10 pt-4 text-xs font-medium uppercase tracking-wide text-blue-400 hover:text-blue-300"
+      className="mt-4 inline-flex items-center gap-1.5 border-t border-navy-700 pt-4 text-xs font-medium uppercase tracking-wide text-blue-400 hover:text-blue-300"
     >
       {label}
       <ArrowUpRight className="h-3.5 w-3.5" />

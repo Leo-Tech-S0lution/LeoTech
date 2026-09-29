@@ -55,7 +55,7 @@ export function TeamGrid({ members, showDepartment = false }: { members: TeamMem
             </div>
           </div>
           <div className="flex flex-1 flex-col p-3">
-            <h3 className="flex items-center gap-1 font-medium text-navy-900">
+            <h3 className="flex items-center gap-1 font-medium text-heading">
               <Link href={profilePath(member.slug)} className="hover:text-blue-600">
                 {member.name}
               </Link>
@@ -65,9 +65,9 @@ export function TeamGrid({ members, showDepartment = false }: { members: TeamMem
             </h3>
             <p className="text-xs text-slate-500">{member.position}</p>
             {showDepartment && member.department && (
-              <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-slate-400">{member.department}</p>
+              <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-slate-500">{member.department}</p>
             )}
-            {member.bio && <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-slate-400">{member.bio}</p>}
+            {member.bio && <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-slate-500">{member.bio}</p>}
             <Link
               href={profilePath(member.slug)}
               className="mt-auto inline-flex items-center gap-1 pt-3 font-mono text-[11px] uppercase tracking-[0.15em] text-blue-600 hover:text-blue-700"

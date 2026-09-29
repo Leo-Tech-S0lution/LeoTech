@@ -11,7 +11,8 @@ export type TechnologyCategoryInput = z.infer<typeof technologyCategorySchema>;
 export const technologySchema = z.object({
   categoryId: z.uuid({ error: "Select a category." }),
   name: requiredString(100),
-  icon: z.string().trim().max(255).optional().or(z.literal("")).transform((v) => v || undefined),
+  // Logo image URL. Empty → null (not undefined) so removing a logo actually clears it on update.
+  icon: z.string().trim().max(255).optional().or(z.literal("")).transform((v) => v || null),
   order: orderSchema,
 });
 export type TechnologyInput = z.infer<typeof technologySchema>;

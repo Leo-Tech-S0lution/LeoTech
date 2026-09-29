@@ -62,7 +62,7 @@ export function InternshipForm({ program }: InternshipFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Title" required error={errors.title?.message}>
             <Input {...register("title")} />
@@ -86,7 +86,7 @@ export function InternshipForm({ program }: InternshipFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Program details</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Program details</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField label="Projects" error={errors.projects?.message} hint="What interns build during the program.">
             <Textarea rows={2} {...register("projects")} />
@@ -104,7 +104,7 @@ export function InternshipForm({ program }: InternshipFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Status" error={errors.status?.message}>
             <Select {...register("status")}>

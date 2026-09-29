@@ -57,7 +57,7 @@ export async function Footer() {
   const settings: SiteSettings = await getSiteSettings();
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-navy-900 text-slate-300">
+    <footer className="relative overflow-hidden border-t border-navy-700 bg-navy-900 text-slate-300">
       <TechBackground type="network" dark className="opacity-40" />
 
       <div className="container-tech relative py-16 lg:py-20">
@@ -78,7 +78,7 @@ export async function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="flex h-9 w-9 items-center justify-center border border-white/10 text-slate-300 transition-colors hover:border-blue-400/40 hover:text-blue-400"
+                      className="flex h-9 w-9 items-center justify-center border border-navy-700 text-slate-300 transition-colors hover:border-blue-400/40 hover:text-blue-400"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -133,7 +133,7 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-navy-700 pt-8 sm:flex-row sm:items-center">
           <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} {settings.companyName}. All rights reserved.
           </p>

@@ -92,7 +92,7 @@ export function MobileNav({ open, onClose, navLinks }: MobileNavProps) {
               key={link.href}
               href={link.href}
               onClick={handleClose}
-              className="border-b border-white/10 py-4 text-xl font-medium text-slate-200 transition-colors hover:text-white"
+              className="border-b border-navy-700 py-4 text-xl font-medium text-slate-200 transition-colors hover:text-white"
             >
               {link.label}
             </Link>

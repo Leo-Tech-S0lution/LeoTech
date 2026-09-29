@@ -19,7 +19,7 @@ export default async function PrivacyPolicyPage() {
       <PageHeader eyebrow="LEGAL" title="Privacy Policy" description={`Last updated: ${updated}`} pattern="grid" />
 
       <section className="py-20 lg:py-24">
-        <div className="container-tech prose prose-slate max-w-3xl prose-headings:font-display prose-headings:text-navy-900 prose-a:text-blue-600">
+        <div className="container-tech prose prose-slate max-w-3xl prose-headings:font-display prose-headings:text-heading prose-a:text-blue-600">
           <p>
             This Privacy Policy explains how {settings.companyName} (&ldquo;we&rdquo;,
             &ldquo;us&rdquo;) collects, uses, and protects information when you use our website

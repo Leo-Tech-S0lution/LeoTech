@@ -30,7 +30,7 @@ export function CategoryManager({ categories, technologiesByCategory }: Category
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-display text-sm font-semibold text-navy-900">Technology Categories</h2>
+        <h2 className="font-display text-sm font-semibold text-heading">Technology Categories</h2>
         {!adding ? (
           <AdminButton size="sm" variant="outline" onClick={() => setAdding(true)}>
             <Plus className="h-3.5 w-3.5" />
@@ -59,7 +59,7 @@ export function CategoryManager({ categories, technologiesByCategory }: Category
                     <ChevronDown
                       className={cn("h-3.5 w-3.5 text-slate-400 transition-transform", openId === cat.id && "rotate-180")}
                     />
-                    <span className="font-medium text-navy-900">{cat.name}</span>
+                    <span className="font-medium text-heading">{cat.name}</span>
                     <span className="text-xs text-slate-400">
                       ({(technologiesByCategory[cat.id] ?? []).length})
                     </span>

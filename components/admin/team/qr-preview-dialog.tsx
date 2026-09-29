@@ -44,7 +44,7 @@ export function QrPreviewDialog({ member, onClose }: QrPreviewDialogProps) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-navy-900"
+          className="absolute right-3 top-3 rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-heading"
           aria-label="Close preview"
         >
           <X className="h-4 w-4" />
@@ -52,7 +52,7 @@ export function QrPreviewDialog({ member, onClose }: QrPreviewDialogProps) {
 
         <div className="text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-blue-600">Leo Tech Solution</p>
-          <h2 id="qr-preview-title" className="mt-3 font-display text-lg font-semibold text-navy-900">
+          <h2 id="qr-preview-title" className="mt-3 font-display text-lg font-semibold text-heading">
             {member.name}
           </h2>
           {member.position && <p className="text-sm text-slate-500">{member.position}</p>}
@@ -65,7 +65,7 @@ export function QrPreviewDialog({ member, onClose }: QrPreviewDialogProps) {
             className="mx-auto mt-4 aspect-square w-full max-w-[260px] border border-slate-200"
           />
 
-          <p className="mt-3 text-sm font-medium text-navy-900">Scan to view digital profile</p>
+          <p className="mt-3 text-sm font-medium text-heading">Scan to view digital profile</p>
           <p className="mt-1 break-all font-mono text-[11px] text-slate-500">{member.profileUrl}</p>
           <p className="mt-2 text-[11px] text-slate-400">Version {member.qrVersion}</p>
         </div>

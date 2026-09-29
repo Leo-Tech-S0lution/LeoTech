@@ -43,30 +43,30 @@ export default async function InternshipsPage() {
             <Reveal stagger className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {programs.map((program) => (
                 <div key={program.id} className="border border-border bg-white p-7">
-                  <h2 className="font-display text-xl font-semibold text-navy-900">{program.title}</h2>
+                  <h2 className="font-display text-xl font-semibold text-heading">{program.title}</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-500">{program.description}</p>
                   <dl className="mt-6 space-y-3 border-t border-border pt-5 text-sm">
                     {program.duration && (
                       <div className="flex gap-2">
-                        <dt className="font-medium text-navy-900">Duration:</dt>
+                        <dt className="font-medium text-heading">Duration:</dt>
                         <dd className="text-slate-500">{program.duration}</dd>
                       </div>
                     )}
                     {program.eligibility && (
                       <div className="flex gap-2">
-                        <dt className="font-medium text-navy-900">Eligibility:</dt>
+                        <dt className="font-medium text-heading">Eligibility:</dt>
                         <dd className="text-slate-500">{program.eligibility}</dd>
                       </div>
                     )}
                     {program.mentorship && (
                       <div className="flex gap-2">
-                        <dt className="font-medium text-navy-900">Mentorship:</dt>
+                        <dt className="font-medium text-heading">Mentorship:</dt>
                         <dd className="text-slate-500">{program.mentorship}</dd>
                       </div>
                     )}
                     {program.certificate && (
                       <div className="flex gap-2">
-                        <dt className="font-medium text-navy-900">Certificate:</dt>
+                        <dt className="font-medium text-heading">Certificate:</dt>
                         <dd className="text-slate-500">{program.certificate}</dd>
                       </div>
                     )}

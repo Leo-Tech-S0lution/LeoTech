@@ -17,7 +17,7 @@ export function IconPicker({ value, onChange, id, name }: IconPickerProps) {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-navy-900">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-heading">
         <DynamicIcon icon={value} className="h-4 w-4" />
       </div>
       <Select id={id} name={name} value={value} onChange={(e) => onChange(e.target.value)} className="flex-1">

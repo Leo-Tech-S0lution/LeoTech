@@ -46,7 +46,7 @@ export default async function MemberAnalyticsPage({ params }: { params: Promise<
       </div>
 
       <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="font-display text-sm font-semibold text-navy-900">Views — last 30 days</h2>
+        <h2 className="font-display text-sm font-semibold text-heading">Views — last 30 days</h2>
         <div
           className="mt-4 flex h-40 items-end gap-[3px]"
           role="img"
@@ -83,7 +83,7 @@ function Breakdown({ title, rows, emptyLabel }: { title: string; rows: { label: 
   const total = rows.reduce((sum, r) => sum + r.views, 0) || 1;
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5">
-      <h2 className="font-display text-sm font-semibold text-navy-900">{title}</h2>
+      <h2 className="font-display text-sm font-semibold text-heading">{title}</h2>
       <p className="text-xs text-slate-400">Last 30 days</p>
       {rows.length === 0 ? (
         <p className="py-6 text-center text-sm text-slate-400">No views yet.</p>

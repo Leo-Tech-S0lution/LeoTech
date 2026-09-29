@@ -17,7 +17,7 @@ export function HeroSlidesTable({ slides }: { slides: HeroSlide[] }) {
       header: "Slide",
       cell: (row) => (
         <div>
-          <p className="max-w-sm truncate font-medium text-navy-900">{row.title.split("\n")[0]}</p>
+          <p className="max-w-sm truncate font-medium text-heading">{row.title.split("\n")[0]}</p>
           {row.subtitle ? <p className="text-xs text-slate-400">{row.subtitle}</p> : null}
         </div>
       ),

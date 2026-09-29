@@ -56,9 +56,9 @@ export function TestimonialsCarousel({ title, description, testimonials }: Testi
       headerAlign="center"
     >
       <div className="mx-auto max-w-3xl">
-        <div ref={cardRef} className="relative border border-border bg-slate-50 p-8 sm:p-12">
+        <div ref={cardRef} className="relative border border-border bg-white p-8 shadow-card sm:p-12">
           <Quote className="h-8 w-8 text-blue-500/30" />
-          <p className="mt-6 text-lg leading-relaxed text-navy-900 sm:text-xl">
+          <p className="mt-6 text-lg leading-relaxed text-heading sm:text-xl">
             &ldquo;{current.content}&rdquo;
           </p>
 
@@ -77,7 +77,7 @@ export function TestimonialsCarousel({ title, description, testimonials }: Testi
               </div>
             )}
             <div>
-              <p className="font-medium text-navy-900">{current.name}</p>
+              <p className="font-medium text-heading">{current.name}</p>
               <p className="text-sm text-slate-500">
                 {[current.position, current.company].filter(Boolean).join(" · ")}
               </p>

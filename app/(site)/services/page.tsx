@@ -50,14 +50,14 @@ export default async function ServicesPage() {
                         <Icon className="h-7 w-7 text-blue-500" strokeWidth={1.5} />
                         <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-500" />
                       </div>
-                      <h2 className="mt-5 font-display text-lg font-semibold text-navy-900">{service.title}</h2>
+                      <h2 className="mt-5 font-display text-lg font-semibold text-heading">{service.title}</h2>
                       <p className="mt-2 text-sm leading-relaxed text-slate-500">{service.shortDescription}</p>
                       {service.technologies && service.technologies.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-1.5">
                           {service.technologies.slice(0, 4).map((tech) => (
                             <span
                               key={tech}
-                              className="border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-slate-400"
+                              className="border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-slate-500"
                             >
                               {tech}
                             </span>

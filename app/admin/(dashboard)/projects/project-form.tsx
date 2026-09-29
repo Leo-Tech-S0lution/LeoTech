@@ -74,7 +74,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Title" required error={errors.title?.message}>
             <Controller
@@ -113,7 +113,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Case study</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Case study</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField label="Challenge" error={errors.challenge?.message}>
             <Textarea rows={4} {...register("challenge")} />
@@ -128,7 +128,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Technologies</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Technologies</h2>
         <FormField label="Technologies">
           <Controller
             name="technologies"
@@ -141,7 +141,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Media</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Media</h2>
         <div className="grid grid-cols-1 gap-6">
           <FormField label="Cover image">
             <Controller
@@ -165,7 +165,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Status" error={errors.status?.message}>
             <Select {...register("status")}>
@@ -185,7 +185,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">SEO</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">SEO</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="SEO title" error={errors.seoTitle?.message}>
             <Input {...register("seoTitle")} />

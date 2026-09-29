@@ -6,19 +6,22 @@
    ========================================================================== */
 @theme {
   /* Core brand system, derived directly from the Leo Tech Solution logo. */
-  --color-navy-950: #00001f;
-  --color-navy-900: #000054; /* logo primary (deep navy) */
-  --color-navy-800: #050a3d;
-  --color-navy-700: #0c1552;
+  --color-navy-950: #02040f;
+  --color-navy-900: #050a24; /* dark section background (hero, footer, CTA) */
+  --color-navy-800: #0b1140; /* card on dark sections */
+  --color-navy-700: #1e2a5e; /* border on dark sections */
   --color-navy-600: #141f66;
   --color-navy-500: #1d2c80;
+
+  /* Heading on light sections (logo deep navy). */
+  --color-heading: #000054;
 
   --color-blue-50: #eef5ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #b3d4ff;
   --color-blue-300: #7fb4ff;
-  --color-blue-400: #2e8cff; /* light-logo accent */
-  --color-blue-500: #1373e9; /* logo primary blue */
+  --color-blue-400: #38bdf8; /* glow / hover accent on dark sections */
+  --color-blue-500: #1373e9; /* primary: buttons, links */
   --color-blue-600: #0451ae; /* logo secondary blue */
   --color-blue-700: #053e88;
   --color-blue-800: #0a2f66;
@@ -26,26 +29,26 @@
 
   --color-ink: #0a0e27;
 
-  --color-slate-50: #f5f7fb;
-  --color-slate-100: #e8ecf5;
-  --color-slate-200: #cfd7e8;
-  --color-slate-300: #a9b5d1;
-  --color-slate-400: #7887ac;
-  --color-slate-500: #57628a;
-  --color-slate-600: #414a6e;
-  --color-slate-700: #2f3656;
-  --color-slate-800: #1d2340;
-  --color-slate-900: #12162b;
+  --color-slate-50: #f5f7fb; /* light section background */
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8; /* body text on dark sections */
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569; /* body text on light sections */
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
 
   --color-border: #e2e7f2;
-  --color-border-dark: rgba(120, 150, 220, 0.16);
+  --color-border-dark: #1e2a5e;
 
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-  --shadow-glow-sm: 0 0 24px rgba(19, 115, 233, 0.25);
-  --shadow-glow-md: 0 0 48px rgba(19, 115, 233, 0.3);
+  --shadow-glow-sm: 0 0 24px rgba(56, 189, 248, 0.25);
+  --shadow-glow-md: 0 0 48px rgba(56, 189, 248, 0.3);
   --shadow-card: 0 1px 2px rgba(10, 14, 39, 0.04), 0 8px 24px rgba(10, 14, 39, 0.06);
 
   --ease-technical: cubic-bezier(0.65, 0, 0.35, 1);
@@ -77,6 +80,16 @@
 }
 @utility bg-glow-blue {
   background-image: radial-gradient(circle at 50% 0%, rgba(19, 115, 233, 0.25), transparent 60%);
+}
+/* Hero image: fades out at the bottom on mobile, and at the left + bottom on desktop so it melts into the background. */
+@utility hero-image-mask {
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  @media (min-width: 64rem) {
+    mask-image:
+      linear-gradient(to right, transparent, #000 40%),
+      linear-gradient(to bottom, #000 70%, transparent);
+    mask-composite: intersect;
+  }
 }
 @utility bg-grid {
   background-size: 40px 40px;
@@ -127,9 +140,9 @@
     --primary-blue: #1373e9;
     --accent-blue: #0451ae;
     --background: #ffffff;
-    --dark-background: #000054;
+    --dark-background: #050a24;
     --text: #0a0e27;
-    --muted: #57628a;
+    --muted: #475569;
     --border: #e2e7f2;
   }
 

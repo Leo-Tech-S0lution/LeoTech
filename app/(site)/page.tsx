@@ -89,6 +89,9 @@ export default async function HomePage() {
         />
       )}
 
+      {/* Light sections alternate white / #F5F7FB. Done by position rather than per
+          section, so the rhythm holds when a section is disabled from the admin. */}
+      <div className="[&>section:nth-of-type(even)]:bg-slate-50">
       {isEnabled("about") && (
         <AboutPreview
           title={sectionTitle("about", "Who We Are")}
@@ -168,6 +171,7 @@ export default async function HomePage() {
           posts={posts}
         />
       )}
+      </div>
 
       {isEnabled("cta") && <CtaSection />}
     </>

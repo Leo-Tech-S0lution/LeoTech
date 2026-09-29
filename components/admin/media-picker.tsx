@@ -126,7 +126,7 @@ function MediaPickerModal({
         className="relative flex max-h-[85vh] w-full max-w-3xl flex-col rounded-xl border border-slate-200 bg-white shadow-xl"
       >
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-          <h2 className="font-display text-base font-semibold text-navy-900">Select image</h2>
+          <h2 className="font-display text-base font-semibold text-heading">Select image</h2>
           <AdminButton variant="ghost" size="icon" onClick={onClose} aria-label="Close">
             <X className="h-4 w-4" />
           </AdminButton>

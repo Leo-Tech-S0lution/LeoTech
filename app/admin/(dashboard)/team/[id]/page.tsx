@@ -42,7 +42,7 @@ export default async function EditTeamMemberPage({ params }: { params: Promise<{
       <div className="mb-6 rounded-xl border border-slate-200 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="font-display text-sm font-semibold text-navy-900">Profile completion</h2>
+            <h2 className="font-display text-sm font-semibold text-heading">Profile completion</h2>
             {completeness.missing.length > 0 ? (
               <p className="mt-1 text-xs text-slate-500">Missing: {completeness.missing.join(", ")}</p>
             ) : (

@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             )}
 
             <div
-              className="prose prose-slate mt-10 max-w-none prose-headings:font-display prose-headings:text-navy-900 prose-a:text-blue-600"
+              className="prose prose-slate mt-10 max-w-none prose-headings:font-display prose-headings:text-heading prose-a:text-blue-600"
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: safeContent }}
             />

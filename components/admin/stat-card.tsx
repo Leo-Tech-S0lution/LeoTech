@@ -22,7 +22,7 @@ export function StatCard({ label, value, subvalue, icon: Icon, href, className }
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-slate-500">{label}</p>
-          <p className="mt-2 font-display text-2xl font-semibold text-navy-900">{value}</p>
+          <p className="mt-2 font-display text-2xl font-semibold text-heading">{value}</p>
           {subvalue ? <p className="mt-1 text-xs text-slate-400">{subvalue}</p> : null}
         </div>
         {Icon ? (

@@ -95,29 +95,21 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
     return () => mm.revert();
   }, []);
 
-  // Auto-advance — restarts on every slide change, manual or automatic.
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    const timeout = setTimeout(() => goToSlide(active + 1), SLIDE_DURATION_MS);
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, slides.length]);
-
+  // Auto-advance is driven by the ticker's progress bar (see TickerProgress), so
+  // the bar and the slide change always stay in sync.
   return (
     <section
       ref={rootRef}
-      className="relative flex min-h-[92vh] flex-col overflow-hidden bg-navy-900 pt-20"
+      className="relative flex min-h-svh flex-col overflow-hidden bg-navy-900 pt-20"
     >
-      <div className="relative flex flex-1 items-center">
-        <TechBackground type="network" dark className={hasAnyImage ? "opacity-25" : "opacity-60"} />
-        {hasAnyImage && <HeroBackgroundImages slides={slides} active={active} />}
-        {/* Left-to-right fade so text stays legible over an image or the pattern */}
-        <div className="absolute inset-0 bg-linear-to-r from-navy-900 via-navy-900/85 to-navy-900/30" />
+      <div className="relative flex flex-1 items-center py-12 lg:py-16">
+        <TechBackground type="network" dark className="opacity-40" />
+        <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />
+        {hasAnyImage && <HeroImages slides={slides} active={active} />}
         <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy-900" />
-        {!hasAnyImage && <div className="absolute inset-0 bg-glow-blue opacity-70" aria-hidden />}
 
         <div className="container-tech relative z-10">
-          <div ref={contentRef} className="max-w-2xl">
+          <div ref={contentRef} className="max-w-2xl lg:max-w-[46%]">
             <div className="hero-badge mb-5 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-blue-400">
               <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-blue-400" />
               {subtitle}
@@ -148,40 +140,29 @@ export function Hero({ slides, fallbackTitle, fallbackDescription }: HeroProps) 
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
-
-            {hasSlides && slides.length > 1 && (
-              <div className="mt-12 flex items-center gap-2 lg:hidden">
-                {slides.map((s, i) => (
-                  <button
-                    key={s.id}
-                    aria-label={`Go to slide ${i + 1}`}
-                    onClick={() => goToSlide(i)}
-                    className={cn(
-                      "h-1 transition-all duration-300",
-                      i === active ? "w-8 bg-blue-400" : "w-4 bg-white/20",
-                    )}
-                  />
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>
 
       {hasSlides && slides.length > 1 && (
-        <HeroTicker slides={slides} active={active} onSelect={goToSlide} />
+        <HeroTicker
+          slides={slides}
+          active={active}
+          onSelect={goToSlide}
+          onComplete={() => goToSlide(active + 1)}
+        />
       )}
     </section>
   );
 }
 
 /**
- * Stacks each slide's background image absolutely and slides the outgoing
- * one out while the incoming one slides in (opposite horizontal direction,
- * crossfading at the same time) — rather than the image just popping to a
- * new src when the active slide changes.
+ * Right-hand image that bleeds to the viewport edge and fades into the
+ * background on its left and bottom (NVIDIA-style). On mobile it sits faintly
+ * behind the text instead. Each slide's image is stacked absolutely; the
+ * outgoing one drifts out while the incoming one drifts in, crossfading.
  */
-function HeroBackgroundImages({ slides, active }: { slides: HeroSlide[]; active: number }) {
+function HeroImages({ slides, active }: { slides: HeroSlide[]; active: number }) {
   const layerRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const prevActiveRef = useRef(active);
 
@@ -202,20 +183,23 @@ function HeroBackgroundImages({ slides, active }: { slides: HeroSlide[]; active:
 
     if (outEl) {
       gsap.killTweensOf(outEl);
-      gsap.to(outEl, { opacity: 0, xPercent: -8, duration: 1.1, ease: "power2.inOut" });
+      gsap.to(outEl, { opacity: 0, xPercent: -3, scale: 1.02, duration: 1.4, ease: "sine.inOut" });
     }
     if (inEl) {
       gsap.killTweensOf(inEl);
       gsap.fromTo(
         inEl,
-        { opacity: 0, xPercent: 8 },
-        { opacity: 1, xPercent: 0, duration: 1.1, ease: "power2.inOut" },
+        { opacity: 0, xPercent: 3, scale: 1.02 },
+        { opacity: 1, xPercent: 0, scale: 1, duration: 1.4, ease: "sine.inOut" },
       );
     }
   }, [active]);
 
   return (
-    <>
+    <div
+      className="hero-image-mask pointer-events-none absolute inset-0 overflow-hidden opacity-25 lg:left-auto lg:w-[58%] lg:opacity-70"
+      aria-hidden
+    >
       {slides.map((slide, i) =>
         slide.image ? (
           <div
@@ -230,64 +214,104 @@ function HeroBackgroundImages({ slides, active }: { slides: HeroSlide[]; active:
               src={slide.image}
               alt=""
               fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
               priority={i === active}
-              className="object-cover object-[75%_center] opacity-90"
+              className="object-cover"
             />
           </div>
         ) : null,
       )}
-    </>
+    </div>
   );
 }
 
+/**
+ * NVIDIA-style slide rail: one column per slide, each with its own progress
+ * track, a category label and a two-line title. Scrolls sideways on small
+ * screens and keeps the active slide in view.
+ */
 function HeroTicker({
   slides,
   active,
   onSelect,
+  onComplete,
 }: {
   slides: HeroSlide[];
   active: number;
   onSelect: (index: number) => void;
+  onComplete: () => void;
 }) {
+  const railRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Keep the active item visible on the scrollable mobile rail. Scrolls only the
+  // rail itself (never the page, which scrollIntoView could do).
+  useEffect(() => {
+    const rail = railRef.current;
+    const item = itemRefs.current[active];
+    if (!rail || !item || rail.scrollWidth <= rail.clientWidth) return;
+    rail.scrollTo({ left: item.offsetLeft - rail.offsetLeft - 20, behavior: "smooth" });
+  }, [active]);
+
   return (
-    <div className="hero-ticker relative z-10 hidden border-t border-white/10 bg-navy-900/60 backdrop-blur-xs lg:block">
-      <div className="container-tech grid" style={{ gridTemplateColumns: `repeat(${slides.length}, minmax(0, 1fr))` }}>
-        {slides.map((slide, i) => (
-          <button
-            key={slide.id}
-            onClick={() => onSelect(i)}
-            className={cn(
-              "group relative border-l border-white/10 px-5 py-5 text-left first:border-l-0",
-            )}
-          >
-            <span className="absolute inset-x-0 top-0 h-px bg-white/10">
-              <TickerProgress active={i === active} />
-            </span>
-            <span
-              className={cn(
-                "block font-mono text-[10px] uppercase tracking-[0.2em] transition-colors",
-                i === active ? "text-blue-400" : "text-slate-500 group-hover:text-slate-400",
-              )}
+    <div className="hero-ticker relative z-10 pb-6 lg:pb-8">
+      <div
+        ref={railRef}
+        className="container-tech flex snap-x snap-mandatory gap-5 overflow-x-auto scrollbar-none lg:grid lg:gap-8 lg:overflow-visible [&::-webkit-scrollbar]:hidden"
+        style={{ gridTemplateColumns: `repeat(${slides.length}, minmax(0, 1fr))` }}
+      >
+        {slides.map((slide, i) => {
+          const isActive = i === active;
+          const fullTitle = slide.title.replace(/\n/g, " ");
+          return (
+            <button
+              key={slide.id}
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
+              onClick={() => onSelect(i)}
+              aria-label={`Show slide ${i + 1}: ${fullTitle}`}
+              aria-current={isActive ? "true" : undefined}
+              className="group w-[70%] shrink-0 snap-start text-left sm:w-[40%] lg:w-auto"
             >
-              {slide.subtitle || `Slide ${i + 1}`}
-            </span>
-            <span
-              className={cn(
-                "mt-1.5 block line-clamp-1 text-sm font-medium transition-colors",
-                i === active ? "text-white" : "text-slate-500 group-hover:text-slate-300",
-              )}
-            >
-              {slide.title.split("\n")[0]}
-            </span>
-          </button>
-        ))}
+              <span className="block h-0.75 overflow-hidden bg-white/15">
+                <TickerProgress active={isActive} onComplete={onComplete} />
+              </span>
+              <span
+                className={cn(
+                  "mt-4 block truncate text-xs font-semibold transition-colors duration-500",
+                  isActive ? "text-blue-400" : "text-slate-500 group-hover:text-slate-300",
+                )}
+              >
+                {slide.subtitle || `Slide ${i + 1}`}
+              </span>
+              <span
+                className={cn(
+                  "mt-1.5 line-clamp-2 text-sm leading-snug transition-colors duration-500 sm:text-[15px]",
+                  isActive ? "text-white" : "text-slate-400 group-hover:text-slate-200",
+                )}
+              >
+                {fullTitle}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function TickerProgress({ active }: { active: boolean }) {
+/**
+ * Fills over SLIDE_DURATION_MS for the active slide, then calls onComplete to
+ * advance.
+ */
+function TickerProgress({ active, onComplete }: { active: boolean; onComplete: () => void }) {
   const barRef = useRef<HTMLSpanElement>(null);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  });
 
   useEffect(() => {
     const el = barRef.current;
@@ -295,16 +319,22 @@ function TickerProgress({ active }: { active: boolean }) {
     gsap.killTweensOf(el);
 
     if (!active) {
-      gsap.set(el, { scaleX: 0 });
+      // The finished bar eases out instead of snapping back to empty.
+      gsap.to(el, { scaleX: 0, duration: 0.5, ease: "power2.out" });
       return;
     }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.set(el, { scaleX: 1 });
-      return;
-    }
-    gsap.set(el, { scaleX: 0 });
-    gsap.to(el, { scaleX: 1, duration: SLIDE_DURATION_MS / 1000, ease: "none" });
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const done = () => onCompleteRef.current();
+    gsap.set(el, { scaleX: reducedMotion ? 1 : 0 });
+    const tween = reducedMotion
+      ? gsap.delayedCall(SLIDE_DURATION_MS / 1000, done)
+      : gsap.to(el, { scaleX: 1, duration: SLIDE_DURATION_MS / 1000, ease: "none", onComplete: done });
+
+    return () => {
+      tween.kill();
+    };
   }, [active]);
 
-  return <span ref={barRef} className="block h-full w-full origin-left bg-blue-400" />;
+  return <span ref={barRef} className="block h-full w-full origin-left scale-x-0 bg-blue-400" />;
 }

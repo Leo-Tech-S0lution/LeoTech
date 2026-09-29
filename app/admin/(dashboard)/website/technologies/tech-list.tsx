@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { technologySchema, type TechnologyInput } from "@/lib/validation/technologies";
 import { createTechnologyAction, updateTechnologyAction, deleteTechnologyAction } from "./actions";
 import { FormField } from "@/components/admin/form-field";
+import { MediaPicker } from "@/components/admin/media-picker";
 import { Input } from "@/components/admin/ui/input";
 import { AdminButton } from "@/components/admin/ui/button";
 import { SubmitButton } from "@/components/admin/submit-button";
@@ -25,7 +26,17 @@ export function TechList({ categoryId, items }: { categoryId: string; items: Tec
           <TechRow key={tech.id} categoryId={categoryId} tech={tech} onDone={() => setEditingId(null)} />
         ) : (
           <div key={tech.id} className="flex items-center justify-between gap-3 rounded-md bg-slate-50/60 px-3 py-1.5">
-            <span className="text-sm text-slate-700">{tech.name}</span>
+            <span className="flex items-center gap-2.5 text-sm text-slate-700">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white">
+                {tech.icon ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={tech.icon} alt="" className="h-full w-full object-contain p-1" />
+                ) : (
+                  <span className="text-[10px] font-semibold text-slate-400">{tech.name.slice(0, 2)}</span>
+                )}
+              </span>
+              {tech.name}
+            </span>
             <div className="flex items-center gap-1">
               <AdminButton variant="ghost" size="icon" onClick={() => setEditingId(tech.id)} aria-label="Edit">
                 <Pencil className="h-3.5 w-3.5" />
@@ -51,6 +62,7 @@ function TechRow({ categoryId, tech, onDone }: { categoryId: string; tech?: Tech
   const [isPending, startTransition] = useTransition();
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -82,6 +94,13 @@ function TechRow({ categoryId, tech, onDone }: { categoryId: string; tech?: Tech
       </FormField>
       <FormField label="Order" error={errors.order?.message}>
         <Input type="number" {...register("order", { valueAsNumber: true })} className="w-20" />
+      </FormField>
+      <FormField label="Logo" error={errors.icon?.message}>
+        <Controller
+          control={control}
+          name="icon"
+          render={({ field }) => <MediaPicker value={field.value} onChange={field.onChange} label="Logo" />}
+        />
       </FormField>
       <SubmitButton pending={isPending} pendingLabel="Saving…">
         Save

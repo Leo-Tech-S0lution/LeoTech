@@ -90,7 +90,7 @@ export default async function AdminDashboardPage() {
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-sm font-semibold text-navy-900">Recent Blog Posts</h2>
+            <h2 className="font-display text-sm font-semibold text-heading">Recent Blog Posts</h2>
             <Link href="/admin/blog/posts" className="text-xs font-medium text-blue-600 hover:underline">
               View all
             </Link>
@@ -104,7 +104,7 @@ export default async function AdminDashboardPage() {
                   <div className="min-w-0">
                     <Link
                       href={`/admin/blog/posts/${post.id}`}
-                      className="block truncate text-sm font-medium text-navy-900 hover:text-blue-600"
+                      className="block truncate text-sm font-medium text-heading hover:text-blue-600"
                     >
                       {post.title}
                     </Link>
@@ -119,7 +119,7 @@ export default async function AdminDashboardPage() {
 
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-sm font-semibold text-navy-900">Recent Inquiries</h2>
+            <h2 className="font-display text-sm font-semibold text-heading">Recent Inquiries</h2>
             <Link href="/admin/messages" className="text-xs font-medium text-blue-600 hover:underline">
               View all
             </Link>
@@ -133,7 +133,7 @@ export default async function AdminDashboardPage() {
                   <div className="min-w-0">
                     <Link
                       href="/admin/messages"
-                      className="block truncate text-sm font-medium text-navy-900 hover:text-blue-600"
+                      className="block truncate text-sm font-medium text-heading hover:text-blue-600"
                     >
                       {inquiry.name}
                     </Link>

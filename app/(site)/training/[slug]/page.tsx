@@ -65,11 +65,11 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
           <Reveal className="space-y-10">
             {course.curriculum && course.curriculum.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-semibold text-navy-900">Curriculum</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">Curriculum</h2>
                 <div className="mt-5 space-y-6">
                   {course.curriculum.map((module, i) => (
                     <div key={module.title} className="border-l-2 border-blue-500/30 pl-5">
-                      <h3 className="font-medium text-navy-900">
+                      <h3 className="font-medium text-heading">
                         <span className="font-mono text-xs text-blue-500">{String(i + 1).padStart(2, "0")}</span>{" "}
                         {module.title}
                       </h3>
@@ -89,7 +89,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
 
             {course.projects && course.projects.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-semibold text-navy-900">Projects You&apos;ll Build</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">Projects You&apos;ll Build</h2>
                 <ul className="mt-4 space-y-2">
                   {course.projects.map((p) => (
                     <li key={p} className="flex items-start gap-2.5 text-sm text-slate-600">
@@ -110,7 +110,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
           </Reveal>
 
           <Reveal className="h-fit space-y-5 border border-border bg-slate-50 p-6">
-            <div className="text-2xl font-bold text-navy-900">{priceLabel}</div>
+            <div className="text-2xl font-bold text-heading">{priceLabel}</div>
 
             <ul className="space-y-3 border-t border-border pt-4 text-sm text-slate-600">
               {course.duration && (

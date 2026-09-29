@@ -231,7 +231,7 @@ export function QrTable({ rows, canManageQr, canManageTeam }: QrTableProps) {
                           {r.image ? <Image src={r.image} alt="" fill className="object-cover" sizes="36px" /> : null}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-medium text-navy-900">{r.name}</p>
+                          <p className="font-medium text-heading">{r.name}</p>
                           <p className="text-xs text-slate-400">{r.position}</p>
                         </div>
                       </div>

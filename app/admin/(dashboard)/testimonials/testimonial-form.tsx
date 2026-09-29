@@ -60,7 +60,7 @@ export function TestimonialForm({ testimonial }: TestimonialFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Name" required error={errors.name?.message}>
             <Input {...register("name")} />

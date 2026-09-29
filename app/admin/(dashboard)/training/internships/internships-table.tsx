@@ -13,7 +13,7 @@ export function InternshipsTable({ programs }: { programs: InternshipProgram[] }
   const router = useRouter();
 
   const columns: Column<InternshipProgram>[] = [
-    { header: "Program", cell: (row) => <p className="font-medium text-navy-900">{row.title}</p> },
+    { header: "Program", cell: (row) => <p className="font-medium text-heading">{row.title}</p> },
     { header: "Duration", cell: (row) => row.duration ?? "—" },
     { header: "Status", cell: (row) => <StatusBadge status={row.status} /> },
     { header: "Order", cell: (row) => row.order, className: "w-16" },

@@ -28,7 +28,7 @@ export function PostsTable({ posts }: { posts: BlogPost[] }) {
       header: "Post",
       cell: (row) => (
         <div>
-          <p className="max-w-sm truncate font-medium text-navy-900">
+          <p className="max-w-sm truncate font-medium text-heading">
             {row.title}
             {row.featured ? <Star className="ml-1.5 inline h-3.5 w-3.5 fill-amber-400 text-amber-400" /> : null}
           </p>

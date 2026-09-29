@@ -22,7 +22,7 @@ export function StatisticsManager({ statistics }: { statistics: Statistic[] }) {
     <div className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="font-display text-sm font-semibold text-navy-900">Statistics</h2>
+          <h2 className="font-display text-sm font-semibold text-heading">Statistics</h2>
           <p className="text-xs text-slate-400">Powers the animated counters on the homepage and About page.</p>
         </div>
         {!adding ? (
@@ -43,7 +43,7 @@ export function StatisticsManager({ statistics }: { statistics: Statistic[] }) {
               className="flex items-center justify-between gap-3 rounded-lg border border-slate-100 bg-slate-50/60 px-3 py-2"
             >
               <div className="text-sm">
-                <span className="font-medium text-navy-900">
+                <span className="font-medium text-heading">
                   {stat.value}
                   {stat.suffix}
                 </span>{" "}

@@ -37,7 +37,7 @@ export function SectionRow({ section }: { section: HomepageSection }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="font-display text-sm font-semibold text-navy-900">{section.label}</h2>
+        <h2 className="font-display text-sm font-semibold text-heading">{section.label}</h2>
         <Controller
           name="enabled"
           control={control}

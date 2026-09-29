@@ -91,7 +91,7 @@ export function TeamTable({ rows, canManage, canDelete }: TeamTableProps) {
             {row.image ? <Image src={row.image} alt="" fill className="object-cover" sizes="36px" /> : null}
           </div>
           <div className="min-w-0">
-            <p className="font-medium text-navy-900">{row.name}</p>
+            <p className="font-medium text-heading">{row.name}</p>
             <p className="text-xs text-slate-400">{row.position}</p>
           </div>
         </div>

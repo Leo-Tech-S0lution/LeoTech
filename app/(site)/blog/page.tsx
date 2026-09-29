@@ -66,7 +66,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 name="q"
                 defaultValue={q}
                 placeholder="Search articles..."
-                className="border border-border bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-hidden"
+                className="border border-border bg-white px-3 py-1.5 text-sm text-heading placeholder:text-slate-400 focus:border-blue-400 focus:outline-hidden"
               />
             </form>
           </div>
@@ -90,14 +90,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     )}
                   </div>
                   <div className="mt-4">
-                    <div className="flex items-center gap-3 text-xs text-slate-400">
+                    <div className="flex items-center gap-3 text-xs text-slate-500">
                       {post.category && (
                         <span className="font-mono uppercase tracking-wide text-blue-600">{post.category.name}</span>
                       )}
                       {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
                       {post.readingTimeMinutes && <span>{post.readingTimeMinutes} min read</span>}
                     </div>
-                    <h2 className="mt-2 font-display text-lg font-semibold text-navy-900 group-hover:text-blue-600">
+                    <h2 className="mt-2 font-display text-lg font-semibold text-heading group-hover:text-blue-600">
                       {post.title}
                     </h2>
                     <p className="mt-2 line-clamp-2 text-sm text-slate-500">{post.excerpt}</p>

@@ -37,7 +37,7 @@ function Step({ n, title, description, children }: { n: number; title: string; d
           {n}
         </span>
         <div>
-          <h2 id={`step-${n}`} className="font-display text-sm font-semibold text-navy-900">{title}</h2>
+          <h2 id={`step-${n}`} className="font-display text-sm font-semibold text-heading">{title}</h2>
           {description ? <p className="mt-0.5 text-xs text-slate-500">{description}</p> : null}
         </div>
       </div>
@@ -388,7 +388,7 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
                   },
                 })}
                 disabled={lockSettings}
-                className="min-w-0 flex-1 bg-white px-3 py-2 font-mono text-sm text-navy-900 outline-hidden disabled:bg-slate-50 disabled:text-slate-400"
+                className="min-w-0 flex-1 bg-white px-3 py-2 font-mono text-sm text-heading outline-hidden disabled:bg-slate-50 disabled:text-slate-400"
                 aria-describedby="slug-status"
               />
             </div>
@@ -454,7 +454,7 @@ export function TeamForm({ member, canManage, qrPanel }: TeamFormProps) {
           />
           <div className="rounded-lg bg-slate-50 p-3">
             <p className="text-xs text-slate-500">QR destination</p>
-            <p className="mt-0.5 break-all font-mono text-sm text-navy-900">{slug ? profileUrl(slug) : "—"}</p>
+            <p className="mt-0.5 break-all font-mono text-sm text-heading">{slug ? profileUrl(slug) : "—"}</p>
           </div>
           {qrPanel}
         </div>

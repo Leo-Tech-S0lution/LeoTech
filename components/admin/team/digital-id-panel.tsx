@@ -45,7 +45,7 @@ export function DigitalIdPanel({
 
   return (
     <div className="rounded-lg border border-slate-200 p-4">
-      <h3 className="font-display text-sm font-semibold text-navy-900">Digital ID / QR</h3>
+      <h3 className="font-display text-sm font-semibold text-heading">Digital ID / QR</h3>
       <div className="mt-3 flex flex-col gap-5 sm:flex-row">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -56,7 +56,7 @@ export function DigitalIdPanel({
         <div className="min-w-0 flex-1 space-y-3">
           <div>
             <p className="text-xs text-slate-500">Profile URL</p>
-            <p className="break-all font-mono text-sm text-navy-900">{profileUrl}</p>
+            <p className="break-all font-mono text-sm text-heading">{profileUrl}</p>
           </div>
           <p className="text-xs text-slate-500">
             Version {qrVersion}

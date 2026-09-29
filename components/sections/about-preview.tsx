@@ -53,7 +53,7 @@ export function AboutPreview({ title, description, statistics }: AboutPreviewPro
         <Reveal stagger className="mt-16 grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-4">
           {statistics.map((stat) => (
             <div key={stat.id}>
-              <div className="font-display text-3xl font-bold text-navy-900 sm:text-4xl">
+              <div className="font-display text-3xl font-bold text-heading sm:text-4xl">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix ?? ""} />
               </div>
               <p className="mt-1 text-sm text-slate-500">{stat.label}</p>

@@ -71,7 +71,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Title" required error={errors.title?.message}>
             <Controller
@@ -111,7 +111,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Features & Technologies</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Features & Technologies</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <FormField label="Features">
             <Controller
@@ -135,7 +135,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Call to action</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Call to action</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="CTA label" error={errors.ctaLabel?.message}>
             <Input {...register("ctaLabel")} placeholder="Get started" />
@@ -147,7 +147,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Status" error={errors.status?.message}>
             <Select {...register("status")}>
@@ -167,7 +167,7 @@ export function ServiceForm({ service }: ServiceFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">SEO</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">SEO</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="SEO title" error={errors.seoTitle?.message}>
             <Input {...register("seoTitle")} />

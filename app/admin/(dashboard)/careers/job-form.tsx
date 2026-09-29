@@ -64,7 +64,7 @@ export function JobForm({ job }: JobFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Title" required error={errors.title?.message}>
             <Controller
@@ -108,7 +108,7 @@ export function JobForm({ job }: JobFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Details</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Details</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           <FormField label="Responsibilities">
             <Controller
@@ -135,7 +135,7 @@ export function JobForm({ job }: JobFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Application &amp; Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Application &amp; Publishing</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField label="Application instructions" error={errors.applicationInstructions?.message}>
             <Textarea rows={2} {...register("applicationInstructions")} />

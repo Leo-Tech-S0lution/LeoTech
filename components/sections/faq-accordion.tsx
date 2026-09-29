@@ -19,7 +19,7 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
               aria-expanded={isOpen}
               className="flex w-full items-center justify-between gap-4 py-5 text-left"
             >
-              <span className="font-medium text-navy-900">{faq.question}</span>
+              <span className="font-medium text-heading">{faq.question}</span>
               <Plus className={cn("h-4 w-4 shrink-0 text-blue-500 transition-transform duration-300", isOpen && "rotate-45")} />
             </button>
             <div

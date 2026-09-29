@@ -9,7 +9,7 @@ export function EmptyState({ message, className }: EmptyStateProps) {
   return (
     <div
       className={cn(
-        "border border-dashed border-border py-16 text-center text-sm text-slate-400",
+        "border border-dashed border-border py-16 text-center text-sm text-slate-500",
         className,
       )}
     >

@@ -65,7 +65,7 @@ export function TeamPreview({ title, description, members }: TeamPreviewProps) {
               </div>
             </div>
             <div className="p-3">
-              <p className="font-medium text-navy-900">
+              <p className="font-medium text-heading">
                 <Link href={profilePath(member.slug)} className="hover:text-blue-600">
                   {member.name}
                 </Link>

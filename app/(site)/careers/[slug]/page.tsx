@@ -40,7 +40,7 @@ export default async function JobDetailPage({ params }: JobPageProps) {
           <Reveal className="space-y-10">
             {job.responsibilities && job.responsibilities.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-semibold text-navy-900">Responsibilities</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">Responsibilities</h2>
                 <ul className="mt-4 space-y-2.5">
                   {job.responsibilities.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
@@ -53,7 +53,7 @@ export default async function JobDetailPage({ params }: JobPageProps) {
             )}
             {job.requirements && job.requirements.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-semibold text-navy-900">Requirements</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">Requirements</h2>
                 <ul className="mt-4 space-y-2.5">
                   {job.requirements.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
@@ -66,7 +66,7 @@ export default async function JobDetailPage({ params }: JobPageProps) {
             )}
             {job.benefits && job.benefits.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-semibold text-navy-900">Benefits</h2>
+                <h2 className="font-display text-xl font-semibold text-heading">Benefits</h2>
                 <ul className="mt-4 space-y-2.5">
                   {job.benefits.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">

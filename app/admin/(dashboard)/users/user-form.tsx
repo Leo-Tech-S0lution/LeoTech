@@ -176,7 +176,7 @@ function ResetPasswordForm({ userId }: { userId: string }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-xl border border-slate-200 bg-white p-5">
-      <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Reset password</h2>
+      <h2 className="mb-4 font-display text-sm font-semibold text-heading">Reset password</h2>
       <div className="flex items-end gap-2">
         <FormField label="New password" required error={errors.password?.message}>
           <Input {...register("password")} type="password" />

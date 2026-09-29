@@ -62,7 +62,7 @@ export function HeroSlideForm({ slide }: HeroSlideFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Content</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Content</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField
             label="Title"
@@ -89,7 +89,7 @@ export function HeroSlideForm({ slide }: HeroSlideFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Call to action buttons</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Call to action buttons</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Primary button label" error={errors.cta1Label?.message}>
             <Input {...register("cta1Label")} placeholder="Start a Project" />
@@ -107,7 +107,7 @@ export function HeroSlideForm({ slide }: HeroSlideFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Order" error={errors.order?.message}>
             <Input type="number" {...register("order", { valueAsNumber: true })} />

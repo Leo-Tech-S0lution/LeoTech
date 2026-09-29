@@ -27,7 +27,7 @@ export function JobsTable({ jobs }: { jobs: JobOpening[] }) {
       header: "Role",
       cell: (row) => (
         <div>
-          <p className="font-medium text-navy-900">{row.title}</p>
+          <p className="font-medium text-heading">{row.title}</p>
           <p className="text-xs text-slate-400">{[row.department, row.location].filter(Boolean).join(" · ")}</p>
         </div>
       ),

@@ -14,7 +14,7 @@ export function Topbar({ userName, userRole, onOpenMobile }: TopbarProps) {
     <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur-sm sm:px-6">
       <button
         onClick={onOpenMobile}
-        className="text-slate-500 hover:text-navy-900 lg:hidden"
+        className="text-slate-500 hover:text-heading lg:hidden"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -37,7 +37,7 @@ export function Topbar({ userName, userRole, onOpenMobile }: TopbarProps) {
             {userName.slice(0, 1).toUpperCase()}
           </div>
           <div className="hidden text-left sm:block">
-            <p className="text-xs font-medium leading-tight text-navy-900">{userName}</p>
+            <p className="text-xs font-medium leading-tight text-heading">{userName}</p>
             <p className="text-[11px] capitalize leading-tight text-slate-400">{userRole}</p>
           </div>
         </div>

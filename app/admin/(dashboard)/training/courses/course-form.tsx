@@ -76,7 +76,7 @@ export function CourseForm({ course }: CourseFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Basics</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Basics</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Title" required error={errors.title?.message}>
             <Controller
@@ -119,7 +119,7 @@ export function CourseForm({ course }: CourseFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Technologies & Projects</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Technologies & Projects</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <FormField label="Technologies">
             <Controller
@@ -143,7 +143,7 @@ export function CourseForm({ course }: CourseFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Curriculum</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Curriculum</h2>
         <Controller
           name="curriculum"
           control={control}
@@ -154,7 +154,7 @@ export function CourseForm({ course }: CourseFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Enrollment details</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Enrollment details</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Certification" error={errors.certification?.message} className="sm:col-span-2">
             <Textarea rows={3} {...register("certification")} />
@@ -172,7 +172,7 @@ export function CourseForm({ course }: CourseFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Media & Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Media & Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Image" className="sm:col-span-2">
             <Controller
@@ -199,7 +199,7 @@ export function CourseForm({ course }: CourseFormProps) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">SEO</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">SEO</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="SEO title" error={errors.seoTitle?.message}>
             <Input {...register("seoTitle")} />

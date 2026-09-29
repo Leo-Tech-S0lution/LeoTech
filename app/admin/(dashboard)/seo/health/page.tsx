@@ -136,7 +136,7 @@ export default async function SeoHealthPage() {
             <li key={c.label} className="flex items-start gap-3 px-5 py-4">
               <Icon className={`mt-0.5 h-5 w-5 shrink-0 ${COLORS[c.level]}`} aria-label={c.level} />
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-navy-900">{c.label}</p>
+                <p className="text-sm font-medium text-heading">{c.label}</p>
                 <p className="mt-0.5 wrap-break-word text-xs text-slate-500">{c.detail}</p>
               </div>
               {c.fix && c.level !== "pass" ? (

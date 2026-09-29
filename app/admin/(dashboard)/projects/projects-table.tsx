@@ -31,7 +31,7 @@ export function ProjectsTable({ projects }: { projects: Project[] }) {
       header: "Project",
       cell: (row) => (
         <div>
-          <p className="font-medium text-navy-900">{row.title}</p>
+          <p className="font-medium text-heading">{row.title}</p>
           <p className="text-xs text-slate-400">
             /{row.slug}
             {row.client ? ` · ${row.client}` : ""}

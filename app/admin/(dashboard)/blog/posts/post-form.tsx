@@ -101,7 +101,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Content</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Content</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField label="Title" required error={errors.title?.message}>
             <Controller
@@ -142,7 +142,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Organization</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Organization</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Category" error={errors.categoryId?.message}>
             <Select {...register("categoryId")}>
@@ -206,7 +206,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Publishing</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Publishing</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Status" error={errors.status?.message}>
             <Select {...register("status")}>
@@ -229,7 +229,7 @@ export function PostForm({ post, postTagIds = [], categories, tags: initialTags,
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">SEO</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">SEO</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="SEO title" error={errors.seoTitle?.message}>
             <Input {...register("seoTitle")} />

@@ -16,7 +16,7 @@ export function UsersTable({ users, currentUserId }: { users: AdminUser[]; curre
       header: "User",
       cell: (row) => (
         <div>
-          <p className="font-medium text-navy-900">
+          <p className="font-medium text-heading">
             {row.name}
             {row.id === currentUserId ? <span className="ml-1.5 text-xs text-slate-400">(you)</span> : null}
           </p>

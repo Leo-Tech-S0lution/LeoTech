@@ -53,7 +53,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Company</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Company</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Company name" required error={errors.companyName?.message}>
             <Input {...register("companyName")} />
@@ -68,7 +68,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Contact</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Contact</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField label="Email" error={errors.email?.message}>
             <Input {...register("email")} type="email" />
@@ -89,7 +89,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Social links</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Social links</h2>
         <Controller
           name="socialLinks"
           control={control}
@@ -98,7 +98,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-5">
-        <h2 className="mb-4 font-display text-sm font-semibold text-navy-900">Default SEO</h2>
+        <h2 className="mb-4 font-display text-sm font-semibold text-heading">Default SEO</h2>
         <div className="grid grid-cols-1 gap-4">
           <FormField label="Default SEO title" error={errors.defaultSeoTitle?.message}>
             <Input {...register("defaultSeoTitle")} />

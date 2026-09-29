@@ -159,7 +159,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
   ]);
 
   const actionClass =
-    "flex min-h-[48px] flex-col items-center justify-center gap-1 border border-white/15 bg-white/5 px-2 py-2.5 text-[11px] font-medium uppercase tracking-wide text-white transition-colors hover:border-blue-400/60 hover:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:flex-row sm:gap-2 sm:px-4 sm:text-xs";
+    "flex min-h-[48px] flex-col items-center justify-center gap-1 border border-navy-700 bg-navy-800 px-2 py-2.5 text-[11px] font-medium uppercase tracking-wide text-white transition-colors hover:border-blue-400/60 hover:bg-white/10 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:flex-row sm:gap-2 sm:px-4 sm:text-xs";
 
   return (
     <>
@@ -327,7 +327,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
                 <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {m.projects.map((p) => (
                     <li key={p.name} className="border border-border p-4">
-                      <p className="font-display font-semibold text-navy-900">
+                      <p className="font-display font-semibold text-heading">
                         {p.url ? (
                           <a href={p.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-blue-600">
                             {p.name}
@@ -350,7 +350,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
                   {m.certifications.map((c) => (
                     <li key={c.name} className="flex flex-wrap items-baseline justify-between gap-2 py-3">
                       <div>
-                        <p className="font-medium text-navy-900">
+                        <p className="font-medium text-heading">
                           {c.url ? (
                             <a href={c.url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">
                               {c.name}
@@ -361,7 +361,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
                         </p>
                         {c.issuer && <p className="text-sm text-slate-500">{c.issuer}</p>}
                       </div>
-                      {c.year && <span className="font-mono text-xs text-slate-400">{c.year}</span>}
+                      {c.year && <span className="font-mono text-xs text-slate-500">{c.year}</span>}
                     </li>
                   ))}
                 </ul>
@@ -433,7 +433,7 @@ export default async function TeamProfilePage({ params }: ProfilePageProps) {
             <div className="border border-border p-6 text-sm text-slate-500">
               <p>
                 {m.name} is part of the team at{" "}
-                <Link href="/about" className="font-medium text-navy-900 hover:text-blue-600">{org}</Link>.
+                <Link href="/about" className="font-medium text-heading hover:text-blue-600">{org}</Link>.
               </p>
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs uppercase tracking-[0.15em]">
                 <Link href="/team" className="text-blue-600 hover:text-blue-700">Meet the team</Link>
@@ -452,7 +452,7 @@ function ProfileSection({ title, children }: { title: string; children: React.Re
     <section aria-labelledby={`section-${title.toLowerCase()}`}>
       <h2
         id={`section-${title.toLowerCase()}`}
-        className="mb-5 border-b border-border pb-3 font-display text-xl font-semibold text-navy-900"
+        className="mb-5 border-b border-border pb-3 font-display text-xl font-semibold text-heading"
       >
         {title}
       </h2>
@@ -471,7 +471,7 @@ function Timeline({
       {items.map((item, i) => (
         <li key={`${item.title}-${i}`}>
           {item.period && <p className="font-mono text-xs uppercase tracking-[0.15em] text-blue-600">{item.period}</p>}
-          <p className="mt-1 font-display font-semibold text-navy-900">{item.title}</p>
+          <p className="mt-1 font-display font-semibold text-heading">{item.title}</p>
           <p className="text-sm text-slate-500">{item.subtitle}</p>
           {item.description && <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>}
         </li>
